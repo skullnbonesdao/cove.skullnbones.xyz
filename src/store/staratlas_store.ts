@@ -1,0 +1,23 @@
+import { defineStore } from "pinia";
+import { StarAtlasNFT } from "@/typescipt/interfaces/staratlasnft";
+import { STAR_ATLAS_API } from "@/typescipt/const/urls";
+
+export const staratlasStore = defineStore({
+  id: "staratlas_store",
+  state: () => ({
+    nfts: [] as Array<StarAtlasNFT>,
+  }),
+
+  actions: {
+    async fetchFullData() {
+      console.info("Fetching StarAtlas Assets");
+      await fetch(STAR_ATLAS_API)
+        .then((response) => response.json() as Promise<StarAtlasNFT[]>)
+        .then((data) => (this.nfts = data))
+        .then(() => console.info("SA-API-Data fetched!"))
+        .catch((err) => console.error(err));
+
+      this.nfts.sort((a, b) => a.tradeSettings.vwap - b.tradeSettings.vwap);
+    },
+  },
+});

@@ -1,0 +1,184 @@
+<template>
+  <vue-final-modal
+    v-slot="{ close }"
+    v-bind="$attrs"
+    classes="flex justify-center items-center"
+    content-class="overflow-auto md:m-20 relative flex flex-col max-h-full p-4 border dark:border-gray-800 rounded bg-white dark:bg-gray-900"
+  >
+    <div v-if="asset" class="md:m-20">
+      <h1 class="text-center">{{ asset.name }}</h1>
+      <div class="pb-4 flex flex-col md:flex-row items-center space-x-5">
+        <img
+          alt="asset_image"
+          :src="asset.image"
+          class="object-contain h-48 w-96"
+        />
+        <div class="flex flex-col space-y-2">
+          <p>{{ asset.description }}</p>
+          <div class="bg-base-100 p-4 rounded-xl">
+            <div class="grid md:grid-cols-4 md:gap-4">
+              <div>
+                <h4>VWAP</h4>
+                <div>{{ asset.tradeSettings.vwap.toFixed(2) }} $</div>
+              </div>
+              <div>
+                <h4>Supply</h4>
+                <div>
+                  {{
+                    asset.primarySales.reduce((sum, current) => {
+                      return sum + current.supply;
+                    }, 0)
+                  }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <a
+          class="tab md:tab-lg tab-lifted"
+          :class="active_tab === 'info' ? 'tab-active' : ''"
+          @click="active_tab = 'info'"
+          >Info</a
+        >
+        <a
+          class="tab md:tab-lg tab-lifted"
+          :class="active_tab === 'market' ? 'tab-active' : ''"
+          @click="active_tab = 'market'"
+          >Market</a
+        >
+        <a
+          class="tab md:tab-lg tab-lifted"
+          :class="active_tab === 'stats' ? 'tab-active' : ''"
+          @click="active_tab = 'stats'"
+          >Stats</a
+        >
+        <a
+          class="tab md:tab-lg tab-lifted"
+          :class="active_tab === 'explorer' ? 'tab-active' : ''"
+          @click="active_tab = 'explorer'"
+          >Explorer</a
+        >
+        <a
+          class="tab md:tab-lg tab-lifted"
+          :class="active_tab === 'images' ? 'tab-active' : ''"
+          @click="active_tab = 'images'"
+          >Images</a
+        >
+      </div>
+
+      <div class="flex flex-col" v-if="active_tab === 'info'">
+        <div class="bg-base-100 p-4">
+          <h2>Attributes</h2>
+          <div class="grid md:grid-cols-4 gap-4">
+            <div
+              v-for="(attribute, key) in asset.attributes"
+              :key="attribute"
+              class="border-2 bg-base-200 rounded-md px-2 py-1"
+            >
+              <h4 class="capitalize">{{ key }}</h4>
+              <div class="capitalize">{{ attribute }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-base-100 p-4 rounded-xl">
+          <h2>Crew Slots</h2>
+          <div class="grid md:grid-cols-4 gap-4">
+            <div
+              v-for="attribute in asset.slots.crewSlots"
+              :key="attribute"
+              class="border-2 bg-base-200 rounded-md px-2 py-1"
+            >
+              <h4 class="capitalize">{{ attribute.type }}</h4>
+              <div class="capitalize">
+                {{ attribute.quantity }} {{ attribute.size }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-base-100 p-4 rounded-xl">
+          <h2>Component Slots</h2>
+          <div class="grid md:grid-cols-4 gap-4">
+            <div
+              v-for="attribute in asset.slots.componentSlots"
+              :key="attribute"
+              class="border-2 bg-base-200 rounded-md px-2 py-1"
+            >
+              <h4 class="capitalize">{{ attribute.type }}</h4>
+              <div>{{ attribute.quantity }} {{ attribute.size }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-base-100 p-4 rounded-xl">
+          <h2>Module Slots</h2>
+          <div class="grid md:grid-cols-4 gap-4">
+            <div
+              v-for="attribute in asset.slots.moduleSlots"
+              :key="attribute"
+              class="border-2 bg-base-200 rounded-md px-2 py-1"
+            >
+              <h4 class="capitalize">{{ attribute.type }}</h4>
+              <div>{{ attribute.quantity }} {{ attribute.size }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="active_tab === 'market'">
+        <market-tab :mint_address="asset_address"></market-tab>
+      </div>
+      <div v-if="active_tab === 'stats'">
+        <h1>- Under Construction -</h1>
+      </div>
+      <div v-if="active_tab === 'explorer'">
+        <explorer-tab :mint_address="asset_address"></explorer-tab>
+      </div>
+      <div v-if="active_tab === 'images'">
+        <images-tab :mint_address="asset_address"></images-tab>
+      </div>
+    </div>
+    <div class="flex-shrink-0 flex justify-center items-center pt-4">
+      <button class="btn btn-default" @click="$emit('close', close)">
+        close
+      </button>
+    </div>
+    <button class="absolute top-0 right-0 mt-2 mr-2" @click="close"></button>
+  </vue-final-modal>
+</template>
+
+<script lang="ts">
+export default {
+  name: "ShipDetailsModal",
+  inheritAttrs: false,
+  emits: ["close"],
+};
+</script>
+
+<script setup lang="ts">
+import { defineProps, onMounted, ref, PropType, watch, watchEffect } from "vue";
+import { staratlasStore } from "@/store/staratlas_store";
+import { staratlasFactory } from "@/store/staratlas_factory";
+import { StarAtlasNFT } from "@/typescipt/interfaces/staratlasnft";
+import ImagesTab from "@/components/tabs/ImagesTab.vue";
+import MarketTab from "@/components/tabs/MarketTab.vue";
+import ExplorerTab from "@/components/tabs/ExplorerTab.vue";
+
+const staratlas_data = staratlasStore();
+const staratlas_factory = staratlasFactory();
+
+const active_tab = ref("info");
+
+const props = defineProps({
+  asset_address: {
+    type: String,
+    default: "none",
+  },
+  asset: {
+    type: Object as PropType<StarAtlasNFT>,
+    default: undefined,
+  },
+});
+</script>
+
+<style scoped></style>

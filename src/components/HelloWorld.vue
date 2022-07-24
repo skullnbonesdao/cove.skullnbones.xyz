@@ -106,7 +106,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "HelloWorld",
+  symbol: "HelloWorld",
   props: {
     msg: String,
   },

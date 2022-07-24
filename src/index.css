@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1{
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+h2{
+    font-size: x-large;
+    font-weight: bold;
+    color: dodgerblue;
+}
+
+h3{
+    font-size: medium;
+    font-weight: bold;
+    color: dodgerblue;
+
+}
+
+h4{
+    font-size: medium;
+    font-weight: bold;
+
+}
