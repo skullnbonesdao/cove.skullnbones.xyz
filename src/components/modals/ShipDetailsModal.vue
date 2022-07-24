@@ -83,7 +83,8 @@
 
       <div class="flex flex-col" v-if="active_tab === 'info'">
         <div class="bg-base-100 p-4">
-          <h2>Attributes</h2>
+          <h1 class="p-2">Info</h1>
+          <h2 class="p-2">Attributes</h2>
           <div class="grid md:grid-cols-4 gap-4">
             <div
               v-for="(attribute, key) in asset.attributes"
@@ -96,7 +97,7 @@
           </div>
         </div>
         <div class="bg-base-100 p-4 rounded-xl">
-          <h2>Crew Slots</h2>
+          <h2 class="p-2">Crew Slots</h2>
           <div class="grid md:grid-cols-4 gap-4">
             <div
               v-for="attribute in asset.slots.crewSlots"
@@ -111,7 +112,7 @@
           </div>
         </div>
         <div class="bg-base-100 p-4 rounded-xl">
-          <h2>Component Slots</h2>
+          <h2 class="p-2">Component Slots</h2>
           <div class="grid md:grid-cols-4 gap-4">
             <div
               v-for="attribute in asset.slots.componentSlots"
@@ -124,7 +125,7 @@
           </div>
         </div>
         <div class="bg-base-100 p-4 rounded-xl">
-          <h2>Module Slots</h2>
+          <h2 class="p-2">Module Slots</h2>
           <div class="grid md:grid-cols-4 gap-4">
             <div
               v-for="attribute in asset.slots.moduleSlots"

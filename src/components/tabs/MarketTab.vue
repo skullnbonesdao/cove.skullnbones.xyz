@@ -1,6 +1,6 @@
 <template>
   <div class="bg-base-100 p-4">
-    <h1 class="text-center p-2">Market</h1>
+    <h1 class="p-2">Market</h1>
     <div class="flex flex-col space-y-3">
       <div class="bg-base-300 p-4">
         <h2 class="pb-3">BUY Orders</h2>
@@ -28,17 +28,23 @@
         </div>
       </div>
       <div class="bg-base-300 p-4">
-        <h2 class="text-center">SELL</h2>
+        <h2 class="pb-3">SELL Orders</h2>
         <div class="flex flex-row space-x-4">
           <div class="basis-1/2">
-            <h3 class="text-center pb-2">USDC</h3>
+            <div class="flex flex-row pb-2">
+              <h3>USDC</h3>
+              <usdc-icon></usdc-icon>
+            </div>
             <MarketOrders
               :market_orders="market_orders_sell_usdc"
               market_token="USDC"
             />
           </div>
           <div class="basis-1/2">
-            <h3 class="text-center pb-2">ATLAS</h3>
+            <div class="flex flex-row pb-2">
+              <h3>ATLAS</h3>
+              <atlas-icon></atlas-icon>
+            </div>
             <MarketOrders
               :market_orders="market_orders_sell_atlas"
               market_token="ATLAS"
