@@ -1,7 +1,7 @@
 <template>
   <div>
     <ship-details-modal
-      class="md:ml-20"
+      class="md:ml-40"
       v-model="show_modal"
       @close="show_modal = false"
       @click-outside="show_modal = false"
@@ -34,6 +34,7 @@
         >
           <th>
             <ship-table-image-component
+              class="justify-center"
               :symbol="asset.symbol"
               :img_url="'sa_images/webp/' + asset._id + '.webp'"
             ></ship-table-image-component>

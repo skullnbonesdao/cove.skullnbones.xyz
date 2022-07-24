@@ -1,6 +1,13 @@
 <template>
-  <h1>Market</h1>
-  <ship-table :assets="staratlas_data.nfts"></ship-table>
+  <div class="flex flex-col w-full border-opacity-50 p-4">
+    <div class="grid h-20 card bg-base-300 rounded-box place-items-center">
+      <h1>Market</h1>
+    </div>
+    <div class="divider"></div>
+    <div class="bg-base-300 rounded-box place-items-center">
+      <ship-table class="" :assets="staratlas_data.nfts"></ship-table>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

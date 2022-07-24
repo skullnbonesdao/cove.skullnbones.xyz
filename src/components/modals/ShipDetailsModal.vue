@@ -3,9 +3,12 @@
     v-slot="{ close }"
     v-bind="$attrs"
     classes="flex justify-center items-center"
-    content-class="overflow-auto md:m-20 relative flex flex-col max-h-full p-4 border dark:border-gray-800 rounded bg-white dark:bg-gray-900"
+    content-class="overflow-auto  relative flex flex-col max-h-full p-4 border dark:border-gray-800 rounded bg-white dark:bg-gray-900"
   >
     <div v-if="asset" class="md:m-20">
+      <button class="btn btn-primary btn-circle" @click="$emit('close', close)">
+        X
+      </button>
       <h1 class="text-center">{{ asset.name }}</h1>
       <div class="pb-4 flex flex-col md:flex-row items-center space-x-5">
         <img
@@ -151,11 +154,10 @@
       </div>
     </div>
     <div class="flex-shrink-0 flex justify-center items-center pt-4">
-      <button class="btn btn-default" @click="$emit('close', close)">
+      <button class="btn btn-primary" @click="$emit('close', close)">
         close
       </button>
     </div>
-    <button class="absolute top-0 right-0 mt-2 mr-2" @click="close"></button>
   </vue-final-modal>
 </template>
 
