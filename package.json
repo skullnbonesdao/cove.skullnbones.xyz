@@ -10,6 +10,7 @@
   "dependencies": {
     "@solana/web3.js": "^1.50.0",
     "@staratlas/factory": "^0.2.18",
+    "bootstrap-icons": "^1.9.1",
     "core-js": "^3.8.3",
     "daisyui": "^2.19.1",
     "limiter": "^2.1.0",
