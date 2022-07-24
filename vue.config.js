@@ -1,7 +1,8 @@
 const webpack = require("webpack");
 const { defineConfig } = require("@vue/cli-service");
 module.exports = defineConfig({
-  publicPath: process.env.NODE_ENV === "production" ? "/REPO_NAME/" : "/",
+  publicPath:
+    process.env.NODE_ENV === "production" ? "/cave2.skullnbones.xyz/" : "/",
   transpileDependencies: true,
   configureWebpack: {
     plugins: [
