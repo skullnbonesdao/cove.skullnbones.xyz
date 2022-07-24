@@ -3,7 +3,7 @@
     v-slot="{ close }"
     v-bind="$attrs"
     classes="flex justify-center items-center"
-    content-class="overflow-auto  relative flex flex-col max-h-full p-4 border dark:border-gray-800 rounded bg-white dark:bg-gray-900"
+    content-class="overflow-auto relative flex flex-col max-h-full p-4 border dark:border-base-300 rounded bg-base-300"
   >
     <div v-if="asset" class="md:m-20">
       <button class="btn btn-primary btn-circle" @click="$emit('close', close)">

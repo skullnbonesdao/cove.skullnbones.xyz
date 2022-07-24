@@ -1,17 +1,18 @@
 <template>
   <div class="flex flex-row space-x-1">
-    <usdc-icon></usdc-icon>
-    <div class="w-32 text-right">
+    <usdc-icon class="basis-1/3"></usdc-icon>
+    <div class="basis-1/3 text-right">
       {{ (price_usdc * Math.pow(10, -6)).toFixed(2) }}
     </div>
     <percentage-element
+      class="basis-1/3"
       :price_vwap="vwap"
       :is_price="price_usdc * Math.pow(10, -6)"
     ></percentage-element>
   </div>
   <div class="flex flex-row space-x-1">
-    <atlas-icon></atlas-icon>
-    <div class="w-32 text-right">
+    <atlas-icon class="basis-1/3"></atlas-icon>
+    <div class="basis-2/3">
       {{ (price_atlas * Math.pow(10, -8)).toFixed(2) }}
     </div>
   </div>
