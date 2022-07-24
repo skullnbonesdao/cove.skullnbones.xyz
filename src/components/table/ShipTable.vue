@@ -19,7 +19,8 @@
           <th></th>
           <th>Name</th>
           <th>VWAP</th>
-          <th>Favorite Color</th>
+          <th>ASK</th>
+          <th>BID</th>
         </tr>
       </thead>
       <tbody>
@@ -39,11 +40,28 @@
           </th>
           <td>
             <ship-table-name-component
-              :name="asset.name"
+              :mint_address="asset.mint"
             ></ship-table-name-component>
           </td>
-          <td>{{ asset.tradeSettings.vwap.toFixed(2) }}</td>
-          <td>Red</td>
+          <td>
+            <div class="flex flex-row">
+              {{ asset.tradeSettings.vwap.toFixed(2) }} <usdc-icon></usdc-icon>
+            </div>
+          </td>
+          <td>
+            <ask-bid-element
+              :mint_address="asset.mint"
+              side="sell"
+              :vwap="asset.tradeSettings.vwap"
+            ></ask-bid-element>
+          </td>
+          <td>
+            <ask-bid-element
+              :mint_address="asset.mint"
+              side="buy"
+              :vwap="asset.tradeSettings.vwap"
+            ></ask-bid-element>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -62,6 +80,8 @@ import { StarAtlasNFT } from "@/typescipt/interfaces/staratlasnft";
 import ShipTableImageComponent from "@/components/table/components/ShipTableImageComponent.vue";
 import ShipTableNameComponent from "@/components/table/components/ShipTableNameComponent.vue";
 import ShipDetailsModal from "@/components/modals/ShipDetailsModal.vue";
+import UsdcIcon from "@/components/icons/USDCIcon.vue";
+import AskBidElement from "@/components/table/components/AskBidElement.vue";
 
 const props = defineProps({
   assets: { type: Array as PropType<Array<StarAtlasNFT>>, default: null },

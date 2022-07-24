@@ -1,0 +1,154 @@
+<template>
+  <div class="bg-base-100 p-4">
+    <h1 class="pb-4">Score Stats</h1>
+    <div class="space-y-3">
+      <div>
+        <h2>Supply and Burn Rates</h2>
+        <div class="grid grid-cols-4 gap-4">
+          <div class="border p-2 rounded-xl">
+            <h4>Food</h4>
+            <div class="flex flex-row space-x-1">
+              <h5 class="grow">Reserve:</h5>
+              <div>{{ score_vars_ship_info.foodMaxReserve }}</div>
+            </div>
+            <div class="flex flex-row space-x-1">
+              <h5 class="grow">Burn:</h5>
+              <div>
+                {{
+                  (
+                    (score_vars_ship_info.millisecondsToBurnOneFood /
+                      1000 /
+                      60 /
+                      60) *
+                    score_vars_ship_info.foodMaxReserve
+                  ).toFixed(2)
+                }}h
+              </div>
+            </div>
+          </div>
+          <div class="border p-2 rounded-xl">
+            <h4>Arms</h4>
+            <div class="flex flex-row space-x-1">
+              <h5 class="grow">Reserve:</h5>
+              <div>{{ score_vars_ship_info.armsMaxReserve }}</div>
+            </div>
+            <div class="flex flex-row space-x-1">
+              <h5 class="grow">Burn:</h5>
+              <div>
+                {{
+                  (
+                    (score_vars_ship_info.millisecondsToBurnOneArms /
+                      1000 /
+                      60 /
+                      60) *
+                    score_vars_ship_info.armsMaxReserve
+                  ).toFixed(2)
+                }}h
+              </div>
+            </div>
+          </div>
+          <div class="border p-2 rounded-xl">
+            <h4>Fuel</h4>
+            <div class="flex flex-row space-x-1">
+              <h5 class="grow">Reserve:</h5>
+              <div>{{ score_vars_ship_info.fuelMaxReserve }}</div>
+            </div>
+            <div class="flex flex-row space-x-1">
+              <h5 class="grow">Burn:</h5>
+              <div>
+                {{
+                  (
+                    (score_vars_ship_info.millisecondsToBurnOneFuel /
+                      1000 /
+                      60 /
+                      60) *
+                    score_vars_ship_info.fuelMaxReserve
+                  ).toFixed(2)
+                }}h
+              </div>
+            </div>
+          </div>
+          <div class="border p-2 rounded-xl">
+            <h4>Tool</h4>
+            <div class="flex flex-row space-x-1">
+              <h5 class="grow">Reserve:</h5>
+              <div>{{ score_vars_ship_info.toolkitMaxReserve }}</div>
+            </div>
+            <div class="flex flex-row space-x-1">
+              <h5 class="grow">Burn:</h5>
+              <div>
+                {{
+                  (
+                    (score_vars_ship_info.millisecondsToBurnOneToolkit /
+                      1000 /
+                      60 /
+                      60) *
+                    score_vars_ship_info.toolkitMaxReserve
+                  ).toFixed(2)
+                }}h
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2>Supply and Burn Rates</h2>
+        <div class="grid grid-cols-4 gap-4">
+          <div class="border p-2 rounded-xl">
+            <h4>Rewards</h4>
+            <div class="flex flex-row space-x-1">
+              <h5 class="grow">ATLAS:</h5>
+              <div>{{ score_vars_ship_info.rewardRatePerSecond }} 1/s</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+export default {
+  name: "ScoreTab",
+};
+</script>
+
+<script setup lang="ts">
+import { defineProps, onMounted, ref, watch } from "vue";
+import { staratlasStore } from "@/store/staratlas_store";
+import { staratlasFactory } from "@/store/staratlas_factory";
+import { StarAtlasNFT } from "@/typescipt/interfaces/staratlasnft";
+import { OrderAccountItem, ScoreVarsShipInfo } from "@staratlas/factory";
+
+const staratlas_data = staratlasStore();
+const staratlas_factory = staratlasFactory();
+
+const props = defineProps({
+  mint_address: {
+    type: String,
+    default: "",
+  },
+});
+
+let score_vars_ship_info = ref({} as ScoreVarsShipInfo);
+
+async function load_score_data() {
+  await staratlas_factory.getScoreVarsShipInfo(props.mint_address);
+  score_vars_ship_info.value = await staratlas_factory.getScoreVarsShipInfo(
+    props.mint_address
+  );
+}
+
+onMounted(async () => {
+  await load_score_data();
+});
+
+watch(
+  () => props.mint_address,
+  async (value) => {
+    await load_score_data();
+  }
+);
+</script>
+
+<style scoped></style>

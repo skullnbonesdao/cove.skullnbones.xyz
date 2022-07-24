@@ -12,6 +12,7 @@
     "@staratlas/factory": "^0.2.18",
     "core-js": "^3.8.3",
     "daisyui": "^2.19.1",
+    "limiter": "^2.1.0",
     "pinia": "^2.0.16",
     "resolve": "^1.22.1",
     "theme-change": "^2.1.0",

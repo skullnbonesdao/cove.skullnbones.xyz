@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 bg-base-100">
+  <div class="p-4 bg-base-100" v-if="assets?.media">
     <div class="flex justify-center py-2 gap-2">
       <a
         :href="'#item' + id"
@@ -29,7 +29,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
+import { ref, defineProps, onMounted, watch } from "vue";
 import { staratlasStore } from "@/store/staratlas_store";
 import { StarAtlasNFT } from "@/typescipt/interfaces/staratlasnft";
 
@@ -41,8 +41,23 @@ const props = defineProps({
   },
 });
 
-const assets: StarAtlasNFT | undefined = staratlas_data.nfts.find(
-  (nft) => nft.mint === props.mint_address
+let assets = ref({} as StarAtlasNFT | undefined);
+
+function load_image_data() {
+  assets.value = staratlas_data.nfts.find(
+    (nft) => nft.mint === props.mint_address
+  );
+}
+
+onMounted(() => {
+  load_image_data();
+});
+
+watch(
+  () => props.mint_address,
+  (value) => {
+    load_image_data();
+  }
 );
 </script>
 

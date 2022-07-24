@@ -5,37 +5,53 @@ import {
   getMarketVarsAccount,
   getMarketVarsAccountInfo,
   getOpenOrdersForAsset,
+  getScoreVarsShipInfo,
   OrderAccountItem,
+  ScoreVarsShipInfo,
 } from "@staratlas/factory";
 import { GENESYSGO, SOLANANETWORK } from "@/typescipt/const/solana";
+import { SCORE_PROGRAM, TRADE_PROGRAM } from "@/typescipt/const/staratlas";
+import { RateLimiter } from "limiter";
 
 export const staratlasFactory = defineStore({
   id: "staratlas_factory",
   state: () => ({
     connection: {} as Connection,
+    limiter: {} as RateLimiter,
   }),
   actions: {
     init() {
       //this.connection = new Connection(clusterApiUrl(SOLANANETWORK));
       this.connection = new Connection(GENESYSGO);
+      this.limiter = new RateLimiter({ tokensPerInterval: 1, interval: 500 });
     },
     async getAllOpenOrders() {
-      getAllOpenOrders(
-        this.connection,
-        new PublicKey("traderDnaR5w6Tcoi3NFm53i48FTDNbGjBSZwWXDRrg")
-      ).then((r) => {
+      getAllOpenOrders(this.connection, TRADE_PROGRAM).then((r) => {
         console.log(r);
         r.forEach((e) => console.log(e.account.assetMint.toBase58()));
-        //r.forEach((e) => console.log(e.publicKey.toBase58()));
       });
     },
     async getOpenOrdersForAsset(
       mint_address: string
     ): Promise<OrderAccountItem[]> {
+      await this.limiter.removeTokens(1);
+
       return await getOpenOrdersForAsset(
         this.connection,
         new PublicKey(mint_address),
-        new PublicKey("traderDnaR5w6Tcoi3NFm53i48FTDNbGjBSZwWXDRrg")
+        TRADE_PROGRAM
+      );
+    },
+
+    async getScoreVarsShipInfo(
+      mint_address: string
+    ): Promise<ScoreVarsShipInfo> {
+      await this.limiter.removeTokens(1);
+
+      return await getScoreVarsShipInfo(
+        this.connection,
+        SCORE_PROGRAM,
+        new PublicKey(mint_address)
       );
     },
   },

@@ -19,7 +19,10 @@
             <div class="grid md:grid-cols-4 md:gap-4">
               <div>
                 <h4>VWAP</h4>
-                <div>{{ asset.tradeSettings.vwap.toFixed(2) }} $</div>
+                <div class="flex flex-row">
+                  {{ asset.tradeSettings.vwap.toFixed(2) }}
+                  <usdc-icon class="pt-1 pl-1"></usdc-icon>
+                </div>
               </div>
               <div>
                 <h4>Supply</h4>
@@ -48,6 +51,12 @@
           :class="active_tab === 'market' ? 'tab-active' : ''"
           @click="active_tab = 'market'"
           >Market</a
+        >
+        <a
+          class="tab md:tab-lg tab-lifted"
+          :class="active_tab === 'score' ? 'tab-active' : ''"
+          @click="active_tab = 'score'"
+          >Score</a
         >
         <a
           class="tab md:tab-lg tab-lifted"
@@ -128,6 +137,9 @@
       <div v-if="active_tab === 'market'">
         <market-tab :mint_address="asset_address"></market-tab>
       </div>
+      <div v-if="active_tab === 'score'">
+        <score-tab :mint_address="asset_address"></score-tab>
+      </div>
       <div v-if="active_tab === 'stats'">
         <h1>- Under Construction -</h1>
       </div>
@@ -163,6 +175,8 @@ import { StarAtlasNFT } from "@/typescipt/interfaces/staratlasnft";
 import ImagesTab from "@/components/tabs/ImagesTab.vue";
 import MarketTab from "@/components/tabs/MarketTab.vue";
 import ExplorerTab from "@/components/tabs/ExplorerTab.vue";
+import UsdcIcon from "@/components/icons/USDCIcon.vue";
+import ScoreTab from "@/components/tabs/ScoreTab.vue";
 
 const staratlas_data = staratlasStore();
 const staratlas_factory = staratlasFactory();
