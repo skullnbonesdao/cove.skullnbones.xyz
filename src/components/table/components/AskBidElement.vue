@@ -1,25 +1,27 @@
 <template>
   <div class="flex flex-row space-x-1">
-    <usdc-icon class="basis-1/3"></usdc-icon>
+    <usdc-icon class="basis-1/4"></usdc-icon>
     <div class="basis-1/3 text-right">
       {{ (get_price_from_store_usdc() * Math.pow(10, -6)).toFixed(2) }}
     </div>
     <percentage-element
-      class="basis-1/3 text-center"
+      class="basis-1/3 text-right"
       :price_vwap="vwap"
       :is_price="get_price_from_store_usdc() * Math.pow(10, -6)"
     ></percentage-element>
+    <div class="w-full"></div>
   </div>
   <div class="flex flex-row space-x-1">
-    <atlas-icon class="basis-1/3"></atlas-icon>
+    <atlas-icon class="basis-1/4"></atlas-icon>
     <div class="basis-1/3 text-right">
       {{ (get_price_from_store_atlas() * Math.pow(10, -8)).toFixed(2) }}
     </div>
     <percentage-element
-      class="basis-1/3 text-center"
+      class="basis-1/3 text-right"
       :price_vwap="vwap"
       :is_price="0.0"
     ></percentage-element>
+    <div class="w-full"></div>
   </div>
 </template>
 
