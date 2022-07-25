@@ -2,19 +2,24 @@
   <div class="flex flex-row space-x-1">
     <usdc-icon class="basis-1/3"></usdc-icon>
     <div class="basis-1/3 text-right">
-      {{ (price_usdc * Math.pow(10, -6)).toFixed(2) }}
+      {{ (get_price_from_store_usdc() * Math.pow(10, -6)).toFixed(2) }}
     </div>
     <percentage-element
-      class="basis-1/3"
+      class="basis-1/3 text-center"
       :price_vwap="vwap"
-      :is_price="price_usdc * Math.pow(10, -6)"
+      :is_price="get_price_from_store_usdc() * Math.pow(10, -6)"
     ></percentage-element>
   </div>
   <div class="flex flex-row space-x-1">
     <atlas-icon class="basis-1/3"></atlas-icon>
-    <div class="basis-2/3">
-      {{ (price_atlas * Math.pow(10, -8)).toFixed(2) }}
+    <div class="basis-1/3 text-right">
+      {{ (get_price_from_store_atlas() * Math.pow(10, -8)).toFixed(2) }}
     </div>
+    <percentage-element
+      class="basis-1/3 text-center"
+      :price_vwap="vwap"
+      :is_price="0.0"
+    ></percentage-element>
   </div>
 </template>
 
@@ -25,7 +30,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, defineProps, onMounted } from "vue";
+import { ref, defineProps, onMounted, watch } from "vue";
 
 import { staratlasStore } from "@/store/staratlas_store";
 import { staratlasFactory } from "@/store/staratlas_factory";
@@ -43,55 +48,69 @@ const props = defineProps({
 
 const staratlas_factory = staratlasFactory();
 
-let price_usdc = ref(0);
-let price_atlas = ref(0);
-
-async function load_order_data() {
-  const market_orders: OrderAccountItem[] =
-    await staratlas_factory.getOpenOrdersForAsset(props.mint_address);
+function get_price_from_store_atlas() {
+  const market_orders: OrderAccountItem[] | undefined =
+    staratlas_factory.order_account_item_assets?.find(
+      (order) => order.mint_address === props.mint_address
+    )?.orders;
 
   const marker_orders_side = market_orders?.filter((orders) =>
     JSON.stringify(orders.account.orderSide).includes(props.side)
   );
-  if (marker_orders_side.length > 0) {
+
+  if (marker_orders_side != undefined) {
     switch (props.side) {
       case "buy": {
-        price_usdc.value = marker_orders_side
-          ?.filter(
-            (order) =>
-              order.account.currencyMint.toBase58() == TOKEN_USDC.toBase58()
-          )
-          ?.sort((a, b) => b.account.price - a.account.price)[0].account.price;
-        price_atlas.value = marker_orders_side
+        return marker_orders_side
           ?.filter(
             (order) =>
               order.account.currencyMint.toBase58() == TOKEN_ATLAS.toBase58()
           )
-          ?.sort((a, b) => b.account.price - a.account.price)[0].account.price;
-        break;
+          ?.sort((a, b) => b.account.price - a.account.price)[0]?.account.price;
       }
       case "sell": {
-        price_usdc.value = marker_orders_side
-          ?.filter(
-            (order) =>
-              order.account.currencyMint.toBase58() == TOKEN_USDC.toBase58()
-          )
-          ?.sort((a, b) => a.account.price - b.account.price)[0].account.price;
-        price_atlas.value = marker_orders_side
+        return marker_orders_side
           ?.filter(
             (order) =>
               order.account.currencyMint.toBase58() == TOKEN_ATLAS.toBase58()
           )
-          ?.sort((a, b) => a.account.price - b.account.price)[0].account.price;
-        break;
+          ?.sort((a, b) => a.account.price - b.account.price)[0]?.account.price;
       }
     }
   }
 }
 
-onMounted(async () => {
-  await load_order_data();
-});
+function get_price_from_store_usdc() {
+  const market_orders: OrderAccountItem[] | undefined =
+    staratlas_factory.order_account_item_assets?.find(
+      (order) => order.mint_address === props.mint_address
+    )?.orders;
+
+  const marker_orders_side = market_orders?.filter((orders) =>
+    JSON.stringify(orders.account.orderSide).includes(props.side)
+  );
+
+  if (marker_orders_side != undefined) {
+    switch (props.side) {
+      case "buy": {
+        return marker_orders_side
+          ?.filter(
+            (order) =>
+              order.account.currencyMint.toBase58() == TOKEN_USDC.toBase58()
+          )
+          ?.sort((a, b) => b.account.price - a.account.price)[0]?.account.price;
+      }
+      case "sell": {
+        return marker_orders_side
+          ?.filter(
+            (order) =>
+              order.account.currencyMint.toBase58() == TOKEN_USDC.toBase58()
+          )
+          ?.sort((a, b) => a.account.price - b.account.price)[0]?.account.price;
+      }
+    }
+  }
+}
 </script>
 
 <style scoped></style>
