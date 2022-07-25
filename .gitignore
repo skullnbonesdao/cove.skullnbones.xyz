@@ -21,3 +21,4 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+/scripts/sa_images/images/
