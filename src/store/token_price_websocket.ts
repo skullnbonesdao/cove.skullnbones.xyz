@@ -3,11 +3,14 @@ import { SERUMAPIWEBSOCKET } from "@/typescipt/const/serum";
 import { Convert, MarketLevel1 } from "@/typescipt/websockets/MarketLevel1";
 import { Ref } from "vue";
 
-export const tokenPircesWebsocket = defineStore({
-  id: "tokenPirces_websocket",
+export const tokenPricesWebsocket = defineStore({
+  id: "tokenPrices_websocket",
   state: () => ({
     ws: {} as WebSocket,
-    m_btc: {} as Ref<MarketLevel1>,
+    m_btc: "0.0",
+    m_sol: "0.0",
+    m_atlas: "0.0",
+    m_polis: "0.0",
   }),
 
   actions: {
@@ -47,9 +50,23 @@ export const tokenPircesWebsocket = defineStore({
         if (new_market_data.type === "quote") {
           switch (new_market_data.market) {
             case "BTC/USDC":
-              this.m_btc = new_market_data;
+              this.m_btc = new_market_data.bestBid[0];
+              console.info("{ws-message} BTC/USDC");
+              break;
+            case "SOL/USDC":
+              this.m_sol = new_market_data.bestBid[0];
+              console.info("{ws-message} SOL/USDC");
+              break;
+            case "ATLAS/USDC":
+              this.m_atlas = new_market_data.bestBid[0];
+              console.info("{ws-message} ATLAS/USDC");
+              break;
+            case "POLIS/USDC":
+              this.m_polis = new_market_data.bestBid[0];
+              console.info("{ws-message} POLIS/USDC");
               break;
           }
+
           /*if (
             this.markets.value.find(
               (market) => market.market == new_market_data.market

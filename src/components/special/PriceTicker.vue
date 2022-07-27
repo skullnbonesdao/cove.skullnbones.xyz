@@ -1,7 +1,10 @@
 <template>
-  <div class="flex flex-col text-center">
-    <h3>{{ asset_name }}</h3>
-    <h4>{{ asset_price }}</h4>
+  <div class="flex flex-col ring-2 rounded-xl p-2">
+    <h3 class="text-center">{{ asset_name }}</h3>
+    <div class="flex flex-row space-x-2">
+      <usdc-icon></usdc-icon>
+      <h4>{{ asset_price }}</h4>
+    </div>
   </div>
 </template>
 
@@ -12,9 +15,12 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
+import { defineProps, ref, watch } from "vue";
+import UsdcIcon from "@/components/icons/USDCIcon.vue";
 
-defineProps({
+const color = ref("yellow");
+
+const props = defineProps({
   asset_name: {
     type: String,
     default: "ASSET",

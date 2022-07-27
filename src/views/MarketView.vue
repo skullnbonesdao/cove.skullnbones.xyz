@@ -2,7 +2,24 @@
   <div class="flex flex-col w-full border-opacity-50 p-4">
     <div class="grid px-16 card bg-base-300 rounded-box place-items-center">
       <h1>Market</h1>
-      <div>-Ticker-</div>
+      <div class="grid md:grid-cols-4 gap-10 pb-2">
+        <price-ticker
+          asset_name="BTC/USDC"
+          :asset_price="tokenWS.m_btc"
+        ></price-ticker>
+        <price-ticker
+          asset_name="SOL/USDC"
+          :asset_price="tokenWS.m_sol"
+        ></price-ticker>
+        <price-ticker
+          asset_name="POLIS/USDC"
+          :asset_price="tokenWS.m_polis"
+        ></price-ticker>
+        <price-ticker
+          asset_name="ATLAS/USDC"
+          :asset_price="tokenWS.m_atlas"
+        ></price-ticker>
+      </div>
     </div>
 
     <div class="divider"></div>
@@ -27,9 +44,13 @@ export default {
 import { defineComponent, onBeforeMount, onMounted } from "vue";
 import ShipTable from "@/components/table/ShipTable.vue";
 import { staratlasStore } from "@/store/staratlas_store";
+import { tokenPricesWebsocket } from "@/store/token_price_websocket";
 import GridLoader from "vue-spinner/src/GridLoader.vue";
+import PriceTicker from "@/components/special/PriceTicker.vue";
 
 const staratlas_store = staratlasStore();
+const tokenWS = tokenPricesWebsocket();
+tokenWS.initMarkets();
 
 onMounted(async () => {
   await staratlas_store.fetchFullData();
