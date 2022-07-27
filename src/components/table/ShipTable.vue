@@ -38,7 +38,7 @@
               :img_url="'sa_images/webp/' + asset._id + '.webp'"
             ></ship-table-image-component>
           </th>
-          <td>
+          <td class="w-full">
             <ship-table-name-component
               :mint_address="asset.mint"
             ></ship-table-name-component>
@@ -46,7 +46,7 @@
           <td>
             <div class="flex flex-row space-x-1">
               <usdc-icon></usdc-icon>
-              <div>
+              <div class="w-32">
                 {{ asset.tradeSettings.vwap.toFixed(2) }}
               </div>
             </div>

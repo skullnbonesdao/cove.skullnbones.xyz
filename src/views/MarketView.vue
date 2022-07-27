@@ -25,7 +25,13 @@
     </div>
 
     <div class="divider"></div>
+
     <div class="bg-base-300 rounded-box place-items-center">
+      <div class="tabs">
+        <a class="tab tab-bordered">Tab 1</a>
+        <a class="tab tab-bordered tab-active">Tab 2</a>
+        <a class="tab tab-bordered">Tab 3</a>
+      </div>
       <div v-if="staratlas_store.status === 'fetched'">
         <ship-table :assets="staratlas_store.nfts"></ship-table>
       </div>

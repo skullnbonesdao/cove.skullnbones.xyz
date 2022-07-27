@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col">
-    <div>{{ ship?.name }}</div>
+    <h3>{{ ship?.name }}</h3>
     <div class="flex flex-row space-x-2">
       <tier-badge :text="ship?.attributes.tier || 0"></tier-badge>
       <rarity-badge :text="ship?.attributes.rarity"></rarity-badge>
