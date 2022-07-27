@@ -1,13 +1,13 @@
 <template>
   <!-- USDC -->
   <div class="flex flex-row space-x-1">
-    <usdc-icon></usdc-icon>
+    <usdc-icon class="grow"></usdc-icon>
     <div v-if="price_usdc === 0">
       <beat-loader :color="'#ffa500'"></beat-loader>
     </div>
     <div v-else>
       <div v-if="price_usdc !== -1" class="flex flex-row space-x-2">
-        <div class="w-32 text-right">
+        <div class="text-right">
           {{ price_usdc }}
         </div>
         <percentage-element
@@ -17,7 +17,7 @@
         ></percentage-element>
       </div>
       <div v-else class="flex flex-row space-x-2">
-        <div class="w-32 text-right">no-market</div>
+        <div class="text-right">no-market</div>
         <percentage-element
           class="w-24 text-right"
           :price_vwap="vwap"
@@ -29,13 +29,13 @@
 
   <!-- ATLAS -->
   <div class="flex flex-row space-x-1">
-    <atlas-icon></atlas-icon>
+    <atlas-icon class="grow"></atlas-icon>
     <div v-if="price_atlas === 0">
       <beat-loader :color="'#ffa500'"></beat-loader>
     </div>
     <div v-else>
       <div v-if="price_atlas !== -1" class="flex flex-row space-x-2">
-        <div class="w-32 text-right">
+        <div class="text-right">
           {{ price_atlas }}
         </div>
 
@@ -46,7 +46,7 @@
         ></percentage-element>
       </div>
       <div v-else class="flex flex-row space-x-2">
-        <div class="w-32 text-right">no-market</div>
+        <div class="text-right">no-market</div>
         <percentage-element
           class="w-24 text-right"
           :price_vwap="vwap"
