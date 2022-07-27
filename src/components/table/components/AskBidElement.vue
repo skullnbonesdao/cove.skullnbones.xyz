@@ -1,30 +1,58 @@
 <template>
   <!-- USDC -->
   <div class="flex flex-row space-x-1">
-    <usdc-icon class="basis-1/5"></usdc-icon>
-    <div class="basis-2/5 text-right">
-      {{ price_usdc }}
+    <usdc-icon></usdc-icon>
+    <div v-if="price_usdc === 0">
+      <beat-loader :color="'#ffa500'"></beat-loader>
     </div>
-    <percentage-element
-      class="basis-1/5 text-right"
-      :price_vwap="vwap"
-      :is_price="price_usdc"
-    ></percentage-element>
-    <div class="basis-1/5"></div>
+    <div v-else>
+      <div v-if="price_usdc !== -1" class="flex flex-row space-x-2">
+        <div class="w-32 text-right">
+          {{ price_usdc }}
+        </div>
+        <percentage-element
+          class="w-24 text-right"
+          :price_vwap="vwap"
+          :is_price="price_usdc"
+        ></percentage-element>
+      </div>
+      <div v-else class="flex flex-row space-x-2">
+        <div class="w-32 text-right">no-market</div>
+        <percentage-element
+          class="w-24 text-right"
+          :price_vwap="vwap"
+          :is_price="price_usdc"
+        ></percentage-element>
+      </div>
+    </div>
   </div>
 
   <!-- ATLAS -->
   <div class="flex flex-row space-x-1">
-    <atlas-icon class="basis-1/5"></atlas-icon>
-    <div class="basis-2/5 text-right">
-      {{ price_atlas }}
+    <atlas-icon></atlas-icon>
+    <div v-if="price_atlas === 0">
+      <beat-loader :color="'#ffa500'"></beat-loader>
     </div>
-    <percentage-element
-      class="basis-1/5 text-right"
-      :price_vwap="vwap"
-      :is_price="0.0"
-    ></percentage-element>
-    <div class="basis-1/5"></div>
+    <div v-else>
+      <div v-if="price_atlas !== -1" class="flex flex-row space-x-2">
+        <div class="w-32 text-right">
+          {{ price_atlas }}
+        </div>
+        <percentage-element
+          class="w-24 text-right"
+          :price_vwap="vwap"
+          :is_price="0.0"
+        ></percentage-element>
+      </div>
+      <div v-else class="flex flex-row space-x-2">
+        <div class="w-32 text-right">no-market</div>
+        <percentage-element
+          class="w-24 text-right"
+          :price_vwap="vwap"
+          :is_price="0.0"
+        ></percentage-element>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -42,6 +70,7 @@ import { TOKEN_ATLAS, TOKEN_USDC } from "@/typescipt/const/tokens";
 import UsdcIcon from "@/components/icons/USDCIcon.vue";
 import AtlasIcon from "@/components/icons/ATLASIcon.vue";
 import PercentageElement from "@/components/special/PercentageElement.vue";
+import BeatLoader from "vue-spinner/src/BeatLoader.vue";
 
 const props = defineProps({
   vwap: { type: Number, default: 0 },

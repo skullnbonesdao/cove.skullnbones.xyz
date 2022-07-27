@@ -7,7 +7,12 @@
 
     <div class="divider"></div>
     <div class="bg-base-300 rounded-box place-items-center">
-      <ship-table :assets="staratlas_store.nfts"></ship-table>
+      <div v-if="staratlas_store.status === 'fetched'">
+        <ship-table :assets="staratlas_store.nfts"></ship-table>
+      </div>
+      <div v-else class="grid place-items-center">
+        <grid-loader :color="'#ffa500'"></grid-loader>
+      </div>
     </div>
   </div>
 </template>
@@ -19,19 +24,15 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { onBeforeMount, onMounted } from "vue";
+import { defineComponent, onBeforeMount, onMounted } from "vue";
 import ShipTable from "@/components/table/ShipTable.vue";
 import { staratlasStore } from "@/store/staratlas_store";
-import { staratlas_gmClientStore } from "@/store/staratlas_gmClient";
+import GridLoader from "vue-spinner/src/GridLoader.vue";
 
 const staratlas_store = staratlasStore();
 
-onBeforeMount(async () => {
+onMounted(async () => {
   await staratlas_store.fetchFullData();
-
-  //gmOrderBookService.init();
-  //await staratlas_factory.getOpenOrdersForAsset_all(staratlas_store.nfts);
-  //await staratlas_factory.getScoreVarsShipInfo_all(staratlas_store.nfts);
 });
 </script>
 
