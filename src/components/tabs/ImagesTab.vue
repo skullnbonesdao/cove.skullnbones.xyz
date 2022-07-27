@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 bg-base-100" v-if="assets?.media">
+  <div class="p-4 bg-base-100 rounded-xl" v-if="assets?.media">
     <div class="flex justify-center py-2 gap-2">
       <a
         :href="'#item' + id"

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-base-100 p-4 rounded-r-xl rounded-b-xl">
+  <div class="bg-base-100 p-4 rounded-xl">
     <h1 class="p-2">Market</h1>
     <div class="flex flex-col space-y-3">
       <div class="bg-base-300 p-4">

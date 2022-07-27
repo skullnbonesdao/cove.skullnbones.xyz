@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 bg-base-100">
+  <div class="p-4 bg-base-100 rounded-xl">
     <h1>Explorer</h1>
     <div class="pt-4">
       <div class="overflow-x-auto">

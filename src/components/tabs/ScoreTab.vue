@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-base-100 p-4">
+  <div class="bg-base-100 p-4 rounded-xl">
     <h1 class="pb-4">Score Stats</h1>
     <div class="space-y-3">
       <div>
