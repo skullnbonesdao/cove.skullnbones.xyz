@@ -91,6 +91,7 @@
       <div class="flex flex-col" v-if="active_tab === 'info'">
         <div class="bg-base-100 p-4 rounded-r-xl">
           <h1 class="p-2">Info</h1>
+
           <h2 class="p-2">Attributes</h2>
           <div class="grid md:grid-cols-4 gap-4">
             <div
@@ -103,7 +104,7 @@
             </div>
           </div>
         </div>
-        <div class="bg-base-100 p-4">
+        <div class="bg-base-100 p-4" v-if="asset.slots.crewSlots">
           <h2 class="p-2">Crew Slots</h2>
           <div class="grid md:grid-cols-4 gap-4">
             <div
@@ -118,7 +119,7 @@
             </div>
           </div>
         </div>
-        <div class="bg-base-100 p-4">
+        <div class="bg-base-100 p-4" v-if="asset.slots.componentSlots">
           <h2 class="p-2">Component Slots</h2>
           <div class="grid md:grid-cols-4 gap-4">
             <div
@@ -131,7 +132,10 @@
             </div>
           </div>
         </div>
-        <div class="bg-base-100 p-4 rounded-b-xl">
+        <div
+          class="bg-base-100 p-4 rounded-b-xl"
+          v-if="asset.slots.moduleSlots"
+        >
           <h2 class="p-2">Module Slots</h2>
           <div class="grid md:grid-cols-4 gap-4">
             <div
