@@ -2,22 +2,24 @@
   <vue-final-modal
     v-slot="{ close }"
     v-bind="$attrs"
-    classes="flex justify-center items-center"
-    content-class="overflow-auto relative flex flex-col max-h-full p-4 border dark:border-base-300 rounded bg-base-300"
+    classes="flex justify-center items-center md:p-20"
+    content-class="overflow-auto relative flex flex-col max-h-full p-4 border  dark:border-base-300 rounded bg-base-300"
   >
     <div v-if="asset" class="md:m-20">
       <button class="btn btn-primary btn-circle" @click="$emit('close', close)">
         X
       </button>
       <h1 class="text-center">{{ asset.name }}</h1>
-      <div class="pb-4 flex flex-col md:flex-row items-center space-x-5">
+      <div class="pb-4 flex flex-col md:flex-row items-center md:space-x-2">
         <img
           alt="asset_image"
           :src="asset.image"
-          class="object-contain h-48 w-96"
+          class="object-contain p-1 rounded-xl w-96"
         />
         <div class="flex flex-col space-y-2">
-          <p>{{ asset.description }}</p>
+          <div class="bg-base-100 p-4 rounded-xl">
+            <p>{{ asset.description }}</p>
+          </div>
           <div class="bg-base-100 p-4 rounded-xl">
             <div class="grid md:grid-cols-4 md:gap-4">
               <div>
@@ -84,27 +86,27 @@
       </div>
 
       <div class="flex flex-col" v-if="active_tab === 'info'">
-        <div class="bg-base-100 p-4">
+        <div class="bg-base-100 p-4 rounded-r-xl">
           <h1 class="p-2">Info</h1>
           <h2 class="p-2">Attributes</h2>
           <div class="grid md:grid-cols-4 gap-4">
             <div
               v-for="(attribute, key) in asset.attributes"
               :key="attribute"
-              class="border-2 bg-base-200 rounded-md px-2 py-1"
+              class="shadow-inner bg-base-200 rounded-md px-2 py-1"
             >
               <h4 class="capitalize">{{ key }}</h4>
               <div class="capitalize">{{ attribute }}</div>
             </div>
           </div>
         </div>
-        <div class="bg-base-100 p-4 rounded-xl">
+        <div class="bg-base-100 p-4">
           <h2 class="p-2">Crew Slots</h2>
           <div class="grid md:grid-cols-4 gap-4">
             <div
               v-for="attribute in asset.slots.crewSlots"
               :key="attribute"
-              class="border-2 bg-base-200 rounded-md px-2 py-1"
+              class="shadow-inner bg-base-200 rounded-md px-2 py-1"
             >
               <h4 class="capitalize">{{ attribute.type }}</h4>
               <div class="capitalize">
@@ -113,26 +115,26 @@
             </div>
           </div>
         </div>
-        <div class="bg-base-100 p-4 rounded-xl">
+        <div class="bg-base-100 p-4">
           <h2 class="p-2">Component Slots</h2>
           <div class="grid md:grid-cols-4 gap-4">
             <div
               v-for="attribute in asset.slots.componentSlots"
               :key="attribute"
-              class="border-2 bg-base-200 rounded-md px-2 py-1"
+              class="shadow-inner bg-base-200 rounded-md px-2 py-1"
             >
               <h4 class="capitalize">{{ attribute.type }}</h4>
               <div>{{ attribute.quantity }} {{ attribute.size }}</div>
             </div>
           </div>
         </div>
-        <div class="bg-base-100 p-4 rounded-xl">
+        <div class="bg-base-100 p-4 rounded-b-xl">
           <h2 class="p-2">Module Slots</h2>
           <div class="grid md:grid-cols-4 gap-4">
             <div
               v-for="attribute in asset.slots.moduleSlots"
               :key="attribute"
-              class="border-2 bg-base-200 rounded-md px-2 py-1"
+              class="shadow-inner bg-base-200 rounded-md px-2 py-1"
             >
               <h4 class="capitalize">{{ attribute.type }}</h4>
               <div>{{ attribute.quantity }} {{ attribute.size }}</div>

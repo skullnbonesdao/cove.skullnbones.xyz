@@ -1,7 +1,6 @@
 <template>
   <div>
     <ship-details-modal
-      class="md:ml-40"
       v-model="show_modal"
       @close="show_modal = false"
       @click-outside="show_modal = false"
