@@ -1,13 +1,13 @@
 <template>
   <span
-    class="badge border-transparent text-black"
+    class="badge border-transparent"
     v-bind:class="
       ' ' +
-      (text === 0 ? 'gold' : '') +
-      (text === 1 ? 'silver' : '') +
-      (text === 2 ? 'bronze' : '')
+      (text === 0 ? 'gold text-black' : '') +
+      (text === 1 ? 'silver text-black' : '') +
+      (text === 2 ? 'bronze text-black' : '')
     "
-    >GAO {{ text }}</span
+    >TIER {{ text }}</span
   >
 </template>
 
