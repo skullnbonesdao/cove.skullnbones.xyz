@@ -1,10 +1,10 @@
 <template>
-  <div class="bg-base-100 p-4">
+  <div class="bg-base-100 p-4 rounded-r-xl rounded-b-xl">
     <h1 class="p-2">Market</h1>
     <div class="flex flex-col space-y-3">
       <div class="bg-base-300 p-4">
         <h2 class="pb-3">BUY Orders</h2>
-        <div class="grid grid-cols-2 gap-2 place-content-center">
+        <div class="grid sm:grid-cols-2 grid-cols-1 gap-2 place-content-center">
           <div>
             <div class="flex flex-row pb-2">
               <h3>USDC</h3>
@@ -29,7 +29,7 @@
       </div>
       <div class="bg-base-300 p-4">
         <h2 class="pb-3">SELL Orders</h2>
-        <div class="flex flex-row space-x-4">
+        <div class="grid sm:grid-cols-2 grid-cols-1 gap-2 place-content-center">
           <div class="basis-1/2">
             <div class="flex flex-row pb-2">
               <h3>USDC</h3>

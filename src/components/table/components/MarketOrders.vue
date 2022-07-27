@@ -11,15 +11,13 @@
       <tr v-for="orders in market_orders" :key="orders">
         <td v-if="market_token === 'USDC'" class="flex flex-row">
           <div>{{ orders.price }}</div>
-          <usdc-icon></usdc-icon>
         </td>
         <td v-if="market_token === 'ATLAS'" class="flex flex-row">
           <div>
             {{ orders.price }}
           </div>
-          <atlas-icon></atlas-icon>
         </td>
-        <td>{{ orders.orderRemainingQty }}</td>
+        <td>{{ orders.orderQtyRemaining }}</td>
         <td>
           {{ orders.owner.substring(0, 4) }}...{{
             orders.owner.substring(orders.owner.length - 4)
