@@ -1,20 +1,23 @@
 <template>
+  <!-- USDC -->
   <div class="flex flex-row space-x-1">
     <usdc-icon class="basis-1/5"></usdc-icon>
     <div class="basis-2/5 text-right">
-      {{ (get_price_from_store_usdc() * Math.pow(10, -6)).toFixed(2) }}
+      {{ price_usdc }}
     </div>
     <percentage-element
       class="basis-1/5 text-right"
       :price_vwap="vwap"
-      :is_price="get_price_from_store_usdc() * Math.pow(10, -6)"
+      :is_price="price_usdc"
     ></percentage-element>
     <div class="basis-1/5"></div>
   </div>
+
+  <!-- ATLAS -->
   <div class="flex flex-row space-x-1">
     <atlas-icon class="basis-1/5"></atlas-icon>
     <div class="basis-2/5 text-right">
-      {{ (get_price_from_store_atlas() * Math.pow(10, -8)).toFixed(2) }}
+      {{ price_atlas }}
     </div>
     <percentage-element
       class="basis-1/5 text-right"
@@ -32,87 +35,19 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, defineProps, onMounted, watch } from "vue";
-
-import { staratlasStore } from "@/store/staratlas_store";
+import { ref, defineProps, onMounted, watch, PropType } from "vue";
+import { staratlas_gmClientStore } from "@/store/staratlas_gmClient";
 import { staratlasFactory } from "@/store/staratlas_factory";
-import { OrderAccountItem } from "@staratlas/factory";
 import { TOKEN_ATLAS, TOKEN_USDC } from "@/typescipt/const/tokens";
 import UsdcIcon from "@/components/icons/USDCIcon.vue";
 import AtlasIcon from "@/components/icons/ATLASIcon.vue";
 import PercentageElement from "@/components/special/PercentageElement.vue";
 
 const props = defineProps({
-  mint_address: { type: String, default: null },
-  side: { type: String, default: "" },
   vwap: { type: Number, default: 0 },
+  price_atlas: { type: Number, default: 0 },
+  price_usdc: { type: Number, default: undefined },
 });
-
-const staratlas_factory = staratlasFactory();
-
-function get_price_from_store_atlas() {
-  const market_orders: OrderAccountItem[] | undefined =
-    staratlas_factory.order_account_item_assets?.find(
-      (order) => order.mint_address === props.mint_address
-    )?.orders;
-
-  const marker_orders_side = market_orders?.filter((orders) =>
-    JSON.stringify(orders.account.orderSide).includes(props.side)
-  );
-
-  if (marker_orders_side != undefined) {
-    switch (props.side) {
-      case "buy": {
-        return marker_orders_side
-          ?.filter(
-            (order) =>
-              order.account.currencyMint.toBase58() == TOKEN_ATLAS.toBase58()
-          )
-          ?.sort((a, b) => b.account.price - a.account.price)[0]?.account.price;
-      }
-      case "sell": {
-        return marker_orders_side
-          ?.filter(
-            (order) =>
-              order.account.currencyMint.toBase58() == TOKEN_ATLAS.toBase58()
-          )
-          ?.sort((a, b) => a.account.price - b.account.price)[0]?.account.price;
-      }
-    }
-  }
-}
-
-function get_price_from_store_usdc() {
-  const market_orders: OrderAccountItem[] | undefined =
-    staratlas_factory.order_account_item_assets?.find(
-      (order) => order.mint_address === props.mint_address
-    )?.orders;
-
-  const marker_orders_side = market_orders?.filter((orders) =>
-    JSON.stringify(orders.account.orderSide).includes(props.side)
-  );
-
-  if (marker_orders_side != undefined) {
-    switch (props.side) {
-      case "buy": {
-        return marker_orders_side
-          ?.filter(
-            (order) =>
-              order.account.currencyMint.toBase58() == TOKEN_USDC.toBase58()
-          )
-          ?.sort((a, b) => b.account.price - a.account.price)[0]?.account.price;
-      }
-      case "sell": {
-        return marker_orders_side
-          ?.filter(
-            (order) =>
-              order.account.currencyMint.toBase58() == TOKEN_USDC.toBase58()
-          )
-          ?.sort((a, b) => a.account.price - b.account.price)[0]?.account.price;
-      }
-    }
-  }
-}
 </script>
 
 <style scoped></style>

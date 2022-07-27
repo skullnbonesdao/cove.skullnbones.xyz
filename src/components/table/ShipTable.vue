@@ -27,7 +27,7 @@
         <tr
           class="hover"
           v-for="asset in assets.filter(
-            (asset) => asset.attributes.itemType === type
+            (nft) => nft.attributes.itemType === type
           )"
           :key="asset"
           @click="load_modal(asset.mint)"
@@ -52,18 +52,35 @@
               </div>
             </div>
           </td>
+
           <td>
             <ask-bid-element
-              :mint_address="asset.mint"
-              side="sell"
               :vwap="asset.tradeSettings.vwap"
+              :price_usdc="
+                staratlas_gmClient.top_market_orders.find(
+                  (market) => market.mint === asset.mint
+                )?.price_usdc_sell
+              "
+              :price_atlas="
+                staratlas_gmClient.top_market_orders.find(
+                  (market) => market.mint === asset.mint
+                )?.price_atlas_sell
+              "
             ></ask-bid-element>
           </td>
           <td>
             <ask-bid-element
-              :mint_address="asset.mint"
-              side="buy"
               :vwap="asset.tradeSettings.vwap"
+              :price_usdc="
+                staratlas_gmClient.top_market_orders.find(
+                  (market) => market.mint === asset.mint
+                )?.price_usdc_buy
+              "
+              :price_atlas="
+                staratlas_gmClient.top_market_orders.find(
+                  (market) => market.mint === asset.mint
+                )?.price_atlas_buy
+              "
             ></ask-bid-element>
           </td>
         </tr>
@@ -74,18 +91,21 @@
 
 <script lang="ts">
 export default {
-  symbol: "ShipTable",
+  name: "ShipTable",
 };
 </script>
 
 <script setup lang="ts">
-import { defineProps, PropType, ref } from "vue";
+import { defineProps, onMounted, PropType, ref } from "vue";
 import { StarAtlasNFT } from "@/typescipt/interfaces/staratlasnft";
 import ShipTableImageComponent from "@/components/table/components/ShipTableImageComponent.vue";
 import ShipTableNameComponent from "@/components/table/components/ShipTableNameComponent.vue";
 import ShipDetailsModal from "@/components/modals/ShipDetailsModal.vue";
 import UsdcIcon from "@/components/icons/USDCIcon.vue";
 import AskBidElement from "@/components/table/components/AskBidElement.vue";
+import { staratlas_gmClientStore } from "@/store/staratlas_gmClient";
+
+import { TOKEN_ATLAS, TOKEN_USDC } from "@/typescipt/const/tokens";
 
 const props = defineProps({
   assets: { type: Array as PropType<Array<StarAtlasNFT>>, default: null },
@@ -95,6 +115,13 @@ const props = defineProps({
 const show_modal = ref(false);
 const asset_selected = ref();
 const asset_address = ref("1111111");
+
+const staratlas_gmClient = staratlas_gmClientStore();
+
+onMounted(async () => {
+  await staratlas_gmClient.getOrders();
+  props.assets.forEach((nft) => staratlas_gmClient.filter_orders(nft.mint));
+});
 
 function load_modal(asset_address_new: string) {
   asset_address.value = asset_address_new;

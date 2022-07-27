@@ -68,15 +68,12 @@ export default {
 import { defineProps, watch, ref, onMounted } from "vue";
 import { staratlasStore } from "@/store/staratlas_store";
 import { staratlasFactory } from "@/store/staratlas_factory";
-import {
-  OrderAccountInfo,
-  OrderAccountItem,
-  OrderSide,
-} from "@staratlas/factory";
+import { Order } from "@staratlas/factory";
 import { TOKEN_ATLAS, TOKEN_USDC } from "@/typescipt/const/tokens";
 import MarketOrders from "@/components/table/components/MarketOrders.vue";
 import UsdcIcon from "@/components/icons/USDCIcon.vue";
 import AtlasIcon from "@/components/icons/ATLASIcon.vue";
+import { staratlas_gmClientStore } from "@/store/staratlas_gmClient";
 
 const props = defineProps({
   mint_address: {
@@ -84,55 +81,42 @@ const props = defineProps({
     default: null,
   },
 });
+const staratlas_gmClient = staratlas_gmClientStore();
 
-const staratlas_data = staratlasStore();
-const staratlas_factory = staratlasFactory();
+let market_orders_buy_usdc = ref([] as Order[]);
+let market_orders_buy_atlas = ref([] as Order[]);
 
-let market_orders_buy_usdc = ref([] as OrderAccountItem[]);
-let market_orders_buy_atlas = ref([] as OrderAccountItem[]);
-
-let market_orders_sell_usdc = ref([] as OrderAccountItem[]);
-let market_orders_sell_atlas = ref([] as OrderAccountItem[]);
+let market_orders_sell_usdc = ref([] as Order[]);
+let market_orders_sell_atlas = ref([] as Order[]);
 
 async function load_order_data() {
-  const market_orders: OrderAccountItem[] =
-    await staratlas_factory.getOpenOrdersForAsset(props.mint_address);
+  const market_orders: Order[] = await staratlas_gmClient.getOpenOrdersForAsset(
+    props.mint_address
+  );
 
   const market_orders_buy = market_orders.filter((orders) =>
-    JSON.stringify(orders.account.orderSide).includes("buy")
+    JSON.stringify(orders.orderType).includes("buy")
   );
 
   market_orders_buy_usdc.value = market_orders_buy
-    .filter(
-      (orders) =>
-        orders.account.currencyMint.toBase58() == TOKEN_USDC.toBase58()
-    )
-    .sort((a, b) => b.account.price - a.account.price);
+    .filter((orders) => orders.currencyMint == TOKEN_USDC.toString())
+    .sort((a, b) => b.price - a.price);
 
   market_orders_buy_atlas.value = market_orders_buy
-    .filter(
-      (orders) =>
-        orders.account.currencyMint.toBase58() == TOKEN_ATLAS.toBase58()
-    )
-    .sort((a, b) => b.account.price - a.account.price);
+    .filter((orders) => orders.currencyMint == TOKEN_ATLAS.toString())
+    .sort((a, b) => b.price - a.price);
 
   const market_orders_sell = market_orders.filter((orders) =>
-    JSON.stringify(orders.account.orderSide).includes("sell")
+    JSON.stringify(orders.orderType).includes("sell")
   );
 
   market_orders_sell_usdc.value = market_orders_sell
-    .filter(
-      (orders) =>
-        orders.account.currencyMint.toBase58() == TOKEN_USDC.toBase58()
-    )
-    .sort((a, b) => a.account.price - b.account.price);
+    .filter((orders) => orders.currencyMint == TOKEN_USDC.toString())
+    .sort((a, b) => a.price - b.price);
 
   market_orders_sell_atlas.value = market_orders_sell
-    .filter(
-      (orders) =>
-        orders.account.currencyMint.toBase58() === TOKEN_ATLAS.toBase58()
-    )
-    .sort((a, b) => a.account.price - b.account.price);
+    .filter((orders) => orders.currencyMint === TOKEN_ATLAS.toString())
+    .sort((a, b) => a.price - b.price);
 }
 
 onMounted(async () => {

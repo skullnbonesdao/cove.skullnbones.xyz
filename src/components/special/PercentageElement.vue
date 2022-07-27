@@ -1,14 +1,14 @@
 <template>
   <div
     :class="
-      percentage === 0
+      is_price === 0.0
         ? 'text-yellow-500'
-        : percentage > 0
+        : calculatesPercentage > 0
         ? 'text-green-500'
         : 'text-red-500'
     "
   >
-    {{ percentage.toFixed(1) }}%
+    {{ calculatesPercentage().toFixed(1) }}%
   </div>
 </template>
 
@@ -25,22 +25,17 @@ const props = defineProps({
   is_price: { type: Number, default: 0 },
 });
 
-let percentage = ref(0.0);
-
-function calculatesPercentage() {
+function calculatesPercentage(): number {
+  if (props.is_price === 0) {
+    return 0;
+  }
   if (props.price_vwap > props.is_price) {
-    percentage.value = -(1 - props.is_price / props.price_vwap) * 100;
+    return -(1 - props.is_price / props.price_vwap) * 100;
   }
   if (props.price_vwap <= props.is_price) {
-    percentage.value = (props.is_price / props.price_vwap - 1) * 100;
+    return (props.is_price / props.price_vwap - 1) * 100;
   }
+  return 0;
 }
-
-watch(
-  () => props.is_price,
-  (value) => {
-    calculatesPercentage();
-  }
-);
 </script>
 <style scoped></style>

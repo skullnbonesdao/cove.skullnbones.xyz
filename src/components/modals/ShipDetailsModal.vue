@@ -183,9 +183,6 @@ import ExplorerTab from "@/components/tabs/ExplorerTab.vue";
 import UsdcIcon from "@/components/icons/USDCIcon.vue";
 import ScoreTab from "@/components/tabs/ScoreTab.vue";
 
-const staratlas_data = staratlasStore();
-const staratlas_factory = staratlasFactory();
-
 const active_tab = ref("info");
 
 const props = defineProps({

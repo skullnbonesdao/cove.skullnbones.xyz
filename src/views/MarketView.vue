@@ -19,19 +19,18 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { staratlasStore } from "@/store/staratlas_store";
-import { staratlasFactory } from "@/store/staratlas_factory";
-
-import { onMounted } from "vue";
+import { onBeforeMount, onMounted } from "vue";
 import ShipTable from "@/components/table/ShipTable.vue";
+import { staratlasStore } from "@/store/staratlas_store";
+import { staratlas_gmClientStore } from "@/store/staratlas_gmClient";
 
 const staratlas_store = staratlasStore();
-const staratlas_factory = staratlasFactory();
 
-onMounted(async () => {
+onBeforeMount(async () => {
   await staratlas_store.fetchFullData();
 
-  await staratlas_factory.getOpenOrdersForAsset_all(staratlas_store.nfts);
+  //gmOrderBookService.init();
+  //await staratlas_factory.getOpenOrdersForAsset_all(staratlas_store.nfts);
   //await staratlas_factory.getScoreVarsShipInfo_all(staratlas_store.nfts);
 });
 </script>

@@ -10,25 +10,19 @@
     <tbody>
       <tr v-for="orders in market_orders" :key="orders">
         <td v-if="market_token === 'USDC'" class="flex flex-row">
-          <div>{{ (orders.account.price * Math.pow(10, -6)).toFixed(2) }}</div>
+          <div>{{ orders.price }}</div>
           <usdc-icon></usdc-icon>
         </td>
         <td v-if="market_token === 'ATLAS'" class="flex flex-row">
           <div>
-            {{ (orders.account.price * Math.pow(10, -8)).toFixed(2) }}
+            {{ orders.price }}
           </div>
           <atlas-icon></atlas-icon>
         </td>
-        <td>{{ orders.account.orderRemainingQty }}</td>
+        <td>{{ orders.orderRemainingQty }}</td>
         <td>
-          {{
-            orders.account.orderInitializerPubkey.toString().substring(0, 4)
-          }}...{{
-            orders.account.orderInitializerPubkey
-              .toString()
-              .substring(
-                orders.account.orderInitializerPubkey.toString().length - 4
-              )
+          {{ orders.owner.substring(0, 4) }}...{{
+            orders.owner.substring(orders.owner.length - 4)
           }}
         </td>
       </tr>
@@ -43,13 +37,13 @@ export default {
 
 <script setup lang="ts">
 import { defineProps, PropType } from "vue";
-import { OrderAccountItem } from "@staratlas/factory";
+import { Order } from "@staratlas/factory";
 import UsdcIcon from "@/components/icons/USDCIcon.vue";
 import AtlasIcon from "@/components/icons/ATLASIcon.vue";
 
 defineProps({
   market_orders: {
-    type: Array as PropType<Array<OrderAccountItem>>,
+    type: [] as PropType<Order[]>,
   },
   market_token: {
     type: String,

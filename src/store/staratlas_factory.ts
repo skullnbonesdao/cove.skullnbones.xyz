@@ -26,7 +26,7 @@ export const staratlasFactory = defineStore({
   }),
   actions: {
     init() {
-      this.connection = new Connection(clusterApiUrl(SOLANANETWORK));
+      //this.connection = new Connection(clusterApiUrl(SOLANANETWORK));
       this.connection = new Connection(GENESYSGO);
       this.limiter = new RateLimiter({
         tokensPerInterval: 1,
