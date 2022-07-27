@@ -55,7 +55,7 @@ onMounted(() => {
 
 watch(
   () => props.mint_address,
-  (value) => {
+  () => {
     load_image_data();
   }
 );
