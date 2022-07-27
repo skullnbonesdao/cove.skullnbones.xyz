@@ -2,7 +2,7 @@
   <vue-final-modal
     v-slot="{ close }"
     v-bind="$attrs"
-    classes="flex justify-center items-center md:px-20"
+    classes="flex justify-center items-center md:px-20 md:py-10"
     content-class="overflow-auto relative flex flex-col max-h-full p-4 border dark:border-base-300 rounded bg-base-300"
   >
     <div class="flex-shrink-0 flex justify-end pt-4">
