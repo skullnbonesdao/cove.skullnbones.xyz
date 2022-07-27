@@ -53,9 +53,7 @@
             </li>
           </ul>
         </div>
-        <a
-          class="btn btn-ghost normal-case text-xl"
-          href="https://skullnbones.xyz"
+        <a class="btn normal-case text-xl" href="https://skullnbones.xyz"
           ><img
             src="@/assets/snb_logo.svg"
             alt="logo"
@@ -111,7 +109,7 @@
           </li>
         </ul>
       </div>
-      <div class="navbar-end space-x-2">
+      <div class="navbar-end space-x-2 pr-4">
         <theme-toggle></theme-toggle>
       </div>
     </div>
@@ -128,4 +126,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.invertible {
+  filter: invert(1);
+}
+</style>
