@@ -1,17 +1,17 @@
 <template>
   <div class="p-4 bg-base-100 rounded-xl" v-if="assets?.media">
-    <div class="flex justify-center py-2 gap-2">
+    <div class="grid grid-cols-10 md:grid-cols-12 justify-center py-2 gap-2">
       <a
-        :href="'#item' + id"
+        :href="'#item' + id + 1"
         class="btn btn-sm"
         v-for="(image, id) in assets?.media.gallery"
         :key="image"
-        >{{ id }}</a
+        >{{ id + 1 }}</a
       >
     </div>
     <div class="carousel">
       <div
-        :id="'item' + id"
+        :id="'item' + id + 1"
         class="carousel-item w-full max-h-96 justify-center"
         v-for="(image, id) in assets?.media.gallery"
         :key="image"
