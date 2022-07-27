@@ -96,15 +96,21 @@
         <div class="grid md:grid-cols-4 gap-4">
           <div class="border p-2 rounded-xl">
             <h4>Rewards</h4>
-            <div class="flex flex-row space-x-1">
+            <div
+              class="flex flex-row space-x-1"
+              v-for="(value, index) in obj_ranges.value"
+              :key="index"
+            >
               <atlas-icon class="grow"></atlas-icon>
               <div>
                 {{
-                  parseFloat(score_vars_ship_info.rewardRatePerSecond).toFixed(
-                    2
-                  )
+                  (
+                    score_vars_ship_info.rewardRatePerSecond *
+                    value *
+                    Math.pow(10, -8)
+                  ).toFixed(3)
                 }}
-                <sup>1</sup>/<sub>s</sub>
+                <sup>1</sup>/<sub>{{ obj_ranges.name[index] }}</sub>
               </div>
             </div>
           </div>
@@ -132,6 +138,11 @@ const props = defineProps({
     default: "",
   },
 });
+
+const obj_ranges = {
+  name: ["h", "D", "M", "Y"],
+  value: [60 * 60, 60 * 60 * 24, 60 * 60 * 24 * 30, 60 * 60 * 24 * 365],
+};
 
 const staratlas_scoreClient = staratlas_scoreClientStore();
 

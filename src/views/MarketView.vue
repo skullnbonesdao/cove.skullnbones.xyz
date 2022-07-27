@@ -77,7 +77,7 @@ const staratlas_store = staratlasStore();
 const tokenWS = tokenPricesWebsocket();
 tokenWS.initMarkets();
 
-const staratlas_itemType_selected = ref("access");
+const staratlas_itemType_selected = ref("ship");
 
 function switch_itemType_selected(newValue: string) {
   staratlas_itemType_selected.value = newValue;
