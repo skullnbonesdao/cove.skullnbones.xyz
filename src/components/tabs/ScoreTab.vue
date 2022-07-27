@@ -4,7 +4,7 @@
     <div class="space-y-3">
       <div>
         <h2>Supply and Burn Rates</h2>
-        <div class="grid grid-cols-4 gap-4">
+        <div class="grid md:grid-cols-4 gap-4">
           <div class="border p-2 rounded-xl">
             <h4>Food</h4>
             <div class="flex flex-row space-x-1">
@@ -93,12 +93,19 @@
       </div>
       <div>
         <h2>Supply and Burn Rates</h2>
-        <div class="grid grid-cols-4 gap-4">
+        <div class="grid md:grid-cols-4 gap-4">
           <div class="border p-2 rounded-xl">
             <h4>Rewards</h4>
             <div class="flex flex-row space-x-1">
-              <h5 class="grow">ATLAS:</h5>
-              <div>{{ score_vars_ship_info.rewardRatePerSecond }} 1/s</div>
+              <atlas-icon class="grow"></atlas-icon>
+              <div>
+                {{
+                  parseFloat(score_vars_ship_info.rewardRatePerSecond).toFixed(
+                    2
+                  )
+                }}
+                <sup>1</sup>/<sub>s</sub>
+              </div>
             </div>
           </div>
         </div>
@@ -115,13 +122,9 @@ export default {
 
 <script setup lang="ts">
 import { defineProps, onMounted, ref, watch } from "vue";
-import { staratlasStore } from "@/store/staratlas_store";
-import { staratlasFactory } from "@/store/staratlas_factory";
-import { StarAtlasNFT } from "@/typescipt/interfaces/staratlasnft";
-import { OrderAccountItem, ScoreVarsShipInfo } from "@staratlas/factory";
-
-const staratlas_data = staratlasStore();
-const staratlas_factory = staratlasFactory();
+import { staratlas_scoreClientStore } from "@/store/staratlas_scoreClient";
+import { ScoreVarsShipInfo } from "@staratlas/factory";
+import AtlasIcon from "@/components/icons/ATLASIcon.vue";
 
 const props = defineProps({
   mint_address: {
@@ -130,11 +133,12 @@ const props = defineProps({
   },
 });
 
+const staratlas_scoreClient = staratlas_scoreClientStore();
+
 let score_vars_ship_info = ref({} as ScoreVarsShipInfo);
 
 async function load_score_data() {
-  await staratlas_factory.getScoreVarsShipInfo(props.mint_address);
-  score_vars_ship_info.value = await staratlas_factory.getScoreVarsShipInfo(
+  score_vars_ship_info.value = await staratlas_scoreClient.getScoreVarsShipInfo(
     props.mint_address
   );
 }
