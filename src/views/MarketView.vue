@@ -30,6 +30,7 @@
       <div v-if="staratlas_store.status === 'fetched'">
         <div class="tabs justify-center">
           <div
+            class="pt-2"
             v-for="asset in staratlas_store.nfts
               .map((nft) => nft.attributes.itemType)
               .filter(onlyUnique)"
@@ -37,7 +38,7 @@
           >
             <a
               @click="staratlas_itemType_selected = asset.toString()"
-              class="tab tab-bordered uppercase"
+              class="tab md:tab-lg tab-bordered tab-lifted uppercase"
               :class="
                 staratlas_itemType_selected === asset ? ' tab-active' : ''
               "
