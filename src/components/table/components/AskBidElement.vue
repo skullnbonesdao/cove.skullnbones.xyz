@@ -64,10 +64,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, defineProps, onMounted, watch, PropType } from "vue";
-import { staratlas_gmClientStore } from "@/store/staratlas_gmClient";
-import { staratlasFactory } from "@/store/staratlas_factory";
-import { TOKEN_ATLAS, TOKEN_USDC } from "@/typescipt/const/tokens";
+import { defineProps } from "vue";
 import UsdcIcon from "@/components/icons/USDCIcon.vue";
 import AtlasIcon from "@/components/icons/ATLASIcon.vue";
 import PercentageElement from "@/components/special/PercentageElement.vue";
