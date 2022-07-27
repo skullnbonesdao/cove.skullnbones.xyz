@@ -4,7 +4,7 @@
       class="grid px-16 card bg-base-300 rounded-box place-items-center space-y-2"
     >
       <h1>Market</h1>
-      <div class="grid md:grid-cols-4 gap-10 pb-2">
+      <div class="grid md:grid-cols-4 sm:grid-cols-2 sm:gap-10 gap-4 pb-2">
         <price-ticker
           asset_name="BTC/USDC"
           :asset_price="tokenWS.m_btc"
