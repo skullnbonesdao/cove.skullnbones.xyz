@@ -1,57 +1,61 @@
 <template>
   <!-- USDC -->
-  <div class="flex flex-row space-x-1">
-    <usdc-icon class="grow"></usdc-icon>
-    <div v-if="price_usdc === 0">
-      <beat-loader :color="'#ffa500'"></beat-loader>
-    </div>
-    <div v-else>
-      <div v-if="price_usdc !== -1" class="flex flex-row space-x-2">
-        <div class="text-right">
-          {{ price_usdc }}
+  <div class="flex flex-col">
+    <div class="flex flex-row space-x-1">
+      <div class="grow"></div>
+      <usdc-icon class=""></usdc-icon>
+      <div v-if="price_usdc === 0">
+        <beat-loader :color="'#ffa500'"></beat-loader>
+      </div>
+      <div v-else>
+        <div v-if="price_usdc !== -1" class="flex flex-row space-x-2">
+          <div class="text-right">
+            {{ price_usdc }}
+          </div>
+          <percentage-element
+            class="w-24 text-right"
+            :price_vwap="vwap"
+            :is_price="price_usdc"
+          ></percentage-element>
         </div>
-        <percentage-element
-          class="w-24 text-right"
-          :price_vwap="vwap"
-          :is_price="price_usdc"
-        ></percentage-element>
-      </div>
-      <div v-else class="flex flex-row space-x-2">
-        <div class="text-right">no-market</div>
-        <percentage-element
-          class="w-24 text-right"
-          :price_vwap="vwap"
-          :is_price="price_usdc"
-        ></percentage-element>
-      </div>
-    </div>
-  </div>
-
-  <!-- ATLAS -->
-  <div class="flex flex-row space-x-1">
-    <atlas-icon class="grow"></atlas-icon>
-    <div v-if="price_atlas === 0">
-      <beat-loader :color="'#ffa500'"></beat-loader>
-    </div>
-    <div v-else>
-      <div v-if="price_atlas !== -1" class="flex flex-row space-x-2">
-        <div class="text-right">
-          {{ price_atlas }}
+        <div v-else class="flex flex-row space-x-2">
+          <div class="text-right">no-market</div>
+          <percentage-element
+            class="w-24 text-right"
+            :price_vwap="vwap"
+            :is_price="price_usdc"
+          ></percentage-element>
         </div>
-
-        <percentage-element
-          class="w-24 text-right"
-          :price_vwap="vwap"
-          :is_price="price_atlas * parseFloat(tokenWS.m_atlas)"
-        ></percentage-element>
       </div>
-      <div v-else class="flex flex-row space-x-2">
-        <div class="text-right">no-market</div>
-        <percentage-element
-          class="w-24 text-right"
-          :price_vwap="vwap"
-          :is_price="0.0"
-        ></percentage-element>
+    </div>
+
+    <!-- ATLAS -->
+    <div class="flex flex-row space-x-1">
+      <div class="grow"></div>
+      <atlas-icon class=""></atlas-icon>
+      <div v-if="price_atlas === 0">
+        <beat-loader :color="'#ffa500'"></beat-loader>
+      </div>
+      <div v-else>
+        <div v-if="price_atlas !== -1" class="flex flex-row space-x-2">
+          <div class="text-right">
+            {{ price_atlas }}
+          </div>
+
+          <percentage-element
+            class="w-24 text-right"
+            :price_vwap="vwap"
+            :is_price="price_atlas * parseFloat(tokenWS.m_atlas)"
+          ></percentage-element>
+        </div>
+        <div v-else class="flex flex-row space-x-2">
+          <div class="text-right">no-market</div>
+          <percentage-element
+            class="text-right"
+            :price_vwap="vwap"
+            :is_price="0.0"
+          ></percentage-element>
+        </div>
       </div>
     </div>
   </div>

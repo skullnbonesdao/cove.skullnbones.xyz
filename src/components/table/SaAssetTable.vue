@@ -44,10 +44,11 @@
             ></ship-table-name-component>
           </td>
           <td>
-            <div class="flex flex-row space-x-1">
-              <usdc-icon></usdc-icon>
-              <div class="w-32">
-                {{ asset.tradeSettings.vwap.toFixed(2) }}
+            <div class="flex items-center">
+              <usdc-icon class=""></usdc-icon>
+              <div>
+                <strong> {{ asset.tradeSettings.vwap.toFixed(2) }}</strong>
+                <span> VWAP</span>
               </div>
             </div>
           </td>

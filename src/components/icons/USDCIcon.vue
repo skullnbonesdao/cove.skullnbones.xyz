@@ -1,11 +1,9 @@
 <template>
-  <div class="pt-1 pl-1">
+  <div class="self-center w-5 h-5 rounded-full mx-1">
     <img
       class="invertible"
       alt="usdc_icon"
       src="@/components/icons/ICON_USDC.webp"
-      :width="width"
-      :height="height"
     />
   </div>
 </template>
