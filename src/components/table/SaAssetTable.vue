@@ -90,7 +90,7 @@
 
 <script lang="ts">
 export default {
-  name: "ShipTable",
+  name: "SaAssetTable",
 };
 </script>
 

@@ -46,10 +46,10 @@
           </div>
         </div>
 
-        <ship-table
+        <sa-asset-table
           :type="staratlas_itemType_selected"
           :assets="staratlas_store.nfts"
-        ></ship-table>
+        ></sa-asset-table>
       </div>
       <div v-else class="grid place-items-center">
         <grid-loader :color="'#ffa500'"></grid-loader>
@@ -67,7 +67,7 @@ export default {
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { onlyUnique } from "@/typescipt/helper/sorting";
-import ShipTable from "@/components/table/ShipTable.vue";
+import SaAssetTable from "@/components/table/SaAssetTable.vue";
 import { staratlasStore } from "@/store/staratlas_store";
 import { tokenPricesWebsocket } from "@/store/token_price_websocket";
 import GridLoader from "vue-spinner/src/GridLoader.vue";
