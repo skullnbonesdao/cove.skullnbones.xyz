@@ -5,7 +5,9 @@
       <tier-badge :text="ship?.attributes.tier || 0"></tier-badge>
       <rarity-badge :text="ship?.attributes.rarity"></rarity-badge>
       <class-badge :text="ship?.attributes.class"></class-badge>
-      <span class="badge">{{ ship?.attributes.spec }}</span>
+      <span v-if="ship?.attributes.spec" class="badge">{{
+        ship?.attributes.spec
+      }}</span>
     </div>
   </div>
 </template>

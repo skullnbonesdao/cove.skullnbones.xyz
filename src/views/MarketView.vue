@@ -27,13 +27,29 @@
     <div class="divider"></div>
 
     <div class="bg-base-300 rounded-box place-items-center">
-      <div class="tabs">
-        <a class="tab tab-bordered">Tab 1</a>
-        <a class="tab tab-bordered tab-active">Tab 2</a>
-        <a class="tab tab-bordered">Tab 3</a>
-      </div>
       <div v-if="staratlas_store.status === 'fetched'">
-        <ship-table :assets="staratlas_store.nfts"></ship-table>
+        <div class="tabs justify-center">
+          <div
+            v-for="asset in staratlas_store.nfts
+              .map((nft) => nft.attributes.itemType)
+              .filter(onlyUnique)"
+            :key="asset"
+          >
+            <a
+              @click="staratlas_itemType_selected = asset.toString()"
+              class="tab tab-bordered uppercase"
+              :class="
+                staratlas_itemType_selected === asset ? ' tab-active' : ''
+              "
+              >{{ asset }}</a
+            >
+          </div>
+        </div>
+
+        <ship-table
+          :type="staratlas_itemType_selected"
+          :assets="staratlas_store.nfts"
+        ></ship-table>
       </div>
       <div v-else class="grid place-items-center">
         <grid-loader :color="'#ffa500'"></grid-loader>
@@ -49,7 +65,8 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { defineComponent, onBeforeMount, onMounted } from "vue";
+import { ref, onMounted } from "vue";
+import { onlyUnique } from "@/typescipt/helper/sorting";
 import ShipTable from "@/components/table/ShipTable.vue";
 import { staratlasStore } from "@/store/staratlas_store";
 import { tokenPricesWebsocket } from "@/store/token_price_websocket";
@@ -59,6 +76,12 @@ import PriceTicker from "@/components/special/PriceTicker.vue";
 const staratlas_store = staratlasStore();
 const tokenWS = tokenPricesWebsocket();
 tokenWS.initMarkets();
+
+const staratlas_itemType_selected = ref("access");
+
+function switch_itemType_selected(newValue: string) {
+  staratlas_itemType_selected.value = newValue;
+}
 
 onMounted(async () => {
   await staratlas_store.fetchFullData();
