@@ -10,20 +10,30 @@
               <h3>USDC</h3>
               <usdc-icon></usdc-icon>
             </div>
-            <MarketOrders
-              :market_orders="market_orders_buy_usdc"
-              market_token="USDC"
-            />
+            <div v-if="market_orders_buy_usdc.length">
+              <MarketOrders
+                :market_orders="market_orders_buy_usdc"
+                market_token="USDC"
+              />
+            </div>
+            <div v-else>
+              <grid-loader :color="'#ffa500'"></grid-loader>
+            </div>
           </div>
           <div>
             <div class="flex flex-row pb-2">
               <h3>ATLAS</h3>
               <atlas-icon></atlas-icon>
             </div>
-            <MarketOrders
-              :market_orders="market_orders_buy_atlas"
-              market_token="ATLAS"
-            />
+            <div v-if="market_orders_buy_atlas.length">
+              <MarketOrders
+                :market_orders="market_orders_buy_atlas"
+                market_token="ATLAS"
+              />
+            </div>
+            <div v-else>
+              <grid-loader :color="'#ffa500'"></grid-loader>
+            </div>
           </div>
         </div>
       </div>
@@ -35,20 +45,30 @@
               <h3>USDC</h3>
               <usdc-icon></usdc-icon>
             </div>
-            <MarketOrders
-              :market_orders="market_orders_sell_usdc"
-              market_token="USDC"
-            />
+            <div v-if="market_orders_sell_usdc.length">
+              <MarketOrders
+                :market_orders="market_orders_sell_usdc"
+                market_token="USDC"
+              />
+            </div>
+            <div v-else>
+              <grid-loader :color="'#ffa500'"></grid-loader>
+            </div>
           </div>
           <div class="basis-1/2">
             <div class="flex flex-row pb-2">
               <h3>ATLAS</h3>
               <atlas-icon></atlas-icon>
             </div>
-            <MarketOrders
-              :market_orders="market_orders_sell_atlas"
-              market_token="ATLAS"
-            />
+            <div v-if="market_orders_sell_atlas.length">
+              <MarketOrders
+                :market_orders="market_orders_sell_atlas"
+                market_token="ATLAS"
+              />
+            </div>
+            <div v-else>
+              <grid-loader :color="'#ffa500'"></grid-loader>
+            </div>
           </div>
         </div>
       </div>
@@ -68,6 +88,8 @@ export default {
 import { defineProps, watch, ref, onMounted } from "vue";
 import { staratlasStore } from "@/store/staratlas_store";
 import { staratlasFactory } from "@/store/staratlas_factory";
+import GridLoader from "vue-spinner/src/GridLoader.vue";
+
 import { Order } from "@staratlas/factory";
 import { TOKEN_ATLAS, TOKEN_USDC } from "@/typescipt/const/tokens";
 import MarketOrders from "@/components/table/components/MarketOrders.vue";
