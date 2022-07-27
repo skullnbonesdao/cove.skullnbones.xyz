@@ -2,13 +2,16 @@
   <vue-final-modal
     v-slot="{ close }"
     v-bind="$attrs"
-    classes="flex justify-center items-center md:p-20"
-    content-class="overflow-auto relative flex flex-col max-h-full p-4 border  dark:border-base-300 rounded bg-base-300"
+    classes="flex justify-center items-center md:px-20"
+    content-class="overflow-auto relative flex flex-col max-h-full p-4 border dark:border-base-300 rounded bg-base-300"
   >
-    <div v-if="asset" class="md:m-20">
+    <div class="flex-shrink-0 flex justify-end pt-4">
       <button class="btn btn-primary btn-circle" @click="$emit('close', close)">
         X
       </button>
+    </div>
+
+    <div v-if="asset" class="md:m-20">
       <h1 class="text-center">{{ asset.name }}</h1>
       <div class="pb-4 flex flex-col md:flex-row items-center md:space-x-2">
         <img
