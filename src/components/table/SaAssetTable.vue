@@ -100,7 +100,7 @@
           </td>
           <td>
             <a
-              class="btn btn-sm"
+              class="btn btn-sm btn-primary"
               :href="
                 'https://play.staratlas.com/market/' +
                 asset.name.replace(/\s+/g, '-').toLowerCase()
