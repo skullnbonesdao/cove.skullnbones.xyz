@@ -24,3 +24,7 @@ h4{
     font-weight: bold;
 
 }
+
+[data-theme="dark"] .invertible {
+    filter: invert(1);
+}

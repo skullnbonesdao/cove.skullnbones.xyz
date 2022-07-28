@@ -1,9 +1,5 @@
 <template>
-  <img
-    class="invertible"
-    alt="usdc_icon"
-    src="@/components/icons/ICON_SOL.webp"
-  />
+  <img class="" alt="sol_icon" src="@/components/icons/ICON_SOL.webp" />
 </template>
 
 <script lang="ts">
@@ -27,8 +23,4 @@ defineProps({
 });
 </script>
 
-<style scoped>
-[data-theme="dark"] .invertible {
-  filter: invert(1);
-}
-</style>
+<style scoped></style>

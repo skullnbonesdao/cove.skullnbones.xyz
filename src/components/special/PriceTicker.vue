@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4"
+    class="p-6 max-w-sm mx-auto bg-base-100 rounded-xl shadow-md flex items-center space-x-4"
   >
     <div class="w-9">
       <btc-icon v-if="asset_name === 'BTC/USDC'"></btc-icon>

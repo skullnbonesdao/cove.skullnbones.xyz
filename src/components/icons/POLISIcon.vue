@@ -27,8 +27,4 @@ defineProps({
 });
 </script>
 
-<style scoped>
-[data-theme="dark"] .invertible {
-  filter: invert(1);
-}
-</style>
+<style scoped></style>

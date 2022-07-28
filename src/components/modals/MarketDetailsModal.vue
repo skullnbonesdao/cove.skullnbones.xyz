@@ -23,7 +23,10 @@
           <div class="bg-base-100 p-4 rounded-xl">
             <p>{{ asset.description }}</p>
           </div>
-          <div class="bg-base-100 p-4 rounded-xl">
+          <div
+            v-if="asset.tradeSettings.vwap || asset.primarySales"
+            class="bg-base-100 p-4 rounded-xl"
+          >
             <div class="grid md:grid-cols-4 md:gap-4">
               <div>
                 <h4>VWAP</h4>

@@ -44,13 +44,9 @@
             ></ship-table-name-component>
           </td>
           <td>
-            <div class="flex items-center space-x-2">
-              <usdc-icon class="w-6"></usdc-icon>
-              <div>
-                <strong> {{ asset.tradeSettings.vwap.toFixed(2) }}</strong>
-                <span> VWAP</span>
-              </div>
-            </div>
+            <vwap-element
+              :vwap="asset.tradeSettings.vwap.toFixed(2) ?? 0"
+            ></vwap-element>
           </td>
 
           <td>
@@ -106,6 +102,7 @@ import AskBidElements from "@/components/table/components/AskBidElements.vue";
 import { staratlas_gmClientStore } from "@/store/staratlas_gmClient";
 
 import { TOKEN_ATLAS, TOKEN_USDC } from "@/typescipt/const/tokens";
+import VwapElement from "@/components/table/components/VWAPElement.vue";
 
 const props = defineProps({
   assets: { type: Array as PropType<Array<StarAtlasNFT>>, default: null },

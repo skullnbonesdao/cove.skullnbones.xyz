@@ -119,13 +119,14 @@
   <div id="content relative">
     <router-view />
   </div>
-  <footer>123</footer>
+  <footer><footer-component></footer-component></footer>
 </template>
 
 <script>
 import ThemeToggle from "@/components/buttons/ThemeToggle";
+import FooterComponent from "@/components/FooterComponent";
 export default {
-  components: { ThemeToggle },
+  components: { FooterComponent, ThemeToggle },
   symbol: "NavBar",
 };
 </script>
