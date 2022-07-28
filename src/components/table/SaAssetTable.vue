@@ -45,7 +45,7 @@
           </td>
           <td>
             <div class="flex items-center">
-              <usdc-icon class=""></usdc-icon>
+              <usdc-icon class="w-6"></usdc-icon>
               <div>
                 <strong> {{ asset.tradeSettings.vwap.toFixed(2) }}</strong>
                 <span> VWAP</span>

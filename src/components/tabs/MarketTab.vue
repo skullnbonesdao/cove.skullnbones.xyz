@@ -6,7 +6,7 @@
         <h2 class="pb-3">BUY Orders</h2>
         <div class="grid sm:grid-cols-2 grid-cols-1 gap-2 place-content-center">
           <div>
-            <div class="flex flex-row pb-2">
+            <div class="flex flex-row h-6 space-x-2">
               <h3>USDC</h3>
               <usdc-icon></usdc-icon>
             </div>
@@ -21,7 +21,7 @@
             </div>
           </div>
           <div>
-            <div class="flex flex-row pb-2">
+            <div class="flex flex-row h-6 space-x-2">
               <h3>ATLAS</h3>
               <atlas-icon></atlas-icon>
             </div>
@@ -41,7 +41,7 @@
         <h2 class="pb-3">SELL Orders</h2>
         <div class="grid sm:grid-cols-2 grid-cols-1 gap-2 place-content-center">
           <div class="basis-1/2">
-            <div class="flex flex-row pb-2">
+            <div class="flex flex-row h-6 space-x-2">
               <h3>USDC</h3>
               <usdc-icon></usdc-icon>
             </div>
@@ -56,7 +56,7 @@
             </div>
           </div>
           <div class="basis-1/2">
-            <div class="flex flex-row pb-2">
+            <div class="flex flex-row h-6 space-x-2">
               <h3>ATLAS</h3>
               <atlas-icon></atlas-icon>
             </div>

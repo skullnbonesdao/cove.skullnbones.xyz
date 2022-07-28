@@ -97,12 +97,13 @@
           <div class="border p-2 rounded-xl">
             <h4>Rewards</h4>
             <div
-              class="flex flex-row space-x-1"
+              class="flex flex-row h-6 space-x-2"
               v-for="(value, index) in obj_ranges.value"
               :key="index"
             >
-              <atlas-icon class="grow"></atlas-icon>
-              <div>
+              <atlas-icon class=""></atlas-icon>
+
+              <div class="grow text-right">
                 {{
                   (
                     score_vars_ship_info.rewardRatePerSecond *

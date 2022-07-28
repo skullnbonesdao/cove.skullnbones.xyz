@@ -3,7 +3,7 @@
   <div class="flex flex-col">
     <div class="flex flex-row space-x-1">
       <div class="grow"></div>
-      <usdc-icon class=""></usdc-icon>
+      <usdc-icon class="w-6"></usdc-icon>
       <div v-if="price_usdc === 0">
         <beat-loader :color="'#ffa500'"></beat-loader>
       </div>
@@ -32,7 +32,7 @@
     <!-- ATLAS -->
     <div class="flex flex-row space-x-1">
       <div class="grow"></div>
-      <atlas-icon class=""></atlas-icon>
+      <atlas-icon class="w-6"></atlas-icon>
       <div v-if="price_atlas === 0">
         <beat-loader :color="'#ffa500'"></beat-loader>
       </div>

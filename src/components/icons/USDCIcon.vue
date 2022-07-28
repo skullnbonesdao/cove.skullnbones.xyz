@@ -1,11 +1,9 @@
 <template>
-  <div class="self-center w-5 h-5 rounded-full mx-1">
-    <img
-      class="invertible"
-      alt="usdc_icon"
-      src="@/components/icons/ICON_USDC.webp"
-    />
-  </div>
+  <img
+    class="invertible"
+    alt="usdc_icon"
+    src="@/components/icons/ICON_USDC.webp"
+  />
 </template>
 
 <script lang="ts">

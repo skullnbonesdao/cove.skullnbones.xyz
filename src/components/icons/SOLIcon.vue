@@ -2,13 +2,13 @@
   <img
     class="invertible"
     alt="usdc_icon"
-    src="@/components/icons/ICON_ATLAS.webp"
+    src="@/components/icons/ICON_SOL.webp"
   />
 </template>
 
 <script lang="ts">
 export default {
-  name: "AtlasIcon",
+  name: "SolIcon",
 };
 </script>
 
