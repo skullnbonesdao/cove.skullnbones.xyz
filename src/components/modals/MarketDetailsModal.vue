@@ -175,7 +175,7 @@
 
 <script lang="ts">
 export default {
-  name: "ShipDetailsModal",
+  name: "MarketDetailsModal",
   inheritAttrs: false,
   emits: ["close"],
 };

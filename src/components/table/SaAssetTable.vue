@@ -1,13 +1,13 @@
 <template>
   <div>
-    <ship-details-modal
+    <market-details-modal
       v-model="show_modal"
       @close="show_modal = false"
       @click-outside="show_modal = false"
       :asset_address="asset_address"
       :asset="asset_selected"
     >
-    </ship-details-modal>
+    </market-details-modal>
   </div>
 
   <div class="overflow-x-auto">
@@ -100,7 +100,7 @@ import { defineProps, onMounted, PropType, ref } from "vue";
 import { StarAtlasNFT } from "@/typescipt/interfaces/staratlasnft";
 import ShipTableImageComponent from "@/components/table/components/ShipTableImageComponent.vue";
 import ShipTableNameComponent from "@/components/table/components/ShipTableNameComponent.vue";
-import ShipDetailsModal from "@/components/modals/ShipDetailsModal.vue";
+import MarketDetailsModal from "@/components/modals/MarketDetailsModal.vue";
 import UsdcIcon from "@/components/icons/USDCIcon.vue";
 import AskBidElements from "@/components/table/components/AskBidElements.vue";
 import { staratlas_gmClientStore } from "@/store/staratlas_gmClient";
