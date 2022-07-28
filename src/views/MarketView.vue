@@ -26,10 +26,10 @@
 
     <div class="divider"></div>
 
-    <div class="bg-base-300 rounded-box place-items-center">
+    <div class="bg-base-300 rounded-box place-items-center p-1">
       <div v-if="staratlas_store.status === 'fetched'">
         <div class="tabs justify-center">
-          <div class="pt-2" v-for="asset in tab_entries" :key="asset">
+          <div class="" v-for="asset in tab_entries" :key="asset">
             <a
               @click="staratlas_itemType_selected = asset.toString()"
               class="tab md:tab-lg tab-bordered tab-lifted uppercase"

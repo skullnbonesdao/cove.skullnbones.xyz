@@ -38,6 +38,7 @@
           </th>
           <th>ASK</th>
           <th>BID</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -96,6 +97,17 @@
                 )?.price_atlas_buy
               "
             ></ask-bid-elements>
+          </td>
+          <td>
+            <a
+              class="btn btn-sm"
+              :href="
+                'https://play.staratlas.com/market/' +
+                asset.name.replace(/\s+/g, '-').toLowerCase()
+              "
+              target="_blank"
+              ><i class="bi bi-shop"></i
+            ></a>
           </td>
         </tr>
       </tbody>

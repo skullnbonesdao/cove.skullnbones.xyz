@@ -27,7 +27,7 @@
             v-if="asset.tradeSettings.vwap || asset.primarySales"
             class="bg-base-100 p-4 rounded-xl"
           >
-            <div class="grid md:grid-cols-4 md:gap-4">
+            <div class="grid xl:grid-cols-4 md:gap-4">
               <div>
                 <h4>VWAP</h4>
                 <div class="flex flex-row space-x-1 h-6">
@@ -46,6 +46,17 @@
                     }, 0)
                   }}
                 </div>
+              </div>
+              <div>
+                <a
+                  class="btn"
+                  :href="
+                    'https://play.staratlas.com/market/' +
+                    asset.name.replace(/\s+/g, '-').toLowerCase()
+                  "
+                  target="_blank"
+                  >to Marketplace</a
+                >
               </div>
             </div>
           </div>

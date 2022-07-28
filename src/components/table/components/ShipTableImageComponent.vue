@@ -1,12 +1,12 @@
 <template>
-  <div class="flex flex-row">
+  <div class="flex flex-row p-1">
     <div class="flex flex-col items-center">
       <div class="avatar">
         <div class="w-12 mask mask-hexagon">
           <img class="rounded-md" :src="img_url" alt="asset_image" />
         </div>
       </div>
-      <div class="absolute bottom-0 pb-1">
+      <div class="absolute bottom-0 pb-4">
         <div class="badge">{{ symbol }}</div>
       </div>
     </div>
