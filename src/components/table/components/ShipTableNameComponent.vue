@@ -21,7 +21,7 @@ export default {
 <script setup lang="ts">
 import { defineProps } from "vue";
 import { staratlasStore } from "@/store/staratlas_store";
-import { StarAtlasNFT } from "@/typescipt/interfaces/staratlasnft";
+import { StarAtlasNFT } from "@/typescipt/interfaces/StarAtlasNFT";
 import RarityBadge from "@/components/badges/RarityBadge.vue";
 import TierBadge from "@/components/badges/TierBadge.vue";
 import ClassBadge from "@/components/badges/ClassBadge.vue";

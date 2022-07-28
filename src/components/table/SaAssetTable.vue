@@ -15,9 +15,27 @@
       <!-- head -->
       <thead>
         <tr>
-          <th></th>
-          <th>Name</th>
-          <th>VWAP</th>
+          <th>
+            <sortable-element
+              text=""
+              @sort-up="sort_table('up', 'symbol')"
+              @sort-down="sort_table('down', 'symbol')"
+            ></sortable-element>
+          </th>
+          <th>
+            <sortable-element
+              text="Name"
+              @sort-up="sort_table('up', 'name')"
+              @sort-down="sort_table('down', 'name')"
+            ></sortable-element>
+          </th>
+          <th>
+            <sortable-element
+              text="VWAP"
+              @sort-up="sort_table('up', 'vwap')"
+              @sort-down="sort_table('down', 'vwap')"
+            ></sortable-element>
+          </th>
           <th>ASK</th>
           <th>BID</th>
         </tr>
@@ -25,7 +43,7 @@
       <tbody>
         <tr
           class="hover"
-          v-for="asset in assets.filter(
+          v-for="asset in ref_assets.filter(
             (nft) => nft.attributes.itemType === type
           )"
           :key="asset"
@@ -93,7 +111,7 @@ export default {
 
 <script setup lang="ts">
 import { defineProps, onMounted, PropType, ref } from "vue";
-import { StarAtlasNFT } from "@/typescipt/interfaces/staratlasnft";
+import { StarAtlasNFT } from "@/typescipt/interfaces/StarAtlasNFT";
 import ShipTableImageComponent from "@/components/table/components/ShipTableImageComponent.vue";
 import ShipTableNameComponent from "@/components/table/components/ShipTableNameComponent.vue";
 import MarketDetailsModal from "@/components/modals/MarketDetailsModal.vue";
@@ -103,12 +121,14 @@ import { staratlas_gmClientStore } from "@/store/staratlas_gmClient";
 
 import { TOKEN_ATLAS, TOKEN_USDC } from "@/typescipt/const/tokens";
 import VwapElement from "@/components/table/components/VWAPElement.vue";
+import SortableElement from "@/components/table/components/SortableElement.vue";
 
 const props = defineProps({
   assets: { type: Array as PropType<Array<StarAtlasNFT>>, default: null },
   type: { type: String, default: "ship" },
 });
 
+const ref_assets = ref(props.assets);
 const show_modal = ref(false);
 const asset_selected = ref();
 const asset_address = ref("1111111");
@@ -126,6 +146,42 @@ function load_modal(asset_address_new: string) {
   asset_selected.value = props.assets.find(
     (asset) => asset.mint === asset_address_new
   );
+}
+
+function sort_table(direction: string, entry: string) {
+  switch (entry) {
+    case "name":
+      sortName();
+      break;
+    case "vwap":
+      sortVWAP();
+      break;
+    case "symbol":
+      sortSymbol();
+      break;
+  }
+
+  if (direction === "down") {
+    ref_assets.value.reverse();
+  }
+}
+
+function sortName() {
+  ref_assets.value.sort((a, b) => {
+    return a.name.localeCompare(b.name);
+  });
+}
+
+function sortVWAP() {
+  ref_assets.value.sort((a, b) => {
+    return a.tradeSettings.vwap - b.tradeSettings.vwap;
+  });
+}
+
+function sortSymbol() {
+  ref_assets.value.sort((a, b) => {
+    return a.symbol.localeCompare(b.symbol);
+  });
 }
 </script>
 

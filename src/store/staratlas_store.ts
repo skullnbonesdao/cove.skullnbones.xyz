@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { StarAtlasNFT } from "@/typescipt/interfaces/staratlasnft";
+import { StarAtlasNFT } from "@/typescipt/interfaces/StarAtlasNFT";
 import { STAR_ATLAS_API } from "@/typescipt/const/urls";
 
 export const staratlasStore = defineStore({

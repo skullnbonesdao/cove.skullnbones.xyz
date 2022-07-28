@@ -29,13 +29,7 @@
     <div class="bg-base-300 rounded-box place-items-center">
       <div v-if="staratlas_store.status === 'fetched'">
         <div class="tabs justify-center">
-          <div
-            class="pt-2"
-            v-for="asset in staratlas_store.nfts
-              .map((nft) => nft.attributes.itemType)
-              .filter(onlyUnique)"
-            :key="asset"
-          >
+          <div class="pt-2" v-for="asset in tab_entries" :key="asset">
             <a
               @click="staratlas_itemType_selected = asset.toString()"
               class="tab md:tab-lg tab-bordered tab-lifted uppercase"
@@ -77,6 +71,10 @@ import PriceTicker from "@/components/special/PriceTicker.vue";
 const staratlas_store = staratlasStore();
 const tokenWS = tokenPricesWebsocket();
 tokenWS.initMarkets();
+
+const tab_entries = staratlas_store.nfts
+  .map((nft) => nft.attributes.itemType)
+  .filter(onlyUnique);
 
 const staratlas_itemType_selected = ref("ship");
 

@@ -12,7 +12,7 @@ import {
 import { GENESYSGO, SOLANANETWORK } from "@/typescipt/const/solana";
 import { SCORE_PROGRAM, TRADE_PROGRAM } from "@/typescipt/const/staratlas";
 import { RateLimiter } from "limiter";
-import { StarAtlasNFT } from "@/typescipt/interfaces/staratlasnft";
+import { StarAtlasNFT } from "@/typescipt/interfaces/StarAtlasNFT";
 import { OrderAccountItemAsset } from "@/typescipt/interfaces/OrderAccountItemAsset";
 import { delay } from "@/typescipt/delay/delay";
 

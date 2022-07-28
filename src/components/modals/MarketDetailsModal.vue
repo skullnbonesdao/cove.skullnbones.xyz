@@ -188,7 +188,7 @@ export default {
 import { defineProps, onMounted, ref, PropType, watch, watchEffect } from "vue";
 import { staratlasStore } from "@/store/staratlas_store";
 import { staratlasFactory } from "@/store/staratlas_factory";
-import { StarAtlasNFT } from "@/typescipt/interfaces/staratlasnft";
+import { StarAtlasNFT } from "@/typescipt/interfaces/StarAtlasNFT";
 import ImagesTab from "@/components/tabs/ImagesTab.vue";
 import MarketTab from "@/components/tabs/MarketTab.vue";
 import ExplorerTab from "@/components/tabs/ExplorerTab.vue";
