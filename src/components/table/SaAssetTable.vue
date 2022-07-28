@@ -44,7 +44,7 @@
             ></ship-table-name-component>
           </td>
           <td>
-            <div class="flex items-center">
+            <div class="flex items-center space-x-2">
               <usdc-icon class="w-6"></usdc-icon>
               <div>
                 <strong> {{ asset.tradeSettings.vwap.toFixed(2) }}</strong>
@@ -54,7 +54,7 @@
           </td>
 
           <td>
-            <ask-bid-element
+            <ask-bid-elements
               :vwap="asset.tradeSettings.vwap"
               :price_usdc="
                 staratlas_gmClient.top_market_orders.find(
@@ -66,10 +66,10 @@
                   (market) => market.mint === asset.mint
                 )?.price_atlas_sell
               "
-            ></ask-bid-element>
+            ></ask-bid-elements>
           </td>
           <td>
-            <ask-bid-element
+            <ask-bid-elements
               :vwap="asset.tradeSettings.vwap"
               :price_usdc="
                 staratlas_gmClient.top_market_orders.find(
@@ -81,7 +81,7 @@
                   (market) => market.mint === asset.mint
                 )?.price_atlas_buy
               "
-            ></ask-bid-element>
+            ></ask-bid-elements>
           </td>
         </tr>
       </tbody>
@@ -102,7 +102,7 @@ import ShipTableImageComponent from "@/components/table/components/ShipTableImag
 import ShipTableNameComponent from "@/components/table/components/ShipTableNameComponent.vue";
 import ShipDetailsModal from "@/components/modals/ShipDetailsModal.vue";
 import UsdcIcon from "@/components/icons/USDCIcon.vue";
-import AskBidElement from "@/components/table/components/AskBidElement.vue";
+import AskBidElements from "@/components/table/components/AskBidElements.vue";
 import { staratlas_gmClientStore } from "@/store/staratlas_gmClient";
 
 import { TOKEN_ATLAS, TOKEN_USDC } from "@/typescipt/const/tokens";

@@ -1,6 +1,6 @@
 <template>
   <!-- USDC -->
-  <div class="flex flex-col">
+  <div class="flex flex-col space-y-1">
     <div class="flex flex-row space-x-1">
       <div class="grow"></div>
       <usdc-icon class="w-6"></usdc-icon>
@@ -9,19 +9,19 @@
       </div>
       <div v-else>
         <div v-if="price_usdc !== -1" class="flex flex-row space-x-2">
-          <div class="text-right">
-            {{ price_usdc }}
+          <div class="w-24 text-right">
+            {{ price_usdc.toFixed(2) }}
           </div>
           <percentage-element
-            class="w-24 text-right"
+            class="w-13 text-right"
             :price_vwap="vwap"
             :is_price="price_usdc"
           ></percentage-element>
         </div>
         <div v-else class="flex flex-row space-x-2">
-          <div class="text-right">no-market</div>
+          <div class="w-24 text-right">no-market</div>
           <percentage-element
-            class="w-24 text-right"
+            class="w-13 text-right"
             :price_vwap="vwap"
             :is_price="price_usdc"
           ></percentage-element>
@@ -38,22 +38,22 @@
       </div>
       <div v-else>
         <div v-if="price_atlas !== -1" class="flex flex-row space-x-2">
-          <div class="text-right">
-            {{ price_atlas }}
+          <div class="w-24 text-right">
+            {{ price_atlas.toFixed(2) }}
           </div>
 
           <percentage-element
-            class="w-24 text-right"
+            class="w-13 text-right"
             :price_vwap="vwap"
             :is_price="price_atlas * parseFloat(tokenWS.m_atlas)"
           ></percentage-element>
         </div>
         <div v-else class="flex flex-row space-x-2">
-          <div class="text-right">no-market</div>
+          <div class="w-24 text-right">no-market</div>
           <percentage-element
-            class="text-right"
+            class="w-13 text-right"
             :price_vwap="vwap"
-            :is_price="0.0"
+            :is_price="price_atlas * parseFloat(tokenWS.m_atlas)"
           ></percentage-element>
         </div>
       </div>
@@ -63,7 +63,7 @@
 
 <script lang="ts">
 export default {
-  name: "AskBidElement",
+  name: "AskBidElements",
 };
 </script>
 
@@ -80,7 +80,7 @@ const tokenWS = tokenPricesWebsocket();
 const props = defineProps({
   vwap: { type: Number, default: 0 },
   price_atlas: { type: Number, default: 0 },
-  price_usdc: { type: Number, default: undefined },
+  price_usdc: { type: Number, default: 0 },
 });
 </script>
 

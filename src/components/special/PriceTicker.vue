@@ -2,7 +2,7 @@
   <div
     class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4"
   >
-    <div class="shrink-0 w-9">
+    <div class="w-9">
       <btc-icon v-if="asset_name === 'BTC/USDC'"></btc-icon>
       <sol-icon v-else-if="asset_name === 'SOL/USDC'"> </sol-icon>
       <atlas-icon v-else-if="asset_name === 'ATLAS/USDC'"></atlas-icon>
