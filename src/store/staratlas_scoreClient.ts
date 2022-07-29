@@ -68,6 +68,7 @@ export const staratlas_scoreClientStore = defineStore({
       const rewards_day =
         score_vars.rewardRatePerSecond * 60 * 60 * 24 * Math.pow(10, -8);
 
+      return 0;
       return (
         ((rewards_day - cost_sumResourcesDay) / ship_cost_atlas / 365) *
         365 *
