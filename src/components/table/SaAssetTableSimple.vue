@@ -145,7 +145,9 @@ async function load_data() {
   assets.value = staratlas_store.nfts.filter(
     (nft) => nft.attributes.itemType === props.sa_asset_type
   );
-  await staratlas_gmClient.getOrders();
+  if (staratlas_gmClient.orders.length === 0) {
+    await staratlas_gmClient.fetchOrders();
+  }
   assets.value.forEach((nft) => staratlas_gmClient.filter_orders(nft.mint));
 }
 

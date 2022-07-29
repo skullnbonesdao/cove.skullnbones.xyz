@@ -32,8 +32,8 @@
         <tr>
           <th></th>
           <th :colspan="rows[0]?.vwap !== 0 ? 2 : 1" class="">Asset</th>
-          <th colspan="4" class="marketAsk">ASK</th>
-          <th colspan="4" class="marketBid">BID</th>
+          <th :colspan="rows[0]?.vwap !== 0 ? 4 : 2" class="marketAsk">ASK</th>
+          <th :colspan="rows[0]?.vwap !== 0 ? 4 : 2" class="marketBid">BID</th>
           <th colspan="1" class=""></th>
           <th v-if="rows[0]?.vwap ?? 0" colspan="1" class=""></th>
         </tr>
@@ -43,12 +43,32 @@
           <VTh v-if="rows[0]?.vwap ?? 0" sortKey="vwap">VWAP</VTh>
           <VTh class="marketAsk" sortKey="price_ask_usdc">USDC</VTh>
           <VTh class="marketAsk" sortKey="price_ask_usdc">ATLAS</VTh>
-          <VTh class="marketAsk" sortKey="price_ask_usdc_discount">USDC%</VTh>
-          <VTh class="marketAsk" sortKey="price_ask_atlas_discount">ATLAS%</VTh>
+          <VTh
+            v-if="rows[0]?.vwap ?? 0"
+            class="marketAsk"
+            sortKey="price_ask_usdc_discount"
+            >USDC%</VTh
+          >
+          <VTh
+            v-if="rows[0]?.vwap ?? 0"
+            class="marketAsk"
+            sortKey="price_ask_atlas_discount"
+            >ATLAS%</VTh
+          >
           <VTh class="marketBid" sortKey="price_bid_usdc">USDC</VTh>
           <VTh class="marketBid" sortKey="price_bid_atlas">ATLAS</VTh>
-          <VTh class="marketBid" sortKey="price_bid_usdc_discount">USDC%</VTh>
-          <VTh class="marketBid" sortKey="price_bid_atlas_discount">ATLAS%</VTh>
+          <VTh
+            v-if="rows[0]?.vwap ?? 0"
+            class="marketBid"
+            sortKey="price_bid_usdc_discount"
+            >USDC%</VTh
+          >
+          <VTh
+            v-if="rows[0]?.vwap ?? 0"
+            class="marketBid"
+            sortKey="price_bid_atlas_discount"
+            >ATLAS%</VTh
+          >
           <VTh v-if="rows[0]?.vwap ?? 0" sortKey="vwap">APR_DEV</VTh>
           <th></th>
         </tr>
@@ -87,7 +107,7 @@
               :price="row.price_ask_atlas"
             ></price-element>
           </td>
-          <td class="marketAsk">
+          <td v-if="rows[0]?.vwap ?? 0" class="marketAsk">
             <price-element
               :show_percentage="true"
               :vwap="row.vwap"
@@ -95,7 +115,7 @@
               :price="row.price_ask_usdc"
             ></price-element>
           </td>
-          <td class="marketAsk">
+          <td v-if="rows[0]?.vwap ?? 0" class="marketAsk">
             <price-element
               :show_percentage="true"
               :vwap="row.vwap"
@@ -116,7 +136,7 @@
               :price="row.price_bid_atlas"
             ></price-element>
           </td>
-          <td class="marketBid">
+          <td v-if="rows[0]?.vwap ?? 0" class="marketBid">
             <price-element
               :show_percentage="true"
               :vwap="row.vwap"
@@ -124,7 +144,7 @@
               :price="row.price_bid_usdc"
             ></price-element>
           </td>
-          <td class="marketBid">
+          <td v-if="rows[0]?.vwap ?? 0" class="marketBid">
             <price-element
               :show_percentage="true"
               :vwap="row.vwap"
@@ -232,7 +252,9 @@ async function load_data() {
   });
 
   //Prepare Orders
-  await staratlas_gmClient.getOrders();
+  if (staratlas_gmClient.orders.length === 0) {
+    await staratlas_gmClient.fetchOrders();
+  }
   table_data.value.forEach((element) =>
     staratlas_gmClient.filter_orders(element.mint)
   );

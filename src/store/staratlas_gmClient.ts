@@ -24,7 +24,7 @@ export const staratlas_gmClientStore = defineStore({
   }),
 
   actions: {
-    async getOrders() {
+    async fetchOrders() {
       const client = new GmClientService();
       this.orders = await client.getAllOpenOrders(
         new Connection(GENESYSGO),

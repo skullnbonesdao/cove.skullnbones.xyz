@@ -86,6 +86,7 @@ import { tokenPricesWebsocket } from "@/store/token_price_websocket";
 import GridLoader from "vue-spinner/src/GridLoader.vue";
 import PriceTicker from "@/components/special/PriceTicker.vue";
 import SaAssetTableAdvanced from "@/components/table/SaAssetTableAdvanced.vue";
+import { staratlas_gmClientStore } from "@/store/staratlas_gmClient";
 
 const staratlas_store = staratlasStore();
 const tokenWS = tokenPricesWebsocket();
