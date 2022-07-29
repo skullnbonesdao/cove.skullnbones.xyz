@@ -35,7 +35,7 @@
           <th colspan="4" class="marketAsk">ASK</th>
           <th colspan="4" class="marketBid">BID</th>
           <th colspan="1" class=""></th>
-          <th colspan="1" class=""></th>
+          <th v-if="rows[0]?.vwap ?? 0" colspan="1" class=""></th>
         </tr>
         <tr>
           <VTh sortKey="symbol">#</VTh>
@@ -49,7 +49,7 @@
           <VTh class="marketBid" sortKey="price_bid_atlas">ATLAS</VTh>
           <VTh class="marketBid" sortKey="price_bid_usdc_discount">USDC%</VTh>
           <VTh class="marketBid" sortKey="price_bid_atlas_discount">ATLAS%</VTh>
-          <th>APR-DEV</th>
+          <VTh v-if="rows[0]?.vwap ?? 0" sortKey="vwap">APR_DEV</VTh>
           <th></th>
         </tr>
       </template>
@@ -132,7 +132,7 @@
               :price="row.price_bid_atlas"
             ></price-element>
           </td>
-          <td>{{ row.apr_atlas.toFixed(2) }}</td>
+          <td v-if="rows[0]?.vwap ?? 0">{{ row.apr_atlas.toFixed(2) }}</td>
           <td>
             <div class="tooltip" data-tip="Market">
               <a
