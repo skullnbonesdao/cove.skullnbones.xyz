@@ -40,6 +40,7 @@
         <div v-if="vwap" class="item w-16">
           <percentage-element
             class="w-16"
+            :price_vwap="vwap"
             :no_market="vwap === 0"
             :is_price="
               price_atlas !== -1 ? price_atlas * parseFloat(tokenWS.m_atlas) : 0
