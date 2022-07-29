@@ -44,9 +44,7 @@
       <tbody>
         <tr
           class="hover"
-          v-for="asset in ref_assets.filter(
-            (nft) => nft.attributes.itemType === type
-          )"
+          v-for="asset in assets"
           :key="asset"
           @click="load_modal(asset.mint)"
         >
@@ -99,15 +97,17 @@
             ></ask-bid-elements>
           </td>
           <td>
-            <a
-              class="btn btn-sm btn-primary"
-              :href="
-                'https://play.staratlas.com/market/' +
-                asset.name.replace(/\s+/g, '-').toLowerCase()
-              "
-              target="_blank"
-              ><i class="bi bi-shop"></i
-            ></a>
+            <div class="tooltip" data-tip="Market">
+              <a
+                class="btn btn-sm btn-secondary btn-circle"
+                :href="
+                  'https://play.staratlas.com/market/' +
+                  asset.name.replace(/\s+/g, '-').toLowerCase()
+                "
+                target="_blank"
+                ><i class="bi bi-shop"></i
+              ></a>
+            </div>
           </td>
         </tr>
       </tbody>
@@ -117,12 +117,12 @@
 
 <script lang="ts">
 export default {
-  name: "SaAssetTable",
+  name: "SaAssetTableSimple",
 };
 </script>
 
 <script setup lang="ts">
-import { defineProps, onMounted, PropType, ref } from "vue";
+import { defineProps, onMounted, PropType, ref, watch } from "vue";
 import { StarAtlasNFT } from "@/typescipt/interfaces/StarAtlasNFT";
 import ShipTableImageComponent from "@/components/table/components/ShipTableImageComponent.vue";
 import ShipTableNameComponent from "@/components/table/components/ShipTableNameComponent.vue";
@@ -134,28 +134,41 @@ import { staratlas_gmClientStore } from "@/store/staratlas_gmClient";
 import { TOKEN_ATLAS, TOKEN_USDC } from "@/typescipt/const/tokens";
 import VwapElement from "@/components/table/components/VWAPElement.vue";
 import SortableElement from "@/components/table/components/SortableElement.vue";
+import { MarketTableElements } from "@/typescipt/interfaces/MarkeTableElements";
+import { staratlasStore } from "@/store/staratlas_store";
 
 const props = defineProps({
-  assets: { type: Array as PropType<Array<StarAtlasNFT>>, default: null },
-  type: { type: String, default: "ship" },
+  sa_asset_type: { type: String, default: "ship" },
 });
 
-const ref_assets = ref(props.assets);
 const show_modal = ref(false);
 const asset_selected = ref();
 const asset_address = ref("1111111");
+const assets = ref([] as StarAtlasNFT[]);
 
+const staratlas_store = staratlasStore();
 const staratlas_gmClient = staratlas_gmClientStore();
 
 onMounted(async () => {
-  await staratlas_gmClient.getOrders();
-  props.assets.forEach((nft) => staratlas_gmClient.filter_orders(nft.mint));
+  await load_data();
 });
+
+watch(props, async () => {
+  await load_data();
+});
+
+async function load_data() {
+  assets.value = staratlas_store.nfts.filter(
+    (nft) => nft.attributes.itemType === props.sa_asset_type
+  );
+  await staratlas_gmClient.getOrders();
+  assets.value.forEach((nft) => staratlas_gmClient.filter_orders(nft.mint));
+}
 
 function load_modal(asset_address_new: string) {
   asset_address.value = asset_address_new;
   show_modal.value = true;
-  asset_selected.value = props.assets.find(
+  asset_selected.value = assets.value.find(
     (asset) => asset.mint === asset_address_new
   );
 }
@@ -174,24 +187,24 @@ function sort_table(direction: string, entry: string) {
   }
 
   if (direction === "down") {
-    ref_assets.value.reverse();
+    assets.value.reverse();
   }
 }
 
 function sortName() {
-  ref_assets.value.sort((a, b) => {
+  assets.value.sort((a, b) => {
     return a.name.localeCompare(b.name);
   });
 }
 
 function sortVWAP() {
-  ref_assets.value.sort((a, b) => {
+  assets.value.sort((a, b) => {
     return a.tradeSettings.vwap - b.tradeSettings.vwap;
   });
 }
 
 function sortSymbol() {
-  ref_assets.value.sort((a, b) => {
+  assets.value.sort((a, b) => {
     return a.symbol.localeCompare(b.symbol);
   });
 }

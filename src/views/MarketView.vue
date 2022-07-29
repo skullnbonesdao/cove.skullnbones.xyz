@@ -27,6 +27,21 @@
     <div class="divider"></div>
 
     <div class="bg-base-300 rounded-box place-items-center p-1">
+      <div class="flex flex-row justify-end p-3">
+        <div class="tooltip" data-tip="table-mode">
+          <input
+            type="checkbox"
+            class="toggle"
+            v-model="ref_toggle_state"
+            @click="
+              ref_toggle_state === true
+                ? (tableType_selected = 'simple')
+                : (tableType_selected = 'advanced')
+            "
+          />
+        </div>
+      </div>
+
       <div v-if="staratlas_store.status === 'fetched'">
         <div class="tabs justify-center">
           <div class="" v-for="asset in tab_entries" :key="asset">
@@ -40,11 +55,14 @@
             >
           </div>
         </div>
-        <s-a-asset-table2></s-a-asset-table2>
-        <!--        <sa-asset-table
-          :type="staratlas_itemType_selected"
-          :assets="staratlas_store.nfts"
-        ></sa-asset-table>-->
+        <sa-asset-table-simple
+          v-if="tableType_selected === 'simple'"
+          :sa_asset_type="staratlas_itemType_selected"
+        ></sa-asset-table-simple>
+        <sa-asset-table-advanced
+          v-if="tableType_selected === 'advanced'"
+          :sa_asset_type="staratlas_itemType_selected"
+        ></sa-asset-table-advanced>
       </div>
       <div v-else class="grid place-items-center">
         <grid-loader :color="'#ffa500'"></grid-loader>
@@ -62,21 +80,22 @@ export default {
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { onlyUnique } from "@/typescipt/helper/sorting";
-import SaAssetTable from "@/components/table/SaAssetTable.vue";
+import SaAssetTableSimple from "@/components/table/SaAssetTableSimple.vue";
 import { staratlasStore } from "@/store/staratlas_store";
 import { tokenPricesWebsocket } from "@/store/token_price_websocket";
 import GridLoader from "vue-spinner/src/GridLoader.vue";
 import PriceTicker from "@/components/special/PriceTicker.vue";
-import SAAssetTable2 from "@/components/table/SAAssetTable2.vue";
+import SaAssetTableAdvanced from "@/components/table/SaAssetTableAdvanced.vue";
 
 const staratlas_store = staratlasStore();
 const tokenWS = tokenPricesWebsocket();
 tokenWS.initMarkets();
 
-const tab_entries = staratlas_store.nfts
-  .map((nft) => nft.attributes.itemType)
-  .filter(onlyUnique);
+const tab_entries = ref();
 
+const ref_toggle_state = ref(true);
+
+const tableType_selected = ref("simple");
 const staratlas_itemType_selected = ref("ship");
 
 function switch_itemType_selected(newValue: string) {
@@ -85,6 +104,9 @@ function switch_itemType_selected(newValue: string) {
 
 onMounted(async () => {
   await staratlas_store.fetchFullData();
+  tab_entries.value = staratlas_store.nfts
+    .map((nft) => nft.attributes.itemType)
+    .filter(onlyUnique);
 });
 </script>
 

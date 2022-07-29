@@ -92,15 +92,17 @@
           <td>{{ row.apr_usdc.toFixed(2) }}</td>
           <td>{{ row.apr_atlas.toFixed(2) }}</td>
           <td>
-            <a
-              class="btn btn-sm btn-primary"
-              :href="
-                'https://play.staratlas.com/market/' +
-                row.name.replace(/\s+/g, '-').toLowerCase()
-              "
-              target="_blank"
-              ><i class="bi bi-shop"></i
-            ></a>
+            <div class="tooltip" data-tip="Market">
+              <a
+                class="btn btn-sm btn-secondary btn-circle"
+                :href="
+                  'https://play.staratlas.com/market/' +
+                  row.name.replace(/\s+/g, '-').toLowerCase()
+                "
+                target="_blank"
+                ><i class="bi bi-shop"></i
+              ></a>
+            </div>
           </td>
         </tr>
       </template>
@@ -110,12 +112,12 @@
 
 <script lang="ts">
 export default {
-  name: "SAAssetTable2",
+  name: "SaAssetTableAdvanced",
 };
 </script>
 
 <script setup lang="ts">
-import { onMounted, ref, defineProps } from "vue";
+import { onMounted, ref, defineProps, watch } from "vue";
 import { staratlasStore } from "@/store/staratlas_store";
 import { MarketTableElements } from "@/typescipt/interfaces/MarkeTableElements";
 import { staratlas_gmClientStore } from "@/store/staratlas_gmClient";
@@ -138,6 +140,15 @@ const asset_address = ref("1111111");
 const table_data = ref([] as MarketTableElements[]);
 
 onMounted(async () => {
+  await load_data();
+});
+
+watch(props, async () => {
+  table_data.value = [];
+  await load_data();
+});
+
+async function load_data() {
   const filtered_nfts = staratlas_store.nfts.filter(
     (nft) => nft.attributes.itemType === props.sa_asset_type
   );
@@ -182,7 +193,7 @@ onMounted(async () => {
     table_data.value[index].price_bid_atlas =
       market_orders_filtered?.price_atlas_buy ?? 0;
   });
-});
+}
 
 function load_modal(asset_address_new: string) {
   asset_address.value = asset_address_new;
