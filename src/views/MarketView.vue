@@ -40,11 +40,11 @@
             >
           </div>
         </div>
-
-        <sa-asset-table
+        <s-a-asset-table2></s-a-asset-table2>
+        <!--        <sa-asset-table
           :type="staratlas_itemType_selected"
           :assets="staratlas_store.nfts"
-        ></sa-asset-table>
+        ></sa-asset-table>-->
       </div>
       <div v-else class="grid place-items-center">
         <grid-loader :color="'#ffa500'"></grid-loader>
@@ -67,6 +67,7 @@ import { staratlasStore } from "@/store/staratlas_store";
 import { tokenPricesWebsocket } from "@/store/token_price_websocket";
 import GridLoader from "vue-spinner/src/GridLoader.vue";
 import PriceTicker from "@/components/special/PriceTicker.vue";
+import SAAssetTable2 from "@/components/table/SAAssetTable2.vue";
 
 const staratlas_store = staratlasStore();
 const tokenWS = tokenPricesWebsocket();

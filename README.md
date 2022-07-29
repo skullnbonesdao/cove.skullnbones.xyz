@@ -27,3 +27,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 https://v3.vue-final-modal.org/examples/tailwind
 
 www.tailwind-tools.com
+
+https://vue-smart-table.netlify.app/sorting.html#hide-sort-icons

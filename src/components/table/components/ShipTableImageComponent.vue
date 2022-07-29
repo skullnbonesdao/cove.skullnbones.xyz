@@ -6,7 +6,7 @@
           <img class="rounded-md" :src="img_url" alt="asset_image" />
         </div>
       </div>
-      <div class="absolute bottom-0 pb-4">
+      <div class="absolute bottom-0 pb-2">
         <div class="badge">{{ symbol }}</div>
       </div>
     </div>

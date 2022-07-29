@@ -1,7 +1,8 @@
 <template>
   <div
+    class="w-24 text-right"
     :class="
-      is_price === 0.0
+      is_price === 0.0 || no_market
         ? 'text-yellow-500'
         : calculatesPercentage > 0
         ? 'text-green-500'
@@ -23,10 +24,11 @@ import { ref, defineProps, watch } from "vue";
 const props = defineProps({
   price_vwap: { type: Number, default: 0 },
   is_price: { type: Number, default: 0 },
+  no_market: { type: Boolean, default: false },
 });
 
 function calculatesPercentage(): number {
-  if (props.is_price === 0) {
+  if (props.is_price === 0 || props.no_market === true) {
     return 0;
   }
   if (props.price_vwap > props.is_price) {
