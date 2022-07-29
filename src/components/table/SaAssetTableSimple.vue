@@ -17,11 +17,11 @@
       sortHeaderClass="flex items-center justify-between w-full"
     >
       <!-- head -->
-      <template #head>
+      <template #head="{ rows }">
         <tr>
           <th></th>
           <VTh sortKey="name">Name</VTh>
-          <VTh sortKey="tradeSettings.vwap">VWAP</VTh>
+          <VTh v-if="rows[0]?.vwap ?? 0" sortKey="tradeSettings.vwap">VWAP</VTh>
           <th>ASK</th>
           <th>BID</th>
           <th></th>
@@ -46,7 +46,7 @@
               :mint_address="asset.mint"
             ></ship-table-name-component>
           </td>
-          <td>
+          <td v-if="rows[0]?.vwap ?? 0">
             <vwap-element :vwap="asset.tradeSettings.vwap ?? 0"></vwap-element>
           </td>
 
