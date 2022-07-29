@@ -9,7 +9,7 @@
       <polis-icon v-else-if="asset_name === 'POLIS/USDC'"></polis-icon>
       <usdc-icon v-else></usdc-icon>
     </div>
-    <div>
+    <div class="w-28">
       <h3>{{ asset_name }}</h3>
       <h4>{{ asset_price }}</h4>
     </div>
