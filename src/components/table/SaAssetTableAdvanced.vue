@@ -16,18 +16,19 @@
       :data="table_data"
       sortHeaderClass="flex items-center justify-between w-full"
     >
-      <template #head>
+      <template #head="{ rows }">
         <tr>
-          <th colspan="3" class="">Asset</th>
+          <th></th>
+          <th :colspan="rows[0]?.vwap !== 0 ? 2 : 1" class="">Asset</th>
           <th colspan="4" class="marketAsk">ASK</th>
           <th colspan="4" class="marketBid">BID</th>
-          <th colspan="2" class="">APR</th>
+          <th colspan="1" class=""></th>
           <th colspan="1" class=""></th>
         </tr>
         <tr>
           <VTh sortKey="symbol">#</VTh>
           <VTh sortKey="name">Name</VTh>
-          <VTh sortKey="vwap">VWAP</VTh>
+          <VTh v-if="rows[0]?.vwap ?? 0" sortKey="vwap">VWAP</VTh>
           <VTh class="marketAsk" sortKey="price_ask_usdc">USDC</VTh>
           <VTh class="marketAsk" sortKey="price_ask_usdc">ATLAS</VTh>
           <VTh class="marketAsk" sortKey="price_ask_usdc_discount">USDC%</VTh>
@@ -36,9 +37,8 @@
           <VTh class="marketBid" sortKey="price_bid_atlas">ATLAS</VTh>
           <VTh class="marketBid" sortKey="price_bid_usdc_discount">USDC%</VTh>
           <VTh class="marketBid" sortKey="price_bid_atlas_discount">ATLAS%</VTh>
-          <th>APR1</th>
-          <th>APR2</th>
-          <th>a</th>
+          <th>APR-DEV</th>
+          <th></th>
         </tr>
       </template>
       <template #body="{ rows }">
@@ -61,7 +61,7 @@
               :disable_badges="true"
             ></ship-table-name-component>
           </td>
-          <td>
+          <td v-if="rows[0]?.vwap ?? 0">
             <vwap-element :vwap="row.vwap"></vwap-element>
           </td>
           <td class="marketAsk">
@@ -123,7 +123,6 @@
               :price="row.price_bid_atlas"
             ></price-element>
           </td>
-          <td>{{ row.apr_usdc.toFixed(2) }}</td>
           <td>{{ row.apr_atlas.toFixed(2) }}</td>
           <td>
             <div class="tooltip" data-tip="Market">

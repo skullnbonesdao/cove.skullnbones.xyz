@@ -13,14 +13,14 @@
       <percentage-element
         class="item w-16"
         v-if="show_percentage && currency === 'atlas'"
-        :no_market="price === -1"
+        :no_market="price === -1 || !vwap"
         :is_price="price * tokenWS.m_atlas"
         :price_vwap="vwap"
       ></percentage-element>
       <percentage-element
         class="item w-16"
         v-else-if="show_percentage && currency === 'usdc'"
-        :no_market="price === -1"
+        :no_market="price === -1 || !vwap"
         :is_price="price"
         :price_vwap="vwap"
       ></percentage-element>
