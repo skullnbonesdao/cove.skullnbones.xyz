@@ -38,49 +38,40 @@ export const staratlas_scoreClientStore = defineStore({
     ): Promise<number> {
       const score_vars = await this.getScoreVarsShipInfo(ship_address);
 
-      const cost_ammoPerSecond =
-        score_vars.millisecondsToBurnOneArms *
-        1000 *
-        prices_resources.ammo_price *
-        Math.pow(10, -8);
-      const cost_fuelPerSecond =
-        score_vars.millisecondsToBurnOneFuel *
-        1000 *
-        prices_resources.fuel_price *
-        Math.pow(10, -8);
-      const cost_toolsPerSecond =
-        score_vars.millisecondsToBurnOneToolkit *
-        1000 *
-        prices_resources.tool_price *
-        Math.pow(10, -8);
-      const cost_foodPerSecond =
-        score_vars.millisecondsToBurnOneFood *
-        1000 *
-        prices_resources.food_price *
-        Math.pow(10, -8);
+      const cost_ammoPerDay =
+        (score_vars.millisecondsToBurnOneArms / 1000 / 60 / 60) *
+        prices_resources.tool_price;
+      const cost_fuelPerDay =
+        (score_vars.millisecondsToBurnOneFuel / 1000 / 60 / 60) *
+        prices_resources.tool_price;
+      const cost_toolsPerDay =
+        (score_vars.millisecondsToBurnOneToolkit / 1000 / 60 / 60) *
+        prices_resources.tool_price;
+      const cost_foodPerDay =
+        (score_vars.millisecondsToBurnOneFood / 1000 / 60 / 60) *
+        prices_resources.food_price;
 
       console.log("COST FOOD");
-      console.log(cost_foodPerSecond);
+      console.log(score_vars.millisecondsToBurnOneFood);
+      console.log(cost_foodPerDay);
+      console.log("COST TOOL");
+      console.log(score_vars.millisecondsToBurnOneToolkit);
+      console.log(cost_toolsPerDay);
 
       const cost_sumResourcesDay =
-        ((cost_ammoPerSecond +
-          cost_fuelPerSecond +
-          cost_toolsPerSecond +
-          cost_foodPerSecond) /
-          60 /
-          60 /
-          24) *
-        Math.pow(10, -8);
+        cost_ammoPerDay + cost_fuelPerDay + cost_toolsPerDay + cost_foodPerDay;
 
       console.log("COST daly");
-      console.log(prices_resources.ammo_price);
       console.log(cost_sumResourcesDay);
+      console.log(score_vars.rewardRatePerSecond * 60 * 60 * 24);
 
       const rewards_day =
         score_vars.rewardRatePerSecond * 60 * 60 * 24 * Math.pow(10, -8);
 
       return (
-        (rewards_day - cost_sumResourcesDay / ship_cost_atlas / 365) * 365 * 100
+        ((rewards_day - cost_sumResourcesDay) / ship_cost_atlas / 365) *
+        365 *
+        100
       );
     },
   },

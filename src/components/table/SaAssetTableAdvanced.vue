@@ -198,6 +198,7 @@ import {
   TOKEN_FUEL,
   TOKEN_TOOL,
 } from "@/typescipt/const/staratlas";
+import { tokenPricesWebsocket } from "@/store/token_price_websocket";
 
 const props = defineProps({
   sa_asset_type: { type: String, default: "ship" },
@@ -206,6 +207,7 @@ const props = defineProps({
 const staratlas_store = staratlasStore();
 const staratlas_gmClient = staratlas_gmClientStore();
 const staratlas_scoreClient = staratlas_scoreClientStore();
+const token_ws = tokenPricesWebsocket();
 
 const show_modal = ref(false);
 const asset_selected = ref();
@@ -301,7 +303,7 @@ async function load_data() {
       );
   });
 
-  const resouce_prices: ResourcePrices = {
+  const resource_prices: ResourcePrices = {
     ammo_price: staratlas_gmClient.orders.filter(
       (order) => order.orderMint === TOKEN_AMMO.toString()
     )[0].price,
@@ -315,6 +317,7 @@ async function load_data() {
       (order) => order.orderMint === TOKEN_TOOL.toString()
     )[0].price,
   };
+  console.log(resource_prices);
 
   // Get APRs
   if (props.sa_asset_type === "ship") {
@@ -325,8 +328,8 @@ async function load_data() {
       table_data.value[index].apr_atlas =
         await staratlas_scoreClient.getAprForShipAtlas(
           element.mint,
-          element.vwap,
-          resouce_prices
+          element.vwap * parseFloat(token_ws.m_atlas),
+          resource_prices
         );
     }
   }
