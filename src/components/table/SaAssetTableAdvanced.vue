@@ -10,10 +10,22 @@
     </market-details-modal>
   </div>
 
-  <div class="overflow-x-auto">
+  <div class="overflow-x-auto bg-base-100">
+    <div class="flex w-full justify-end">
+      <div class="flex p-1 form-control w-full max-w-xs">
+        <input
+          v-model="filters.name.value"
+          type="text"
+          placeholder="Type here"
+          class="input input-bordered w-full max-w-xs"
+        />
+      </div>
+    </div>
+
     <VTable
       class="table w-full"
       :data="table_data"
+      :filters="filters"
       sortHeaderClass="flex items-center justify-between w-full"
     >
       <template #head="{ rows }">
@@ -56,10 +68,7 @@
             ></ship-table-image-component>
           </th>
           <td class="w-full">
-            <ship-table-name-component
-              :mint_address="row.mint"
-              :disable_badges="true"
-            ></ship-table-name-component>
+            <strong>{{ row.name }}</strong>
           </td>
           <td v-if="rows[0]?.vwap ?? 0">
             <vwap-element :vwap="row.vwap"></vwap-element>
@@ -183,6 +192,9 @@ const asset_selected = ref();
 const asset_address = ref("1111111");
 
 const table_data = ref([] as MarketTableElements[]);
+const filters = ref({
+  name: { value: "", keys: ["name"] },
+});
 
 onMounted(async () => {
   await load_data();

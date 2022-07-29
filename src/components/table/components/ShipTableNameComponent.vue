@@ -31,15 +31,20 @@ const staratlas_data = staratlasStore();
 const props = defineProps({
   mint_address: {
     type: String,
-    default: null,
+    default: "",
   },
   disable_badges: {
     type: Boolean,
     default: false,
   },
 });
-
 const ship: StarAtlasNFT | undefined = staratlas_data.nfts.find(
   (assets) => assets.mint === props.mint_address
 );
+
+watch(props, () => {
+  const ship: StarAtlasNFT | undefined = staratlas_data.nfts.find(
+    (assets) => assets.mint === props.mint_address
+  );
+});
 </script>
