@@ -45,7 +45,7 @@
         <tr
           v-for="row in rows"
           :key="row.id"
-          class=""
+          class="hover group"
           @click="load_modal(row.mint)"
         >
           <th>
@@ -62,7 +62,7 @@
             ></ship-table-name-component>
           </td>
           <td>
-            <price-element text="VWAP" :price="row.vwap"></price-element>
+            <vwap-element :vwap="row.vwap"></vwap-element>
           </td>
           <td class="marketAsk">
             <price-element
@@ -160,6 +160,8 @@ import PriceElement from "@/components/table/components/PriceElement.vue";
 import ShipTableNameComponent from "@/components/table/components/ShipTableNameComponent.vue";
 import MarketDetailsModal from "@/components/modals/MarketDetailsModal.vue";
 import { calculatesPercentageVWAPvsMarket } from "@/typescipt/helper/calculate_market";
+import { staratlas_scoreClientStore } from "@/store/staratlas_scoreClient";
+import VwapElement from "@/components/table/components/VWAPElement.vue";
 
 const props = defineProps({
   sa_asset_type: { type: String, default: "ship" },
@@ -167,6 +169,7 @@ const props = defineProps({
 
 const staratlas_store = staratlasStore();
 const staratlas_gmClient = staratlas_gmClientStore();
+const staratlas_scoreClient = staratlas_scoreClientStore();
 
 const show_modal = ref(false);
 const asset_selected = ref();
@@ -184,9 +187,9 @@ watch(props, async () => {
 });
 
 async function load_data() {
-  const filtered_nfts = staratlas_store.nfts.filter(
-    (nft) => nft.attributes.itemType === props.sa_asset_type
-  );
+  const filtered_nfts = staratlas_store.nfts
+    .filter((nft) => nft.attributes.itemType === props.sa_asset_type)
+    .sort((a, b) => a.tradeSettings.vwap - b.tradeSettings.vwap);
 
   //INIT DATA
   filtered_nfts.forEach((nft) => {
@@ -214,8 +217,6 @@ async function load_data() {
   table_data.value.forEach((element) =>
     staratlas_gmClient.filter_orders(element.mint)
   );
-
-  table_data.value.sort((a, b) => a.vwap - b.vwap);
 
   //Append Market order to DATA
   table_data.value.forEach((element, index) => {
@@ -258,6 +259,15 @@ async function load_data() {
         table_data.value[index].price_ask_atlas == -1
       );
   });
+
+  // Get APRs
+  if (props.sa_asset_type === "ship") {
+    for (const element of table_data.value) {
+      const index = table_data.value.indexOf(element);
+      table_data.value[index].apr_atlas =
+        await staratlas_scoreClient.getAprForShip(element.mint, element.vwap);
+    }
+  }
 }
 
 function load_modal(asset_address_new: string) {

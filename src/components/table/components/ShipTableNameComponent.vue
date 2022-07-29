@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col">
-    <h3>{{ ship?.name }}</h3>
+    <h3>{{ ship.name }}</h3>
     <div v-if="!disable_badges" class="flex flex-row space-x-2">
       <tier-badge :text="ship?.attributes.tier || 0"></tier-badge>
       <rarity-badge :text="ship?.attributes.rarity"></rarity-badge>
@@ -19,7 +19,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
+import { defineProps, watch } from "vue";
 import { staratlasStore } from "@/store/staratlas_store";
 import { StarAtlasNFT } from "@/typescipt/interfaces/StarAtlasNFT";
 import RarityBadge from "@/components/badges/RarityBadge.vue";

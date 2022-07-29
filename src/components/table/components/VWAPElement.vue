@@ -7,7 +7,7 @@
     </div>
 
     <div class="item text-right w-24">
-      <strong> {{ vwap }}</strong>
+      <strong> {{ vwap.toFixed(2) }}</strong>
     </div>
     <div class="item divider divider-horizontal"></div>
     <div class="item text-center">VWAP</div>
