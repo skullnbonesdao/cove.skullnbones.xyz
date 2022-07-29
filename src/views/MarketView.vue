@@ -95,7 +95,7 @@ const tab_entries = ref();
 
 const ref_toggle_state = ref(true);
 
-const tableType_selected = ref("simple");
+const tableType_selected = ref("advanced");
 const staratlas_itemType_selected = ref("ship");
 
 function switch_itemType_selected(newValue: string) {

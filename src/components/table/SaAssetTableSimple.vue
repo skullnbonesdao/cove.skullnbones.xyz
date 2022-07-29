@@ -11,40 +11,26 @@
   </div>
 
   <div class="overflow-x-auto">
-    <table class="table w-full">
+    <VTable
+      class="table w-full"
+      :data="assets"
+      sortHeaderClass="flex items-center justify-between w-full"
+    >
       <!-- head -->
-      <thead>
+      <template #head>
         <tr>
-          <th>
-            <sortable-element
-              text=""
-              @sort-up="sort_table('up', 'symbol')"
-              @sort-down="sort_table('down', 'symbol')"
-            ></sortable-element>
-          </th>
-          <th>
-            <sortable-element
-              text="Name"
-              @sort-up="sort_table('up', 'name')"
-              @sort-down="sort_table('down', 'name')"
-            ></sortable-element>
-          </th>
-          <th>
-            <sortable-element
-              text="VWAP"
-              @sort-up="sort_table('up', 'vwap')"
-              @sort-down="sort_table('down', 'vwap')"
-            ></sortable-element>
-          </th>
+          <th></th>
+          <VTh sortKey="name">Name</VTh>
+          <VTh sortKey="tradeSettings.vwap">VWAP</VTh>
           <th>ASK</th>
           <th>BID</th>
           <th></th>
         </tr>
-      </thead>
-      <tbody>
+      </template>
+      <template #body="{ rows }">
         <tr
           class="hover"
-          v-for="asset in assets"
+          v-for="asset in rows"
           :key="asset"
           @click="load_modal(asset.mint)"
         >
@@ -110,8 +96,8 @@
             </div>
           </td>
         </tr>
-      </tbody>
-    </table>
+      </template>
+    </VTable>
   </div>
 </template>
 

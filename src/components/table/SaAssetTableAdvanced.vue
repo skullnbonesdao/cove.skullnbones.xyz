@@ -27,7 +27,7 @@
         <tr>
           <th></th>
           <VTh sortKey="name">Name</VTh>
-          <VTh sortKey="vwap">USDC</VTh>
+          <VTh sortKey="vwap">VWAP</VTh>
           <VTh sortKey="price_ask_usdc">USDC</VTh>
           <VTh sortKey="price_ask_atlas">ATLAS</VTh>
           <VTh sortKey="price_bid_usdc">USDC</VTh>
