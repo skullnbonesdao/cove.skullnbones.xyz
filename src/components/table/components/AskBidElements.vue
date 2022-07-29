@@ -49,67 +49,6 @@
       </div>
     </div>
   </div>
-
-  <!--  &lt;!&ndash; USDC &ndash;&gt;
-  <div class="flex flex-col space-y-1">
-    <div class="flex flex-row space-x-1">
-      <div class="grow"></div>
-      <usdc-icon class="w-6"></usdc-icon>
-      <div v-if="price_usdc === 0">
-        <beat-loader :color="'#ffa500'"></beat-loader>
-      </div>
-      <div v-else>
-        <div v-if="price_usdc !== -1" class="flex flex-row space-x-2">
-          <div class="w-24 text-right">
-            {{ price_usdc.toFixed(2) }}
-          </div>
-          <percentage-element
-            class="w-13 text-right"
-            :price_vwap="vwap"
-            :is_price="price_usdc"
-          ></percentage-element>
-        </div>
-        <div v-else class="flex flex-row space-x-2">
-          <div class="w-24 text-right">no-market</div>
-          <percentage-element
-            class="w-13 text-right"
-            :price_vwap="vwap"
-            :is_price="price_usdc"
-          ></percentage-element>
-        </div>
-      </div>
-    </div>
-
-    &lt;!&ndash; ATLAS &ndash;&gt;
-    <div class="flex flex-row space-x-1">
-      <div class="grow"></div>
-      <atlas-icon class="w-6"></atlas-icon>
-      <div v-if="price_atlas === 0">
-        <beat-loader :color="'#ffa500'"></beat-loader>
-      </div>
-      <div v-else>
-        <div v-if="price_atlas !== -1" class="flex flex-row space-x-2">
-          <div class="w-24 text-right">
-            {{ price_atlas.toFixed(2) }}
-          </div>
-
-          <percentage-element
-            class="w-13 text-right"
-            :price_vwap="vwap"
-            :is_price="price_atlas * parseFloat(tokenWS.m_atlas)"
-          ></percentage-element>
-        </div>
-        <div v-else class="flex flex-row space-x-2">
-          <div class="w-24 text-right">no-market</div>
-          <percentage-element
-            class="w-13 text-right"
-            :price_vwap="vwap"
-            :is_price="price_atlas * parseFloat(tokenWS.m_atlas)"
-          ></percentage-element>
-        </div>
-      </div>
-    </div>
-  </div>-->
 </template>
 
 <script lang="ts">
