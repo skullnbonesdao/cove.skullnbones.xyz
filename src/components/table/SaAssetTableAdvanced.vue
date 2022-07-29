@@ -161,6 +161,14 @@ import MarketDetailsModal from "@/components/modals/MarketDetailsModal.vue";
 import { calculatesPercentageVWAPvsMarket } from "@/typescipt/helper/calculate_market";
 import { staratlas_scoreClientStore } from "@/store/staratlas_scoreClient";
 import VwapElement from "@/components/table/components/VWAPElement.vue";
+import { ResourcePrices } from "@/store/staratlas_scoreClient";
+import {
+  AMMO_TOOL,
+  TOKEN_AMMO,
+  TOKEN_FOOD,
+  TOKEN_FUEL,
+  TOKEN_TOOL,
+} from "@/typescipt/const/staratlas";
 
 const props = defineProps({
   sa_asset_type: { type: String, default: "ship" },
@@ -259,12 +267,33 @@ async function load_data() {
       );
   });
 
+  const resouce_prices: ResourcePrices = {
+    ammo_price: staratlas_gmClient.orders.filter(
+      (order) => order.orderMint === TOKEN_AMMO.toString()
+    )[0].price,
+    food_price: staratlas_gmClient.orders.filter(
+      (order) => order.orderMint === TOKEN_FOOD.toString()
+    )[0].price,
+    fuel_price: staratlas_gmClient.orders.filter(
+      (order) => order.orderMint === TOKEN_FUEL.toString()
+    )[0].price,
+    tool_price: staratlas_gmClient.orders.filter(
+      (order) => order.orderMint === TOKEN_TOOL.toString()
+    )[0].price,
+  };
+
   // Get APRs
   if (props.sa_asset_type === "ship") {
     for (const element of table_data.value) {
       const index = table_data.value.indexOf(element);
+      console.log(table_data.value[index].name);
+
       table_data.value[index].apr_atlas =
-        await staratlas_scoreClient.getAprForShip(element.mint, element.vwap);
+        await staratlas_scoreClient.getAprForShipAtlas(
+          element.mint,
+          element.vwap,
+          resouce_prices
+        );
     }
   }
 }
