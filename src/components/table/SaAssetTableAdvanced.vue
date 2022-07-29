@@ -18,30 +18,34 @@
     >
       <template #head>
         <tr>
-          <th colspan="3" class="bg-base-100"></th>
-          <th colspan="2" class="bg-base-100">ASK</th>
-          <th colspan="2" class="bg-base-100">BID</th>
-          <th colspan="2" class="bg-base-100">APR</th>
-          <th colspan="1" class="bg-base-100"></th>
+          <th colspan="3" class="">Asset</th>
+          <th colspan="4" class="marketAsk">ASK</th>
+          <th colspan="4" class="marketBid">BID</th>
+          <th colspan="2" class="">APR</th>
+          <th colspan="1" class=""></th>
         </tr>
         <tr>
-          <th></th>
+          <VTh sortKey="symbol">#</VTh>
           <VTh sortKey="name">Name</VTh>
           <VTh sortKey="vwap">VWAP</VTh>
-          <VTh sortKey="price_ask_usdc">USDC</VTh>
-          <VTh sortKey="price_ask_atlas">ATLAS</VTh>
-          <VTh sortKey="price_bid_usdc">USDC</VTh>
-          <VTh sortKey="price_bid_atlas">ATLAS</VTh>
-          <th>USDC</th>
-          <th>ATLAS</th>
-          <th></th>
+          <VTh class="marketAsk" sortKey="price_ask_usdc">USDC</VTh>
+          <VTh class="marketAsk" sortKey="price_ask_usdc">ATLAS</VTh>
+          <VTh class="marketAsk" sortKey="price_ask_usdc_discount">USDC%</VTh>
+          <VTh class="marketAsk" sortKey="price_ask_atlas_discount">ATLAS%</VTh>
+          <VTh class="marketBid" sortKey="price_bid_usdc">USDC</VTh>
+          <VTh class="marketBid" sortKey="price_bid_atlas">ATLAS</VTh>
+          <VTh class="marketBid" sortKey="price_bid_usdc_discount">USDC%</VTh>
+          <VTh class="marketBid" sortKey="price_bid_atlas_discount">ATLAS%</VTh>
+          <th>APR1</th>
+          <th>APR2</th>
+          <th>a</th>
         </tr>
       </template>
       <template #body="{ rows }">
         <tr
           v-for="row in rows"
           :key="row.id"
-          class="hover"
+          class=""
           @click="load_modal(row.mint)"
         >
           <th>
@@ -54,36 +58,66 @@
           <td class="w-full">
             <ship-table-name-component
               :mint_address="row.mint"
+              :disable_badges="true"
             ></ship-table-name-component>
           </td>
           <td>
             <price-element text="VWAP" :price="row.vwap"></price-element>
           </td>
-          <td>
+          <td class="marketAsk">
             <price-element
-              text=""
               :vwap="row.vwap"
+              currency="usdc"
               :price="row.price_ask_usdc"
             ></price-element>
           </td>
-          <td>
+          <td class="marketAsk">
             <price-element
-              text=""
               :vwap="row.vwap"
               currency="atlas"
               :price="row.price_ask_atlas"
             ></price-element>
           </td>
-          <td>
+          <td class="marketAsk">
             <price-element
-              text=""
+              :show_percentage="true"
+              :vwap="row.vwap"
+              currency="usdc"
+              :price="row.price_ask_usdc"
+            ></price-element>
+          </td>
+          <td class="marketAsk">
+            <price-element
+              :show_percentage="true"
+              :vwap="row.vwap"
+              currency="atlas"
+              :price="row.price_ask_atlas"
+            ></price-element>
+          </td>
+          <td class="marketBid">
+            <price-element
               :vwap="row.vwap"
               :price="row.price_bid_usdc"
             ></price-element>
           </td>
-          <td>
+          <td class="marketBid">
             <price-element
-              text=""
+              :vwap="row.vwap"
+              currency="atlas"
+              :price="row.price_bid_atlas"
+            ></price-element>
+          </td>
+          <td class="marketBid">
+            <price-element
+              :show_percentage="true"
+              :vwap="row.vwap"
+              currency="usdc"
+              :price="row.price_bid_usdc"
+            ></price-element>
+          </td>
+          <td class="marketBid">
+            <price-element
+              :show_percentage="true"
               :vwap="row.vwap"
               currency="atlas"
               :price="row.price_bid_atlas"
@@ -125,6 +159,7 @@ import ShipTableImageComponent from "@/components/table/components/ShipTableImag
 import PriceElement from "@/components/table/components/PriceElement.vue";
 import ShipTableNameComponent from "@/components/table/components/ShipTableNameComponent.vue";
 import MarketDetailsModal from "@/components/modals/MarketDetailsModal.vue";
+import { calculatesPercentageVWAPvsMarket } from "@/typescipt/helper/calculate_market";
 
 const props = defineProps({
   sa_asset_type: { type: String, default: "ship" },
@@ -165,6 +200,10 @@ async function load_data() {
       price_ask_atlas: 0,
       price_bid_usdc: 0,
       price_bid_atlas: 0,
+      price_ask_usdc_discount: 0,
+      price_ask_atlas_discount: 0,
+      price_bid_usdc_discount: 0,
+      price_bid_atlas_discount: 0,
       apr_usdc: 0,
       apr_atlas: 0,
     });
@@ -184,6 +223,7 @@ async function load_data() {
     const market_orders_filtered = staratlas_gmClient.top_market_orders.find(
       (order) => order.mint === element.mint
     );
+    //Market Prices
     table_data.value[index].price_ask_usdc =
       market_orders_filtered?.price_usdc_sell ?? 0;
     table_data.value[index].price_ask_atlas =
@@ -192,6 +232,31 @@ async function load_data() {
       market_orders_filtered?.price_usdc_buy ?? 0;
     table_data.value[index].price_bid_atlas =
       market_orders_filtered?.price_atlas_buy ?? 0;
+    //Market Discounts
+    table_data.value[index].price_ask_usdc_discount =
+      calculatesPercentageVWAPvsMarket(
+        table_data.value[index].vwap,
+        table_data.value[index].price_ask_usdc,
+        table_data.value[index].price_ask_usdc == -1
+      );
+    table_data.value[index].price_ask_atlas_discount =
+      calculatesPercentageVWAPvsMarket(
+        table_data.value[index].vwap,
+        table_data.value[index].price_ask_atlas,
+        table_data.value[index].price_ask_atlas == -1
+      );
+    table_data.value[index].price_bid_usdc_discount =
+      calculatesPercentageVWAPvsMarket(
+        table_data.value[index].vwap,
+        table_data.value[index].price_bid_usdc,
+        table_data.value[index].price_bid_usdc == -1
+      );
+    table_data.value[index].price_bid_atlas_discount =
+      calculatesPercentageVWAPvsMarket(
+        table_data.value[index].vwap,
+        table_data.value[index].price_bid_atlas,
+        table_data.value[index].price_ask_atlas == -1
+      );
   });
 }
 

@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+    .marketBid {
+        background-color: theme('colors.red.200');
+    }
+    .marketAsk {
+        background-color: theme('colors.green.200');
+    }
+    [data-theme="dark"] .marketBid {
+        background-color: theme('colors.red.900');
+    }
+    [data-theme="dark"] .marketAsk {
+        background-color: theme('colors.green.900');
+    }
+
+
+}
+
 h1{
     font-size: xx-large;
     font-weight: bold;
@@ -24,6 +41,8 @@ h4{
     font-weight: bold;
 
 }
+
+
 
 [data-theme="dark"] .invertible {
     filter: invert(1);
