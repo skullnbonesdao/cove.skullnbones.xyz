@@ -47,9 +47,7 @@
             ></ship-table-name-component>
           </td>
           <td>
-            <vwap-element
-              :vwap="asset.tradeSettings.vwap.toFixed(2) ?? 0"
-            ></vwap-element>
+            <vwap-element :vwap="asset.tradeSettings.vwap ?? 0"></vwap-element>
           </td>
 
           <td>
@@ -85,7 +83,7 @@
           <td>
             <div class="tooltip" data-tip="Market">
               <a
-                class="btn btn-sm btn-secondary btn-circle"
+                class="btn btn-sm btn-primary btn-circle"
                 :href="
                   'https://play.staratlas.com/market/' +
                   asset.name.replace(/\s+/g, '-').toLowerCase()
