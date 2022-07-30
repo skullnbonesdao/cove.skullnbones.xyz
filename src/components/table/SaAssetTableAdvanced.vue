@@ -34,7 +34,9 @@
           <th :colspan="rows[0]?.vwap !== 0 ? 2 : 1" class="">Asset</th>
           <th :colspan="rows[0]?.vwap !== 0 ? 4 : 2" class="marketAsk">ASK</th>
           <th :colspan="rows[0]?.vwap !== 0 ? 4 : 2" class="marketBid">BID</th>
-          <th v-if="rows[0]?.vwap ?? 0" colspan="2" class="marketAPR">APR</th>
+          <th v-if="rows[0]?.vwap ?? 0" colspan="2" class="marketAPR">
+            APR (ask)
+          </th>
           <th colspan="1" class=""></th>
         </tr>
         <tr>
