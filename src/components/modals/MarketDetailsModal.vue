@@ -30,8 +30,8 @@
             <div class="grid xl:grid-cols-4 md:gap-4">
               <div>
                 <h4>VWAP</h4>
-                <div class="flex flex-row space-x-1 h-6">
-                  <usdc-icon></usdc-icon>
+                <div class="flex flex-row space-x-1">
+                  <usdc-icon class="w-6"></usdc-icon>
                   <div>
                     {{ asset.tradeSettings.vwap.toFixed(2) }}
                   </div>
