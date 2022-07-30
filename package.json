@@ -8,14 +8,18 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@nfteyez/sol-rayz": "^0.10.2",
+    "@solana/wallet-adapter-wallets": "^0.15.5",
     "@solana/web3.js": "^1.50.0",
     "@staratlas/factory": "^0.2.18",
     "bootstrap-icons": "^1.9.1",
     "core-js": "^3.8.3",
     "daisyui": "^2.19.1",
     "limiter": "^2.1.0",
+    "mosha-vue-toastify": "^1.0.23",
     "pinia": "^2.0.16",
     "resolve": "^1.22.1",
+    "solana-wallets-vue": "^0.3.2",
     "theme-change": "^2.1.0",
     "vue": "^3.2.13",
     "vue-final-modal": "^3.4.4",

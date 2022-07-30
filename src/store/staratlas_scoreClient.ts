@@ -36,7 +36,7 @@ export const staratlas_scoreClientStore = defineStore({
       ship_cost_atlas: number,
       prices_resources: ResourcePrices
     ): Promise<number> {
-      const score_vars = await this.getScoreVarsShipInfo(ship_address);
+      /*const score_vars = await this.getScoreVarsShipInfo(ship_address);
 
       const cost_ammoPerDay =
         (score_vars.millisecondsToBurnOneArms / 1000 / 60 / 60) *
@@ -67,13 +67,8 @@ export const staratlas_scoreClientStore = defineStore({
 
       const rewards_day =
         score_vars.rewardRatePerSecond * 60 * 60 * 24 * Math.pow(10, -8);
-
+*/
       return 0;
-      return (
-        ((rewards_day - cost_sumResourcesDay) / ship_cost_atlas / 365) *
-        365 *
-        100
-      );
     },
   },
 });
