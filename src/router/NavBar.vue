@@ -93,7 +93,7 @@
                 to="/burner"
               >
                 <div class="flex flex-col-reverse items-center">
-                  <div>BURNER</div>
+                  <div>Bruner</div>
                 </div>
               </router-link>
             </li>
