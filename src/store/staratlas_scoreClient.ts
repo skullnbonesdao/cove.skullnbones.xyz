@@ -1,13 +1,8 @@
 import { defineStore } from "pinia";
-import {
-  getScoreVarsInfo,
-  getScoreVarsShipInfo,
-  ScoreVarsShipInfo,
-} from "@staratlas/factory";
+import { getScoreVarsShipInfo, ScoreVarsShipInfo } from "@staratlas/factory";
 import { Connection, PublicKey } from "@solana/web3.js";
-import { GENESYSGO, SOLANRPC } from "@/typescipt/const/solana";
-import { SCORE_PROGRAM, TRADE_PROGRAM } from "@/typescipt/const/staratlas";
-import { TOKEN_ATLAS, TOKEN_USDC } from "@/typescipt/const/tokens";
+import { GENESYSGO } from "@/typescipt/const/solana";
+import { SCORE_PROGRAM } from "@/typescipt/const/staratlas";
 
 export interface ResourcePrices {
   food_price: number;
@@ -36,39 +31,35 @@ export const staratlas_scoreClientStore = defineStore({
       ship_cost_atlas: number,
       prices_resources: ResourcePrices
     ): Promise<number> {
-      /*const score_vars = await this.getScoreVarsShipInfo(ship_address);
+      if (ship_cost_atlas < 0) return 0;
 
-      const cost_ammoPerDay =
-        (score_vars.millisecondsToBurnOneArms / 1000 / 60 / 60) *
-        prices_resources.tool_price;
-      const cost_fuelPerDay =
-        (score_vars.millisecondsToBurnOneFuel / 1000 / 60 / 60) *
-        prices_resources.tool_price;
-      const cost_toolsPerDay =
-        (score_vars.millisecondsToBurnOneToolkit / 1000 / 60 / 60) *
-        prices_resources.tool_price;
-      const cost_foodPerDay =
-        (score_vars.millisecondsToBurnOneFood / 1000 / 60 / 60) *
-        prices_resources.food_price;
+      const score_vars = await this.getScoreVarsShipInfo(ship_address);
 
-      console.log("COST FOOD");
-      console.log(score_vars.millisecondsToBurnOneFood);
-      console.log(cost_foodPerDay);
-      console.log("COST TOOL");
-      console.log(score_vars.millisecondsToBurnOneToolkit);
-      console.log(cost_toolsPerDay);
+      const rewards_per_s: number = parseFloat(
+        score_vars.rewardRatePerSecond.toString()
+      );
+      const rewards_day = rewards_per_s * Math.pow(10, -8) * 60 * 60 * 24;
 
-      const cost_sumResourcesDay =
-        cost_ammoPerDay + cost_fuelPerDay + cost_toolsPerDay + cost_foodPerDay;
+      const used_ammo_day =
+        1 / (score_vars.millisecondsToBurnOneArms / 1000 / 60 / 60 / 24);
+      const used_fuel_day =
+        1 / (score_vars.millisecondsToBurnOneFuel / 1000 / 60 / 60 / 24);
+      const used_tool_day =
+        1 / (score_vars.millisecondsToBurnOneToolkit / 1000 / 60 / 60 / 24);
+      const used_food_day =
+        1 / (score_vars.millisecondsToBurnOneFood / 1000 / 60 / 60 / 24);
 
-      console.log("COST daly");
-      console.log(cost_sumResourcesDay);
-      console.log(score_vars.rewardRatePerSecond * 60 * 60 * 24);
+      const maintained_cost_in_atlas =
+        used_ammo_day * prices_resources.ammo_price +
+        used_fuel_day * prices_resources.fuel_price +
+        used_tool_day * prices_resources.tool_price +
+        used_food_day * prices_resources.food_price;
 
-      const rewards_day =
-        score_vars.rewardRatePerSecond * 60 * 60 * 24 * Math.pow(10, -8);
-*/
-      return 0;
+      const atlas_rewards_day = rewards_day - maintained_cost_in_atlas;
+
+      console.log(ship_cost_atlas);
+      //APR
+      return (atlas_rewards_day / ship_cost_atlas) * 365 * 100;
     },
   },
 });

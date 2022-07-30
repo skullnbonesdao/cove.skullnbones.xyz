@@ -34,8 +34,8 @@
           <th :colspan="rows[0]?.vwap !== 0 ? 2 : 1" class="">Asset</th>
           <th :colspan="rows[0]?.vwap !== 0 ? 4 : 2" class="marketAsk">ASK</th>
           <th :colspan="rows[0]?.vwap !== 0 ? 4 : 2" class="marketBid">BID</th>
+          <th v-if="rows[0]?.vwap ?? 0" colspan="2" class="marketAPR">APR</th>
           <th colspan="1" class=""></th>
-          <th v-if="rows[0]?.vwap ?? 0" colspan="1" class=""></th>
         </tr>
         <tr>
           <VTh sortKey="symbol">#</VTh>
@@ -69,7 +69,12 @@
             sortKey="price_bid_atlas_discount"
             >ATLAS%</VTh
           >
-          <VTh v-if="rows[0]?.vwap ?? 0" sortKey="vwap">APR_DEV</VTh>
+          <VTh v-if="rows[0]?.vwap ?? 0" class="marketAPR" sortKey="apr_usdc"
+            >USDC</VTh
+          >
+          <VTh v-if="rows[0]?.vwap ?? 0" class="marketAPR" sortKey="apr_atlas"
+            >ATLAS</VTh
+          >
           <th></th>
         </tr>
       </template>
@@ -155,7 +160,12 @@
               :price="row.price_bid_atlas"
             ></price-element>
           </td>
-          <td v-if="rows[0]?.vwap ?? 0">{{ row.apr_atlas.toFixed(2) }}</td>
+          <td v-if="rows[0]?.vwap ?? 0" class="marketAPR">
+            {{ row.apr_usdc.toFixed(2) }}%
+          </td>
+          <td v-if="rows[0]?.vwap ?? 0" class="marketAPR">
+            {{ row.apr_atlas.toFixed(2) }}%
+          </td>
           <td>
             <div class="tooltip" data-tip="Market">
               <a
@@ -306,22 +316,32 @@ async function load_data() {
       );
   });
 
-  const resource_prices: ResourcePrices = {
-    ammo_price: staratlas_gmClient.orders.filter(
-      (order) => order.orderMint === TOKEN_AMMO.toString()
-    )[0].price,
-    food_price: staratlas_gmClient.orders.filter(
-      (order) => order.orderMint === TOKEN_FOOD.toString()
-    )[0].price,
-    fuel_price: staratlas_gmClient.orders.filter(
-      (order) => order.orderMint === TOKEN_FUEL.toString()
-    )[0].price,
-    tool_price: staratlas_gmClient.orders.filter(
-      (order) => order.orderMint === TOKEN_TOOL.toString()
-    )[0].price,
+  let resource_prices: ResourcePrices = {
+    ammo_price: 0,
+    food_price: 0,
+    fuel_price: 0,
+    tool_price: 0,
   };
 
-  /*// Get APRs
+  staratlas_gmClient.filter_orders(TOKEN_AMMO.toString());
+  resource_prices.ammo_price =
+    staratlas_gmClient.top_market_orders.at(-1)?.price_atlas_sell ?? 0;
+
+  staratlas_gmClient.filter_orders(TOKEN_FOOD.toString());
+  resource_prices.food_price =
+    staratlas_gmClient.top_market_orders.at(-1)?.price_atlas_sell ?? 0;
+
+  staratlas_gmClient.filter_orders(TOKEN_FUEL.toString());
+  resource_prices.fuel_price =
+    staratlas_gmClient.top_market_orders.at(-1)?.price_atlas_sell ?? 0;
+
+  staratlas_gmClient.filter_orders(TOKEN_TOOL.toString());
+  resource_prices.tool_price =
+    staratlas_gmClient.top_market_orders.at(-1)?.price_atlas_sell ?? 0;
+
+  console.log(resource_prices);
+
+  // Get APRs
   if (props.sa_asset_type === "ship") {
     for (const element of table_data.value) {
       const index = table_data.value.indexOf(element);
@@ -330,11 +350,18 @@ async function load_data() {
       table_data.value[index].apr_atlas =
         await staratlas_scoreClient.getAprForShipAtlas(
           element.mint,
-          element.vwap * parseFloat(token_ws.m_atlas),
+          element.price_ask_atlas,
+          resource_prices
+        );
+
+      table_data.value[index].apr_usdc =
+        await staratlas_scoreClient.getAprForShipAtlas(
+          element.mint,
+          element.price_ask_usdc / parseFloat(token_ws.m_atlas),
           resource_prices
         );
     }
-  }*/
+  }
 }
 
 function load_modal(asset_address_new: string) {

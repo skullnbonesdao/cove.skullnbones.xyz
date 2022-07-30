@@ -9,11 +9,17 @@
     .marketAsk {
         background-color: theme('colors.green.200');
     }
+    .marketAPR {
+        background-color: theme('colors.blue.200');
+    }
     [data-theme="dark"] .marketBid {
         background-color: theme('colors.red.900');
     }
     [data-theme="dark"] .marketAsk {
         background-color: theme('colors.green.900');
+    }
+    [data-theme="dark"] .marketAPR {
+        background-color: theme('colors.blue.900');
     }
 
 
