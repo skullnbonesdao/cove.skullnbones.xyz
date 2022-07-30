@@ -22,7 +22,7 @@ const walletOptions = {
     new SlopeWalletAdapter(),
     new SolflareWalletAdapter(),
   ],
-  autoConnect: true,
+  autoConnect: false,
 };
 
 const app = createApp(App);
