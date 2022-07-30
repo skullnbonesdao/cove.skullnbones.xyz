@@ -25,6 +25,7 @@
                 }}h
               </div>
             </div>
+            {{ score_vars_ship_info.millisecondsToBurnOneFood }}
           </div>
           <div class="border p-2 rounded-xl">
             <h4>Arms</h4>
@@ -46,6 +47,7 @@
                 }}h
               </div>
             </div>
+            {{ score_vars_ship_info.millisecondsToBurnOneArms }}
           </div>
           <div class="border p-2 rounded-xl">
             <h4>Fuel</h4>
@@ -67,6 +69,7 @@
                 }}h
               </div>
             </div>
+            {{ score_vars_ship_info.millisecondsToBurnOneFuel }}
           </div>
           <div class="border p-2 rounded-xl">
             <h4>Tool</h4>
@@ -88,6 +91,7 @@
                 }}h
               </div>
             </div>
+            {{ score_vars_ship_info.millisecondsToBurnOneToolkit }}
           </div>
         </div>
       </div>
@@ -114,6 +118,7 @@
                 <sup>1</sup>/<sub>{{ obj_ranges.name[index] }}</sub>
               </div>
             </div>
+            {{ score_vars_ship_info.rewardRatePerSecond }}
           </div>
         </div>
       </div>

@@ -9,8 +9,8 @@
     <div class="item text-right w-24">
       <strong> {{ vwap.toFixed(2) }}</strong>
     </div>
-    <div class="item divider divider-horizontal"></div>
-    <div class="item text-center">VWAP</div>
+    <div v-if="show_vwap_text" class="item divider divider-horizontal"></div>
+    <div v-if="show_vwap_text" class="item text-center">VWAP</div>
   </div>
 </template>
 
@@ -28,6 +28,10 @@ defineProps({
   vwap: {
     type: Number,
     default: 0,
+  },
+  show_vwap_text: {
+    type: Boolean,
+    default: true,
   },
 });
 </script>

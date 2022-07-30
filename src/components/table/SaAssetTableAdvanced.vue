@@ -91,7 +91,10 @@
             <strong>{{ row.name }}</strong>
           </td>
           <td v-if="rows[0]?.vwap ?? 0">
-            <vwap-element :vwap="row.vwap"></vwap-element>
+            <vwap-element
+              :vwap="row.vwap"
+              :show_vwap_text="false"
+            ></vwap-element>
           </td>
           <td class="marketAsk">
             <price-element

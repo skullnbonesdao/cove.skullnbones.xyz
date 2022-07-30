@@ -1,9 +1,11 @@
 <template>
-  <img
-    class="invertible"
-    alt="usdc_icon"
-    src="@/components/icons/ICON_USDC.webp"
-  />
+  <div class="object-scale-down">
+    <img
+      class="invertible"
+      alt="usdc_icon"
+      src="@/components/icons/ICON_USDC.webp"
+    />
+  </div>
 </template>
 
 <script lang="ts">

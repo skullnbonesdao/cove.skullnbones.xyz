@@ -5,28 +5,32 @@
   >
     <beat-loader :color="'#ffa500'"></beat-loader>
   </div>
-  <div v-else class="flex flex-row rounded-lg space-x-2 p-2 h-10">
-    <atlas-icon v-if="currency === 'atlas'" class="item"></atlas-icon>
-    <usdc-icon v-else class="item"> </usdc-icon>
+  <div v-else class="flex flex-row rounded-lg space-x-1">
+    <div class="item w-3">
+      <atlas-icon v-if="currency === 'atlas'" class="item"></atlas-icon>
+      <usdc-icon v-else class="item"> </usdc-icon>
+    </div>
     <div class="item divider divider-horizontal"></div>
     <div class="item">
       <percentage-element
-        class="item w-16"
+        class="item"
         v-if="show_percentage && currency === 'atlas'"
         :no_market="price === -1 || !vwap"
         :is_price="price * tokenWS.m_atlas"
         :price_vwap="vwap"
       ></percentage-element>
       <percentage-element
-        class="item w-16"
+        class="item"
         v-else-if="show_percentage && currency === 'usdc'"
         :no_market="price === -1 || !vwap"
         :is_price="price"
         :price_vwap="vwap"
       ></percentage-element>
-      <div v-else>{{ price === -1 ? "-" : price.toFixed(2) }}</div>
+      <div v-else class="item text-right">
+        {{ price === -1 ? "-" : price.toFixed(2) }}
+      </div>
     </div>
-    <div v-if="text.length" class="item">{{ text }}</div>
+    <div v-if="text.length" class="item text-right">{{ text }}</div>
   </div>
 </template>
 
