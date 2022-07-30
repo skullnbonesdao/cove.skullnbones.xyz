@@ -105,7 +105,7 @@
               v-for="(value, index) in obj_ranges.value"
               :key="index"
             >
-              <atlas-icon class=""></atlas-icon>
+              <atlas-icon class="w-6"></atlas-icon>
 
               <div class="grow text-right">
                 {{

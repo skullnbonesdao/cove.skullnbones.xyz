@@ -16,7 +16,7 @@
         v-for="(image, id) in assets?.media.gallery"
         :key="image"
       >
-        <img alt="sa_image" :src="image" class="object-cover" />
+        <img alt="sa_image" :src="image" class="object-scale-down" />
       </div>
     </div>
   </div>

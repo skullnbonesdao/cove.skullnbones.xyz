@@ -8,7 +8,7 @@
           <div>
             <div class="flex flex-row h-6 space-x-2">
               <h3>USDC</h3>
-              <usdc-icon></usdc-icon>
+              <usdc-icon class="w-6"></usdc-icon>
             </div>
             <div v-if="market_orders_buy_usdc.length">
               <MarketOrders
@@ -23,7 +23,7 @@
           <div>
             <div class="flex flex-row h-6 space-x-2">
               <h3>ATLAS</h3>
-              <atlas-icon></atlas-icon>
+              <atlas-icon class="w-6"></atlas-icon>
             </div>
             <div v-if="market_orders_buy_atlas.length">
               <MarketOrders
@@ -43,7 +43,7 @@
           <div class="basis-1/2">
             <div class="flex flex-row h-6 space-x-2">
               <h3>USDC</h3>
-              <usdc-icon></usdc-icon>
+              <usdc-icon class="w-6"></usdc-icon>
             </div>
             <div v-if="market_orders_sell_usdc.length">
               <MarketOrders
@@ -58,7 +58,7 @@
           <div class="basis-1/2">
             <div class="flex flex-row h-6 space-x-2">
               <h3>ATLAS</h3>
-              <atlas-icon></atlas-icon>
+              <atlas-icon class="w-6"></atlas-icon>
             </div>
             <div v-if="market_orders_sell_atlas.length">
               <MarketOrders
