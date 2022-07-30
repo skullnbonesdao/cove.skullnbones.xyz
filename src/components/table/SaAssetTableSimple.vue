@@ -10,10 +10,21 @@
     </market-details-modal>
   </div>
 
-  <div class="overflow-x-auto">
+  <div class="overflow-x-auto bg-base-100">
+    <div class="flex w-full justify-end">
+      <div class="flex p-1 form-control w-full max-w-xs">
+        <input
+          v-model="filters.name.value"
+          type="text"
+          placeholder="Type here"
+          class="input input-bordered w-full max-w-xs"
+        />
+      </div>
+    </div>
     <VTable
       class="table w-full"
       :data="table_data"
+      :filters="filters"
       sortHeaderClass="flex items-center justify-between w-full"
     >
       <!-- head -->
@@ -146,6 +157,10 @@ const staratlas_store = staratlasStore();
 const staratlas_gmClient = staratlas_gmClientStore();
 const staratlas_scoreClient = staratlas_scoreClientStore();
 const token_ws = tokenPricesWebsocket();
+
+const filters = ref({
+  name: { value: "", keys: ["name"] },
+});
 
 onMounted(async () => {
   await load_data();
