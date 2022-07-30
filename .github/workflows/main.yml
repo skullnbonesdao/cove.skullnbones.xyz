@@ -12,3 +12,4 @@ jobs:
           username: 'skullnbonesdao'
           reponame: 'cave2.skullnbones.xyz'
           token: ${{ secrets.GITHUB_TOKEN }}
+          cname: 'cave.skullnbones.xyz'
