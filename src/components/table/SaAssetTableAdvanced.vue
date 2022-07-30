@@ -207,16 +207,16 @@ const props = defineProps({
   sa_asset_type: { type: String, default: "ship" },
 });
 
+const show_modal = ref(false);
+const asset_selected = ref();
+const asset_address = ref("1111111");
+const table_data = ref([] as MarketTableElements[]);
+
 const staratlas_store = staratlasStore();
 const staratlas_gmClient = staratlas_gmClientStore();
 const staratlas_scoreClient = staratlas_scoreClientStore();
 const token_ws = tokenPricesWebsocket();
 
-const show_modal = ref(false);
-const asset_selected = ref();
-const asset_address = ref("1111111");
-
-const table_data = ref([] as MarketTableElements[]);
 const filters = ref({
   name: { value: "", keys: ["name"] },
 });
@@ -320,9 +320,8 @@ async function load_data() {
       (order) => order.orderMint === TOKEN_TOOL.toString()
     )[0].price,
   };
-  console.log(resource_prices);
 
-  // Get APRs
+  /*// Get APRs
   if (props.sa_asset_type === "ship") {
     for (const element of table_data.value) {
       const index = table_data.value.indexOf(element);
@@ -335,7 +334,7 @@ async function load_data() {
           resource_prices
         );
     }
-  }
+  }*/
 }
 
 function load_modal(asset_address_new: string) {
