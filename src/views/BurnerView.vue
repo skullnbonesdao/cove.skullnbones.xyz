@@ -7,21 +7,12 @@
     >
     </burner-info-modal>
   </div>
-  <div class="about">
-    <div class="flex flex-col w-full border-opacity-50 p-4">
-      <div
-        class="grid px-16 card bg-base-300 rounded-box place-items-center space-y-2"
-      >
-        <h1>The Plank</h1>
-      </div>
-    </div>
-  </div>
   <FireElement style="opacity: 0.2"></FireElement>
   <div class="flex flex-col w-full mt-3">
     <div
       class="justify-center mx-12 p-3 card bg-base-300 rounded-box place-items-center"
     >
-      <p class="text-4xl">The Plank</p>
+      <h1>The Plank</h1>
 
       <div class="alert-warning shadow-lg text-center rounded-md px-2">
         <p>🔥 You are about to burn your NFTs 🔥</p>
@@ -40,8 +31,8 @@
         </p>
         <p class="text-lg">💰 Your NFT-SOL-Rent will be recovered 💰</p>
       </div>
-      <div v-if="!publicKey" class="flex flex-col items-center pt-10 space-y-2">
-        <p class="text-xl">You are not connected!</p>
+      <div class="flex flex-col items-center pt-10 space-y-2">
+        <p v-if="!publicKey" class="text-xl">You are not connected!</p>
         <wallet-multi-button dark></wallet-multi-button>
       </div>
       <div class="flex justify-center p-9">
