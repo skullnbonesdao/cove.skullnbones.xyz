@@ -1,4 +1,12 @@
 <template>
+  <div>
+    <burner-info-modal
+      v-model="show_modal"
+      @close="show_modal = false"
+      @click-outside="show_modal = false"
+    >
+    </burner-info-modal>
+  </div>
   <div class="about">
     <div class="flex flex-col w-full border-opacity-50 p-4">
       <div
@@ -76,6 +84,9 @@ import {
   TOAST_SUCCESS,
 } from "@/typescipt/toast-config/toasts";
 import { status_message_enum } from "@/typescipt/interfaces/StatusMessage";
+import BurnerInfoModal from "@/components/modals/BurnerInfoModal.vue";
+
+const show_modal = ref(true);
 
 const { publicKey } = useWallet();
 const solana_burner = solana_burnerStore();
