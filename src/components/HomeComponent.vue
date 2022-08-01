@@ -11,7 +11,7 @@
         </p>
         <div class="flex flex-col space-y-2">
           <a
-            class="btn btn-primary"
+            class="btn btn-primary m-3"
             target="_blank"
             rel="noopener noreferrer"
             href="https://skullnbones.xyz/"
@@ -19,7 +19,7 @@
             Skull&Bones
           </a>
           <a
-            class="btn btn-primary"
+            class="btn btn-primary m-3"
             target="_blank"
             rel="noopener noreferrer"
             href="https://staratlas.com/"
