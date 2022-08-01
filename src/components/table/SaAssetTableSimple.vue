@@ -159,7 +159,7 @@ const staratlas_scoreClient = staratlas_scoreClientStore();
 const token_ws = tokenPricesWebsocket();
 
 const filters = ref({
-  name: { value: "", keys: ["name"] },
+  name: { value: "", keys: ["name", "symbol"] },
 });
 
 onMounted(async () => {
