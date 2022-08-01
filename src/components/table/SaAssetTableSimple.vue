@@ -229,7 +229,7 @@ async function load_data() {
       );
     table_data.value[index].price_ask_atlas_discount =
       calculatesPercentageVWAPvsMarket(
-        table_data.value[index].vwap,
+        table_data.value[index].vwap / parseFloat(token_ws.m_atlas),
         table_data.value[index].price_ask_atlas,
         table_data.value[index].price_ask_atlas == -1
       );
@@ -241,7 +241,7 @@ async function load_data() {
       );
     table_data.value[index].price_bid_atlas_discount =
       calculatesPercentageVWAPvsMarket(
-        table_data.value[index].vwap,
+        table_data.value[index].vwap / parseFloat(token_ws.m_atlas),
         table_data.value[index].price_bid_atlas,
         table_data.value[index].price_ask_atlas == -1
       );
