@@ -1,11 +1,11 @@
 <template>
   <div
     class="hero min-h-screen"
-    v-bind:style="{ backgroundImage: 'url(SBtankship.jpg)' }"
+    v-bind:style="{ backgroundImage: 'url(cave_pirate.jpg)' }"
   >
     <div class="hero-content text-center text-neutral-content">
-      <div class="space-y-10">
-        <h1 class="mb-5 text-5xl text-black">SKULL & BONES</h1>
+      <div class="space-y-10 bg-transparent/60 p-20 card">
+        <h1 class="mb-5 text-5xl">SKULL & BONES</h1>
         <p class="mb-5">
           Skull & Bones is Star Atlas’ 1st and largest piracy DAC
         </p>

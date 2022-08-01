@@ -20,8 +20,8 @@ for i in "${!IMAGES[@]}"; do
  echo "> Downloading: ${IMAGES[$i]}"
  curl "${IMAGES[$i]}" -o "$output_dir/jpg/${IMAGES_NAME[$i]}".jpg
  echo "> Converting: $output_dir/jpg/${IMAGES_NAME[$i]}.jpg to .webp"
- convert "$output_dir/jpg/${IMAGES_NAME[$i]}".jpg -resize 200 -quality 10 "$output_dir/jpg/low/${IMAGES_NAME[$i]}".jpg
- convert "$output_dir/jpg/${IMAGES_NAME[$i]}".jpg -quality 10 "$output_dir/jpg/${IMAGES_NAME[$i]}".jpg
+ convert "$output_dir/jpg/${IMAGES_NAME[$i]}".jpg -resize 100 -quality 5 "$output_dir/jpg/low/${IMAGES_NAME[$i]}".jpg
+ convert "$output_dir/jpg/${IMAGES_NAME[$i]}".jpg -quality 5 "$output_dir/jpg/${IMAGES_NAME[$i]}".jpg
  convert "$output_dir/jpg/${IMAGES_NAME[$i]}".jpg "$output_dir/webp/${IMAGES_NAME[$i]}".webp
 done
 
