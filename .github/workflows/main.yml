@@ -10,6 +10,6 @@ jobs:
         uses: xRealNeon/VuePagesAction@1.0.1
         with:
           username: 'skullnbonesdao'
-          reponame: 'cave2.skullnbones.xyz'
+          reponame: 'cove.skullnbones.xyz'
           token: ${{ secrets.GITHUB_TOKEN }}
           cname: 'cove.skullnbones.xyz'
