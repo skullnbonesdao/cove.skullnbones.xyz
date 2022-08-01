@@ -1,11 +1,11 @@
 <template>
   <div
     class="hero min-h-screen"
-    v-bind:style="{ backgroundImage: 'url(pirate-ship-large.jpg)' }"
+    v-bind:style="{ backgroundImage: 'url(SBtankship.jpg)' }"
   >
     <div class="hero-content text-center text-neutral-content">
       <div class="space-y-10">
-        <h1 class="mb-5 text-5xl font-bold">SKULL & BONES</h1>
+        <h1 class="mb-5 text-5xl text-black">SKULL & BONES</h1>
         <p class="mb-5">
           Skull & Bones is Star Atlas’ 1st and largest piracy DAC
         </p>
@@ -43,4 +43,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+h1 {
+  font-family: font-mono, Times, serif;
+}
+</style>
