@@ -163,10 +163,10 @@
             ></price-element>
           </td>
           <td v-if="rows[0]?.vwap ?? 0" class="marketAPR">
-            {{ row.apr_usdc.toFixed(2) }}%
+            <apr-element :apr_value="row.apr_usdc"></apr-element>
           </td>
           <td v-if="rows[0]?.vwap ?? 0" class="marketAPR">
-            {{ row.apr_atlas.toFixed(2) }}%
+            <apr-element :apr_value="row.apr_atlas"></apr-element>
           </td>
           <td>
             <div class="tooltip" data-tip="Market">
@@ -204,16 +204,17 @@ import ShipTableNameComponent from "@/components/table/components/ShipTableNameC
 import MarketDetailsModal from "@/components/modals/MarketDetailsModal.vue";
 import { calculatesPercentageVWAPvsMarket } from "@/typescipt/helper/calculate_market";
 import { staratlas_scoreClientStore } from "@/store/staratlas_scoreClient";
+import BeatLoader from "vue-spinner/src/BeatLoader.vue";
 import VwapElement from "@/components/table/components/VWAPElement.vue";
 import { ResourcePrices } from "@/store/staratlas_scoreClient";
 import {
-  AMMO_TOOL,
   TOKEN_AMMO,
   TOKEN_FOOD,
   TOKEN_FUEL,
   TOKEN_TOOL,
 } from "@/typescipt/const/staratlas";
 import { tokenPricesWebsocket } from "@/store/token_price_websocket";
+import AprElement from "@/components/table/components/AprElement.vue";
 
 const props = defineProps({
   sa_asset_type: { type: String, default: "ship" },
@@ -263,8 +264,8 @@ async function load_data() {
       price_ask_atlas_discount: 0,
       price_bid_usdc_discount: 0,
       price_bid_atlas_discount: 0,
-      apr_usdc: 0,
-      apr_atlas: 0,
+      apr_usdc: -1,
+      apr_atlas: -1,
     });
   });
 

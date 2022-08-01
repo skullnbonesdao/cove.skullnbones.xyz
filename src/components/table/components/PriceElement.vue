@@ -6,7 +6,7 @@
     <beat-loader :color="'#ffa500'"></beat-loader>
   </div>
   <div v-else class="flex flex-row rounded-lg space-x-1">
-    <div class="item w-3">
+    <div class="item w-4">
       <atlas-icon v-if="currency === 'atlas'" class="item"></atlas-icon>
       <usdc-icon v-else class="item"> </usdc-icon>
     </div>
@@ -26,9 +26,9 @@
         :is_price="price"
         :price_vwap="vwap"
       ></percentage-element>
-      <div v-else class="item text-right">
-        {{ price === -1 ? "-" : price.toFixed(2) }}
-      </div>
+      <strong v-else class="item">
+        {{ price === -1 ? "-" : format_number(price) }}
+      </strong>
     </div>
     <div v-if="text.length" class="item text-right">{{ text }}</div>
   </div>
@@ -72,6 +72,13 @@ defineProps({
     default: false,
   },
 });
+
+function format_number(number: number): string {
+  if (number >= 1000) {
+    const num_parts = number.toFixed(2).split(".");
+    return (num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+  } else return number.toFixed(2);
+}
 </script>
 
 <style scoped></style>
