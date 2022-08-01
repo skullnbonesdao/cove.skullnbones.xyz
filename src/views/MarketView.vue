@@ -26,7 +26,7 @@
 
     <div class="divider"></div>
 
-    <div class="bg-base-300 rounded-box place-items-center p-1">
+    <div class="bg-base-300 rounded-xl place-items-center p-1">
       <div class="flex flex-row justify-end p-3">
         <div class="tooltip" data-tip="table-mode">
           <input
