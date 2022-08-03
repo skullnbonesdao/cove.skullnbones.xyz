@@ -42,6 +42,7 @@ import AtlasIcon from "@/components/icons/ATLASIcon.vue";
 defineProps({
   market_orders: {
     type: [] as PropType<Order[]>,
+    default: [],
   },
   market_token: {
     type: String,

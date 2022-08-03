@@ -9,6 +9,7 @@ const pinia = createPinia();
 import vfmPlugin from "vue-final-modal";
 import SmartTable from "vuejs-smart-table";
 import SolanaWallets from "solana-wallets-vue";
+import VueApexCharts from "vue3-apexcharts";
 
 import {
   PhantomWalletAdapter,
@@ -31,6 +32,7 @@ app
   .use(pinia)
   .use(router)
   .use(SmartTable)
+  .use(VueApexCharts)
   .use(vfmPlugin)
   .use(SolanaWallets, walletOptions)
   .mount("#app");

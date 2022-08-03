@@ -1,6 +1,11 @@
 <template>
   <div class="bg-base-100 p-4 rounded-xl">
     <h1 class="p-2">Market</h1>
+    <!--    <OrderDepthChart
+      :order_buys="market_orders_buy_usdc"
+      :order_sells="market_orders_sell_usdc"
+    ></OrderDepthChart>
+   -->
     <div class="flex flex-col space-y-3">
       <div class="bg-base-200 shadow-inner rounded-xl p-4">
         <h2 class="pb-3">BUY Orders</h2>
@@ -95,6 +100,7 @@ import MarketOrders from "@/components/table/components/MarketOrders.vue";
 import UsdcIcon from "@/components/icons/USDCIcon.vue";
 import AtlasIcon from "@/components/icons/ATLASIcon.vue";
 import { staratlas_gmClientStore } from "@/store/staratlas_gmClient";
+import OrderDepthChart from "@/components/charts/OrderDepthChart.vue";
 
 const props = defineProps({
   mint_address: {
@@ -111,8 +117,8 @@ let market_orders_sell_usdc = ref([] as Order[]);
 let market_orders_sell_atlas = ref([] as Order[]);
 
 async function load_order_data() {
-  const market_orders: Order[] = await staratlas_gmClient.getOpenOrdersForAsset(
-    props.mint_address
+  const market_orders: Order[] = staratlas_gmClient.orders.filter(
+    (order) => order.orderMint === props.mint_address
   );
 
   const market_orders_buy = market_orders.filter((orders) =>
