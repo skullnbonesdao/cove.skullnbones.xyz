@@ -90,6 +90,7 @@ import { staratlas_gmClientStore } from "@/store/staratlas_gmClient";
 
 const staratlas_store = staratlasStore();
 const tokenWS = tokenPricesWebsocket();
+
 tokenWS.initMarkets();
 
 const tab_entries = ref();

@@ -28,8 +28,8 @@ const walletOptions = {
 const app = createApp(App);
 
 app
-  .use(router)
   .use(pinia)
+  .use(router)
   .use(SmartTable)
   .use(vfmPlugin)
   .use(SolanaWallets, walletOptions)

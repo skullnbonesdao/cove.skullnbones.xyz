@@ -17,7 +17,6 @@ export const staratlas_gmClientStore = defineStore({
   id: "staratlas_gmClient",
 
   state: () => ({
-    client: {} as GmClientService,
     connection: {} as Connection,
     orders: [] as Order[],
     top_market_orders: [] as TopMarketOrders[],
@@ -25,19 +24,21 @@ export const staratlas_gmClientStore = defineStore({
 
   actions: {
     async fetchOrders() {
-      const client = new GmClientService();
-      this.orders = await client.getAllOpenOrders(
-        new Connection(GENESYSGO),
-        TRADE_PROGRAM
-      );
       console.info("{getOrders} called!");
+      const client = new GmClientService();
+      await client
+        .getAllOpenOrders(new Connection(SOLANRPC), TRADE_PROGRAM)
+        .then((response) => {
+          this.orders = response;
+        })
+        .catch((err) => console.log("{getOrders}: " + err));
     },
 
     async getOpenOrdersForAsset(nft_mint: string): Promise<Order[]> {
       console.info("{calling} getOpenOrdersForAsset");
       const client = new GmClientService();
       return await client.getOpenOrdersForAsset(
-        new Connection(GENESYSGO),
+        new Connection(SOLANRPC),
         new PublicKey(nft_mint),
         TRADE_PROGRAM
       );
