@@ -30,10 +30,10 @@ export default {
 
 <script setup lang="ts">
 import { ref, defineProps, onMounted, watch } from "vue";
-import { staratlasStore } from "@/store/staratlas_store";
+import { use_staratlasStore } from "@/store/staratlas_store";
 import { StarAtlasNFT } from "@/typescipt/interfaces/StarAtlasNFT";
 
-const staratlas_data = staratlasStore();
+const staratlas_data = use_staratlasStore();
 const props = defineProps({
   mint_address: {
     type: String,

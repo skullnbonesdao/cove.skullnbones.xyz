@@ -130,7 +130,7 @@ import { TOKEN_ATLAS, TOKEN_USDC } from "@/typescipt/const/tokens";
 import VwapElement from "@/components/table/components/VWAPElement.vue";
 import SortableElement from "@/components/table/components/SortableElement.vue";
 import { MarketTableElements } from "@/typescipt/interfaces/MarkeTableElements";
-import { staratlasStore } from "@/store/staratlas_store";
+import { use_staratlasStore } from "@/store/staratlas_store";
 import { calculatesPercentageVWAPvsMarket } from "@/typescipt/helper/calculate_market";
 import {
   ResourcePrices,
@@ -153,7 +153,7 @@ const asset_selected = ref();
 const asset_address = ref("1111111");
 const table_data = ref([] as MarketTableElements[]);
 
-const staratlas_store = staratlasStore();
+const staratlas_store = use_staratlasStore();
 const staratlas_gmClient = staratlas_gmClientStore();
 const staratlas_scoreClient = staratlas_scoreClientStore();
 const token_ws = tokenPricesWebsocket();

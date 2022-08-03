@@ -197,7 +197,7 @@ export default {
 
 <script setup lang="ts">
 import { defineProps, onMounted, ref, PropType, watch, watchEffect } from "vue";
-import { staratlasStore } from "@/store/staratlas_store";
+import { use_staratlasStore } from "@/store/staratlas_store";
 import { StarAtlasNFT } from "@/typescipt/interfaces/StarAtlasNFT";
 import ImagesTab from "@/components/tabs/ImagesTab.vue";
 import MarketTab from "@/components/tabs/MarketTab.vue";

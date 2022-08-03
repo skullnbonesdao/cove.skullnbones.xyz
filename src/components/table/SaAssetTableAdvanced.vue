@@ -195,7 +195,7 @@ export default {
 
 <script setup lang="ts">
 import { onMounted, ref, defineProps, watch } from "vue";
-import { staratlasStore } from "@/store/staratlas_store";
+import { use_staratlasStore } from "@/store/staratlas_store";
 import { MarketTableElements } from "@/typescipt/interfaces/MarkeTableElements";
 import { staratlas_gmClientStore } from "@/store/staratlas_gmClient";
 import ShipTableImageComponent from "@/components/table/components/ShipTableImageComponent.vue";
@@ -225,7 +225,7 @@ const asset_selected = ref();
 const asset_address = ref("1111111");
 const table_data = ref([] as MarketTableElements[]);
 
-const staratlas_store = staratlasStore();
+const staratlas_store = use_staratlasStore();
 const staratlas_gmClient = staratlas_gmClientStore();
 const staratlas_scoreClient = staratlas_scoreClientStore();
 const token_ws = tokenPricesWebsocket();

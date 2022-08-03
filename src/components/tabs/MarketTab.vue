@@ -86,7 +86,7 @@ export default {
 
 <script setup lang="ts">
 import { defineProps, watch, ref, onMounted } from "vue";
-import { staratlasStore } from "@/store/staratlas_store";
+import { use_staratlasStore } from "@/store/staratlas_store";
 import GridLoader from "vue-spinner/src/GridLoader.vue";
 
 import { Order } from "@staratlas/factory";

@@ -81,14 +81,14 @@ export default {
 import { ref, onMounted } from "vue";
 import { onlyUnique } from "@/typescipt/helper/sorting";
 import SaAssetTableSimple from "@/components/table/SaAssetTableSimple.vue";
-import { staratlasStore } from "@/store/staratlas_store";
+import { use_staratlasStore } from "@/store/staratlas_store";
 import { tokenPricesWebsocket } from "@/store/token_price_websocket";
 import GridLoader from "vue-spinner/src/GridLoader.vue";
 import PriceTicker from "@/components/special/PriceTicker.vue";
 import SaAssetTableAdvanced from "@/components/table/SaAssetTableAdvanced.vue";
 import { staratlas_gmClientStore } from "@/store/staratlas_gmClient";
 
-const staratlas_store = staratlasStore();
+const staratlas_store = use_staratlasStore();
 const tokenWS = tokenPricesWebsocket();
 
 tokenWS.initMarkets();
