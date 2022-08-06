@@ -1,9 +1,10 @@
 <template>
-  <div class="bg-white rounded-box">
-    <div class="m-2 badge badge-secondary">Alpha Feature</div>
+  <div class="">
+    <div class="m-2 badge badge-secondary">testing</div>
     <apexchart
       type="line"
-      height="350"
+      height="250"
+      class="invertible"
       :options="chartOptions"
       :series="series"
     ></apexchart>

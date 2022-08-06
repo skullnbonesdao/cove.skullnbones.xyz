@@ -1,13 +1,17 @@
 <template>
   <div class="bg-base-100 p-4 rounded-xl">
     <h1 class="p-2">Market</h1>
-    <trading-chart :mint_address="mint_address"></trading-chart>
+
     <!--    <OrderDepthChart
       :order_buys="market_orders_buy_usdc"
       :order_sells="market_orders_sell_usdc"
     ></OrderDepthChart>
    -->
     <div class="flex flex-col space-y-3">
+      <div class="bg-base-200 shadow-inner rounded-xl p-4">
+        <trading-chart :mint_address="mint_address"></trading-chart>
+      </div>
+
       <div class="bg-base-200 shadow-inner rounded-xl p-4">
         <h2 class="pb-3">BUY Orders</h2>
         <div class="grid sm:grid-cols-2 grid-cols-1 gap-2 place-content-center">

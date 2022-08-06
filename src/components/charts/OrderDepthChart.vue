@@ -1,12 +1,7 @@
 <template>
   <h1>ORDER DEPTH</h1>
   <div class="bg-black">
-    <apexchart
-      width="380"
-      type="donut"
-      :options="options"
-      :series="series"
-    ></apexchart>
+    <apexchart type="donut" :options="options" :series="series"></apexchart>
     {{ order_buys.map((order) => order.price) }}
   </div>
 </template>
