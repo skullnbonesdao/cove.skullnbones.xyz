@@ -1,6 +1,7 @@
 <template>
   <div class="bg-base-100 p-4 rounded-xl">
     <h1 class="p-2">Market</h1>
+    <trading-chart :mint_address="mint_address"></trading-chart>
     <!--    <OrderDepthChart
       :order_buys="market_orders_buy_usdc"
       :order_sells="market_orders_sell_usdc"
@@ -101,6 +102,7 @@ import UsdcIcon from "@/components/icons/USDCIcon.vue";
 import AtlasIcon from "@/components/icons/ATLASIcon.vue";
 import { staratlas_gmClientStore } from "@/store/staratlas_gmClient";
 import OrderDepthChart from "@/components/charts/OrderDepthChart.vue";
+import TradingChart from "@/components/charts/TradingChart.vue";
 
 const props = defineProps({
   mint_address: {
