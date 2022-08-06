@@ -1,5 +1,8 @@
 <template>
-  <div class="">
+  <div v-if="is_loading" class="flex justify-center">
+    <grid-loader :color="'#ffa500'"></grid-loader>
+  </div>
+  <div v-else>
     <div class="m-2 badge badge-secondary">testing</div>
     <apexchart
       type="line"
@@ -20,7 +23,7 @@ export default {
 <script setup lang="ts">
 import { defineProps, onMounted, PropType, ref, watch } from "vue";
 import { Trade } from "@/typescipt/interfaces/Trade";
-import { Order } from "@staratlas/factory";
+import GridLoader from "vue-spinner/src/GridLoader.vue";
 
 const props = defineProps({
   mint_address: {
@@ -28,7 +31,7 @@ const props = defineProps({
     default: undefined,
   },
 });
-
+const is_loading = ref(true);
 const trading_data_atlas = ref([]);
 const trading_data_usdc = ref([]);
 const series = ref([
@@ -131,13 +134,17 @@ async function load_table_data() {
 }
 
 onMounted(async () => {
+  is_loading.value = true;
   await load_table_data();
+  is_loading.value = false;
 });
 
 watch(
   () => props.mint_address,
   async (value) => {
+    is_loading.value = true;
     await load_table_data();
+    is_loading.value = false;
   }
 );
 </script>
