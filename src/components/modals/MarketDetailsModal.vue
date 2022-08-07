@@ -12,9 +12,9 @@
     </button>
 
     <div id="content relative">
-      <div v-if="asset" class="m-5">
+      <div v-if="asset" class="md:m-5">
         <div class="card bg-base-100 shadow-xl image-full space-y-1">
-          <figure>
+          <figure class="w-auto">
             <img :src="asset.image" alt="asset_image" />
           </figure>
           <div class="card-body">
@@ -61,116 +61,116 @@
             </div>
           </div>
         </div>
+        <div>
+          <div class="tabs pt-2">
+            <a
+              class="tab md:tab-lg tab-lifted"
+              :class="active_tab === 'info' ? 'tab-active' : ''"
+              @click="active_tab = 'info'"
+              >Info</a
+            >
+            <a
+              class="tab md:tab-lg tab-lifted"
+              :class="active_tab === 'market' ? 'tab-active' : ''"
+              @click="active_tab = 'market'"
+              >Market</a
+            >
+            <a
+              class="tab md:tab-lg tab-lifted"
+              :class="active_tab === 'score' ? 'tab-active' : ''"
+              @click="active_tab = 'score'"
+              >Score</a
+            >
 
-        <div class="tabs pt-2">
-          <a
-            class="tab md:tab-lg tab-lifted"
-            :class="active_tab === 'info' ? 'tab-active' : ''"
-            @click="active_tab = 'info'"
-            >Info</a
-          >
-          <a
-            class="tab md:tab-lg tab-lifted"
-            :class="active_tab === 'market' ? 'tab-active' : ''"
-            @click="active_tab = 'market'"
-            >Market</a
-          >
-          <a
-            class="tab md:tab-lg tab-lifted"
-            :class="active_tab === 'score' ? 'tab-active' : ''"
-            @click="active_tab = 'score'"
-            >Score</a
-          >
+            <a
+              class="tab md:tab-lg tab-lifted"
+              :class="active_tab === 'explorer' ? 'tab-active' : ''"
+              @click="active_tab = 'explorer'"
+              >Explorer</a
+            >
+            <a
+              class="tab md:tab-lg tab-lifted"
+              :class="active_tab === 'images' ? 'tab-active' : ''"
+              @click="active_tab = 'images'"
+              >Images</a
+            >
+          </div>
+          <div class="flex flex-col" v-if="active_tab === 'info'">
+            <div class="bg-base-100 p-4 rounded-tr-box">
+              <h1 class="p-2">Info</h1>
 
-          <a
-            class="tab md:tab-lg tab-lifted"
-            :class="active_tab === 'explorer' ? 'tab-active' : ''"
-            @click="active_tab = 'explorer'"
-            >Explorer</a
-          >
-          <a
-            class="tab md:tab-lg tab-lifted"
-            :class="active_tab === 'images' ? 'tab-active' : ''"
-            @click="active_tab = 'images'"
-            >Images</a
-          >
-        </div>
-
-        <div class="flex flex-col" v-if="active_tab === 'info'">
-          <div class="bg-base-100 p-4 rounded-tr-box">
-            <h1 class="p-2">Info</h1>
-
-            <h2 class="p-2">Attributes</h2>
-            <div class="grid md:grid-cols-4 gap-4">
-              <div
-                v-for="(attribute, key) in asset.attributes"
-                :key="attribute"
-                class="shadow-inner bg-base-200 rounded-md px-2 py-1"
-              >
-                <h4 class="capitalize">{{ key }}</h4>
-                <div class="capitalize">{{ attribute }}</div>
+              <h2 class="p-2">Attributes</h2>
+              <div class="grid md:grid-cols-4 gap-4">
+                <div
+                  v-for="(attribute, key) in asset.attributes"
+                  :key="attribute"
+                  class="shadow-inner bg-base-200 rounded-md px-2 py-1"
+                >
+                  <h4 class="capitalize">{{ key }}</h4>
+                  <div class="capitalize">{{ attribute }}</div>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="bg-base-100 p-4" v-if="asset.slots.crewSlots">
-            <h2 class="p-2">Crew Slots</h2>
-            <div class="grid md:grid-cols-4 gap-4">
-              <div
-                v-for="attribute in asset.slots.crewSlots"
-                :key="attribute"
-                class="shadow-inner bg-base-200 rounded-md px-2 py-1"
-              >
-                <h4 class="capitalize">{{ attribute.type }}</h4>
-                <div class="capitalize">
-                  {{ attribute.quantity }} {{ attribute.size }}
+            <div class="bg-base-100 p-4" v-if="asset.slots.crewSlots">
+              <h2 class="p-2">Crew Slots</h2>
+              <div class="grid md:grid-cols-4 gap-4">
+                <div
+                  v-for="attribute in asset.slots.crewSlots"
+                  :key="attribute"
+                  class="shadow-inner bg-base-200 rounded-md px-2 py-1"
+                >
+                  <h4 class="capitalize">{{ attribute.type }}</h4>
+                  <div class="capitalize">
+                    {{ attribute.quantity }} {{ attribute.size }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-base-100 p-4" v-if="asset.slots.componentSlots">
+              <h2 class="p-2">Component Slots</h2>
+              <div class="grid md:grid-cols-4 gap-4">
+                <div
+                  v-for="attribute in asset.slots.componentSlots"
+                  :key="attribute"
+                  class="shadow-inner bg-base-200 rounded-md px-2 py-1"
+                >
+                  <h4 class="capitalize">{{ attribute.type }}</h4>
+                  <div>{{ attribute.quantity }} {{ attribute.size }}</div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="bg-base-100 p-4 rounded-b-xl"
+              v-if="asset.slots.moduleSlots"
+            >
+              <h2 class="p-2">Module Slots</h2>
+              <div class="grid md:grid-cols-4 gap-4">
+                <div
+                  v-for="attribute in asset.slots.moduleSlots"
+                  :key="attribute"
+                  class="shadow-inner bg-base-200 rounded-md px-2 py-1"
+                >
+                  <h4 class="capitalize">{{ attribute.type }}</h4>
+                  <div>{{ attribute.quantity }} {{ attribute.size }}</div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="bg-base-100 p-4" v-if="asset.slots.componentSlots">
-            <h2 class="p-2">Component Slots</h2>
-            <div class="grid md:grid-cols-4 gap-4">
-              <div
-                v-for="attribute in asset.slots.componentSlots"
-                :key="attribute"
-                class="shadow-inner bg-base-200 rounded-md px-2 py-1"
-              >
-                <h4 class="capitalize">{{ attribute.type }}</h4>
-                <div>{{ attribute.quantity }} {{ attribute.size }}</div>
-              </div>
-            </div>
+          <div v-if="active_tab === 'market'">
+            <market-tab :mint_address="mint_address"></market-tab>
           </div>
-          <div
-            class="bg-base-100 p-4 rounded-b-xl"
-            v-if="asset.slots.moduleSlots"
-          >
-            <h2 class="p-2">Module Slots</h2>
-            <div class="grid md:grid-cols-4 gap-4">
-              <div
-                v-for="attribute in asset.slots.moduleSlots"
-                :key="attribute"
-                class="shadow-inner bg-base-200 rounded-md px-2 py-1"
-              >
-                <h4 class="capitalize">{{ attribute.type }}</h4>
-                <div>{{ attribute.quantity }} {{ attribute.size }}</div>
-              </div>
-            </div>
+          <div v-if="active_tab === 'score'">
+            <score-tab :mint_address="mint_address"></score-tab>
           </div>
-        </div>
-        <div v-if="active_tab === 'market'">
-          <market-tab :mint_address="mint_address"></market-tab>
-        </div>
-        <div v-if="active_tab === 'score'">
-          <score-tab :mint_address="mint_address"></score-tab>
-        </div>
-        <div v-if="active_tab === 'stats'">
-          <h1>- Under Construction -</h1>
-        </div>
-        <div v-if="active_tab === 'explorer'">
-          <explorer-tab :mint_address="mint_address"></explorer-tab>
-        </div>
-        <div v-if="active_tab === 'images'">
-          <images-tab :mint_address="mint_address"></images-tab>
+          <div v-if="active_tab === 'stats'">
+            <h1>- Under Construction -</h1>
+          </div>
+          <div v-if="active_tab === 'explorer'">
+            <explorer-tab :mint_address="mint_address"></explorer-tab>
+          </div>
+          <div v-if="active_tab === 'images'">
+            <images-tab :mint_address="mint_address"></images-tab>
+          </div>
         </div>
       </div>
     </div>
