@@ -62,7 +62,7 @@ const series = ref([
   },
 ]);
 
-const chartOptions = {
+const chartOptions = ref({
   chart: {
     type: "candlestick",
     height: 350,
@@ -79,9 +79,11 @@ const chartOptions = {
       enabled: true,
     },
   },
-};
+});
 
 async function load_table_data() {
+  chartOptions.value.title.text =
+    selected_pair.value + " " + selected_timeframe.value;
   const currency =
     selected_pair.value === "ATLAS"
       ? "ATLASXmbPQxBUYbxPsV97usA3fPQYEqzQBUHgiFCUsXx"
@@ -89,10 +91,10 @@ async function load_table_data() {
 
   const time =
     selected_timeframe.value === "5min"
-      ? 60 * 60 * 5
+      ? 60 * 5
       : selected_timeframe.value === "1h"
-      ? 60 * 60 * 60
-      : 60 * 60 * 60 * 24;
+      ? 60 * 60
+      : 60 * 60 * 24;
 
   const trading_history = ref();
   await fetch(
