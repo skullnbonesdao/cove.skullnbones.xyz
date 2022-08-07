@@ -118,7 +118,6 @@
                 <sup>1</sup>/<sub>{{ obj_ranges.name[index] }}</sub>
               </div>
             </div>
-            {{ score_vars_ship_info.rewardRatePerSecond }}
           </div>
         </div>
       </div>

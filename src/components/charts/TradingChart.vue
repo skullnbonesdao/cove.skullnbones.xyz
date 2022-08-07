@@ -57,7 +57,7 @@ const chartOptions = {
     enabled: false,
   },
   stroke: {
-    width: [3, 4],
+    width: [4, 4],
   },
   title: {
     text: "History",
