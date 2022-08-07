@@ -33,8 +33,8 @@
           <th></th>
           <VTh sortKey="name">Name</VTh>
           <VTh v-if="rows[0]?.vwap ?? 0" sortKey="tradeSettings.vwap">VWAP</VTh>
-          <th>ASK</th>
-          <th>BID</th>
+          <th class="marketAsk">ASK</th>
+          <th class="marketBid">BID</th>
           <th></th>
         </tr>
       </template>
@@ -61,7 +61,7 @@
             <vwap-element :vwap="row.vwap ?? 0"></vwap-element>
           </td>
 
-          <td>
+          <td class="marketAsk">
             <ask-bid-elements
               :vwap="row.vwap"
               :price_usdc="
@@ -76,7 +76,7 @@
               "
             ></ask-bid-elements>
           </td>
-          <td>
+          <td class="marketBid">
             <ask-bid-elements
               :vwap="row.vwap"
               :price_usdc="
