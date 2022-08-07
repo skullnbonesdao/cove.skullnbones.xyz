@@ -101,7 +101,7 @@
         </div>
 
         <div class="flex flex-col" v-if="active_tab === 'info'">
-          <div class="bg-base-100 p-4 rounded-r-xl">
+          <div class="bg-base-100 p-4">
             <h1 class="p-2">Info</h1>
 
             <h2 class="p-2">Attributes</h2>
