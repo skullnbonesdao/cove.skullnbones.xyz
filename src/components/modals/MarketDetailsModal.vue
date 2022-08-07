@@ -80,12 +80,7 @@
             @click="active_tab = 'score'"
             >Score</a
           >
-          <a
-            class="tab md:tab-lg tab-lifted"
-            :class="active_tab === 'stats' ? 'tab-active' : ''"
-            @click="active_tab = 'stats'"
-            >Stats</a
-          >
+
           <a
             class="tab md:tab-lg tab-lifted"
             :class="active_tab === 'explorer' ? 'tab-active' : ''"
@@ -101,7 +96,7 @@
         </div>
 
         <div class="flex flex-col" v-if="active_tab === 'info'">
-          <div class="bg-base-100 p-4">
+          <div class="bg-base-100 p-4 rounded-tr-box">
             <h1 class="p-2">Info</h1>
 
             <h2 class="p-2">Attributes</h2>
