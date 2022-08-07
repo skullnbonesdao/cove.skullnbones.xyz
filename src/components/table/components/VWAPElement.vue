@@ -2,15 +2,14 @@
   <div
     class="flex flex-row bg-base-200 hover:bg-base-100 shadow-md rounded-lg space-x-2 p-2"
   >
-    <div class="item w-6">
-      <usdc-icon class=""> </usdc-icon>
-    </div>
-
-    <div class="item text-right w-24">
-      <strong> {{ vwap.toFixed(2) }}</strong>
+    <div class="item inline-flex items-baseline">
+      <usdc-icon class="self-center w-5 h-5 rounded-full mx-1"> </usdc-icon>
+      <span>
+        <strong> {{ vwap.toFixed(2) }}</strong></span
+      >
     </div>
     <div v-if="show_vwap_text" class="item divider divider-horizontal"></div>
-    <div v-if="show_vwap_text" class="item text-center">VWAP</div>
+    <div v-if="show_vwap_text" class="item w-full text-right pr-1">VWAP</div>
   </div>
 </template>
 
