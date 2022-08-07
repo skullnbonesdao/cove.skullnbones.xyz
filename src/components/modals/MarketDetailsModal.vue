@@ -12,14 +12,14 @@
     </div>
 
     <div v-if="asset" class="md:m-20">
-      <div class="card bg-base-100 shadow-xl image-full">
+      <div class="card bg-base-100 shadow-xl image-full space-y-1">
         <figure>
           <img :src="asset.image" alt="asset_image" />
         </figure>
         <div class="card-body">
           <h1 class="text-center">{{ asset.name }}</h1>
 
-          <p class="border p-2 rounded-box">
+          <p class="rounded-box">
             {{ asset.description }}
           </p>
           <div class="card-actions justify-end">
