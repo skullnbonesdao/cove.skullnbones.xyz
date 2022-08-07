@@ -110,7 +110,7 @@
             </li>
           </ul>
         </div>
-        <div class="navbar-end space-x-2 pr-4">
+        <div class="navbar-end space-x-2">
           <theme-toggle></theme-toggle>
         </div>
       </div>
