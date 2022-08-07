@@ -2,82 +2,108 @@
   <div class="bg-base-100 p-4 rounded-xl">
     <h1 class="p-2">Market</h1>
 
-    <!--    <OrderDepthChart
-      :order_buys="market_orders_buy_usdc"
-      :order_sells="market_orders_sell_usdc"
-    ></OrderDepthChart>
-   -->
     <div class="flex flex-col space-y-3">
       <div class="bg-base-200 shadow-inner rounded-xl p-4">
-        <trading-chart :mint_address="mint_address"></trading-chart>
+        <line-chart :mint_address="mint_address"></line-chart>
       </div>
 
       <div class="bg-base-200 shadow-inner rounded-xl p-4">
-        <h2 class="pb-3">BUY Orders</h2>
-        <div class="grid sm:grid-cols-2 grid-cols-1 gap-2 place-content-center">
-          <div>
-            <div class="flex flex-row h-6 space-x-2">
-              <h3>USDC</h3>
-              <usdc-icon class="w-6"></usdc-icon>
-            </div>
-            <div v-if="market_orders_buy_usdc.length">
-              <MarketOrders
-                :market_orders="market_orders_buy_usdc"
-                market_token="USDC"
-              />
-            </div>
-            <div v-else>
-              <grid-loader :color="'#ffa500'"></grid-loader>
-            </div>
+        <div class="collapse collapse-arrow border border-base-300 bg-base-100">
+          <input type="checkbox" class="peer" />
+          <div class="collapse-title text-primary-content">
+            <h2 class="">CandleStickChart</h2>
           </div>
-          <div>
-            <div class="flex flex-row h-6 space-x-2">
-              <h3>ATLAS</h3>
-              <atlas-icon class="w-6"></atlas-icon>
-            </div>
-            <div v-if="market_orders_buy_atlas.length">
-              <MarketOrders
-                :market_orders="market_orders_buy_atlas"
-                market_token="ATLAS"
-              />
-            </div>
-            <div v-else>
-              <grid-loader :color="'#ffa500'"></grid-loader>
-            </div>
+          <div class="collapse-content">
+            <candle-stick-chart
+              :mint_address="mint_address"
+            ></candle-stick-chart>
           </div>
         </div>
       </div>
-      <div class="bg-base-200 shadow-inner rounded-xl p-4">
-        <h2 class="pb-3">SELL Orders</h2>
-        <div class="grid sm:grid-cols-2 grid-cols-1 gap-2 place-content-center">
-          <div class="basis-1/2">
-            <div class="flex flex-row h-6 space-x-2">
-              <h3>USDC</h3>
-              <usdc-icon class="w-6"></usdc-icon>
-            </div>
-            <div v-if="market_orders_sell_usdc.length">
-              <MarketOrders
-                :market_orders="market_orders_sell_usdc"
-                market_token="USDC"
-              />
-            </div>
-            <div v-else>
-              <grid-loader :color="'#ffa500'"></grid-loader>
+
+      <div class="bg-base-200 shadow-inner rounded-xl p-4 space-y-2">
+        <div class="collapse collapse-arrow border border-base-300 bg-base-100">
+          <input type="checkbox" class="peer" />
+          <div class="collapse-title text-primary-content">
+            <h2 class="">BUY Orders</h2>
+          </div>
+          <div class="collapse-content">
+            <div
+              class="bg-base-200 p-3 grid sm:grid-cols-2 grid-cols-1 gap-2 place-content-center"
+            >
+              <div>
+                <div class="flex flex-row h-6 space-x-2">
+                  <h3>USDC</h3>
+                  <usdc-icon class="w-6"></usdc-icon>
+                </div>
+                <div v-if="market_orders_buy_usdc.length">
+                  <MarketOrders
+                    :market_orders="market_orders_buy_usdc"
+                    market_token="USDC"
+                  />
+                </div>
+                <div v-else>
+                  <grid-loader :color="'#ffa500'"></grid-loader>
+                </div>
+              </div>
+              <div>
+                <div class="flex flex-row h-6 space-x-2">
+                  <h3>ATLAS</h3>
+                  <atlas-icon class="w-6"></atlas-icon>
+                </div>
+                <div v-if="market_orders_buy_atlas.length">
+                  <MarketOrders
+                    :market_orders="market_orders_buy_atlas"
+                    market_token="ATLAS"
+                  />
+                </div>
+                <div v-else>
+                  <grid-loader :color="'#ffa500'"></grid-loader>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="basis-1/2">
-            <div class="flex flex-row h-6 space-x-2">
-              <h3>ATLAS</h3>
-              <atlas-icon class="w-6"></atlas-icon>
-            </div>
-            <div v-if="market_orders_sell_atlas.length">
-              <MarketOrders
-                :market_orders="market_orders_sell_atlas"
-                market_token="ATLAS"
-              />
-            </div>
-            <div v-else>
-              <grid-loader :color="'#ffa500'"></grid-loader>
+        </div>
+
+        <div class="collapse collapse-arrow border border-base-300 bg-base-100">
+          <input type="checkbox" class="peer" />
+          <div class="collapse-title text-primary-content">
+            <h2 class="">SELL Orders</h2>
+          </div>
+          <div class="collapse-content">
+            <div
+              class="bg-base-200 p-3 grid sm:grid-cols-2 grid-cols-1 gap-2 place-content-center"
+            >
+              <div class="basis-1/2">
+                <div class="flex flex-row h-6 space-x-2">
+                  <h3>USDC</h3>
+                  <usdc-icon class="w-6"></usdc-icon>
+                </div>
+                <div v-if="market_orders_sell_usdc.length">
+                  <MarketOrders
+                    :market_orders="market_orders_sell_usdc"
+                    market_token="USDC"
+                  />
+                </div>
+                <div v-else>
+                  <grid-loader :color="'#ffa500'"></grid-loader>
+                </div>
+              </div>
+              <div class="basis-1/2">
+                <div class="flex flex-row h-6 space-x-2">
+                  <h3>ATLAS</h3>
+                  <atlas-icon class="w-6"></atlas-icon>
+                </div>
+                <div v-if="market_orders_sell_atlas.length">
+                  <MarketOrders
+                    :market_orders="market_orders_sell_atlas"
+                    market_token="ATLAS"
+                  />
+                </div>
+                <div v-else>
+                  <grid-loader :color="'#ffa500'"></grid-loader>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -106,7 +132,8 @@ import UsdcIcon from "@/components/icons/USDCIcon.vue";
 import AtlasIcon from "@/components/icons/ATLASIcon.vue";
 import { staratlas_gmClientStore } from "@/store/staratlas_gmClient";
 import OrderDepthChart from "@/components/charts/OrderDepthChart.vue";
-import TradingChart from "@/components/charts/TradingChart.vue";
+import LineChart from "@/components/charts/LineChart.vue";
+import CandleStickChart from "@/components/charts/CandleStickChart.vue";
 
 const props = defineProps({
   mint_address: {

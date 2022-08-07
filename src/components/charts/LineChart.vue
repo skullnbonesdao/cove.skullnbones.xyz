@@ -16,7 +16,7 @@
 
 <script lang="ts">
 export default {
-  name: "TradingChart",
+  name: "LineChart",
 };
 </script>
 
