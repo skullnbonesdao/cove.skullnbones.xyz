@@ -59,8 +59,7 @@ const chartOptions = {
     width: [4, 4],
   },
   title: {
-    text: "History",
-    align: "center",
+    text: "Last 100 trades",
   },
   xaxis: {
     type: "datetime",
