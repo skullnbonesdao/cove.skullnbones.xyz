@@ -27,19 +27,19 @@
     <div class="divider"></div>
 
     <div class="bg-base-300 rounded-xl place-items-center p-1">
-      <div class="flex flex-row justify-end p-3">
-        <div class="tooltip" data-tip="table-mode">
-          <input
-            type="checkbox"
-            class="toggle"
-            v-model="ref_toggle_state"
-            @click="
-              ref_toggle_state === true
-                ? (tableType_selected = 'simple')
-                : (tableType_selected = 'advanced')
-            "
-          />
-        </div>
+      <div class="tabs flex flex-row justify-center">
+        <a
+          class="tab md:tab-lg tab-bordered uppercase"
+          :class="tableType_selected === 'simple' ? 'tab-active' : ''"
+          @click="tableType_selected = 'simple'"
+          >simple</a
+        >
+        <a
+          class="tab md:tab-lg tab-bordered uppercase"
+          :class="tableType_selected === 'advanced' ? 'tab-active' : ''"
+          @click="tableType_selected = 'advanced'"
+          >advanced</a
+        >
       </div>
 
       <div v-if="staratlas_store.status === 'fetched'">
