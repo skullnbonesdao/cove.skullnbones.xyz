@@ -5,29 +5,25 @@
     classes="flex justify-center items-center md:px-20 md:py-10"
     content-class="overflow-auto relative flex flex-col max-h-full p-4 border dark:border-base-300 rounded bg-base-300"
   >
-    <div class="flex-shrink-0 flex justify-end pt-4 pr-4">
+    <div class="flex-shrink-0 flex justify-end pb-1">
       <button class="btn btn-primary btn-circle" @click="$emit('close', close)">
         X
       </button>
     </div>
 
     <div v-if="asset" class="md:m-20">
-      <h1 class="text-center">{{ asset.name }}</h1>
-      <div class="pb-4 flex flex-col md:flex-row items-center md:space-x-2">
-        <img
-          alt="asset_image"
-          :src="asset.image"
-          class="object-contain p-1 rounded-xl w-96"
-        />
-        <div class="flex flex-col space-y-2">
-          <div class="bg-base-100 p-4 rounded-xl">
-            <p>{{ asset.description }}</p>
-          </div>
-          <div
-            v-if="asset.tradeSettings.vwap || asset.primarySales"
-            class="bg-base-100 p-4 rounded-xl"
-          >
-            <div class="grid xl:grid-cols-4 md:gap-4">
+      <div class="card bg-base-100 shadow-xl image-full">
+        <figure>
+          <img :src="asset.image" alt="asset_image" />
+        </figure>
+        <div class="card-body">
+          <h1 class="text-center">{{ asset.name }}</h1>
+
+          <p class="border p-2 rounded-box">
+            {{ asset.description }}
+          </p>
+          <div class="card-actions justify-end">
+            <div class="grid md:grid-cols-3 grid-cols-2 md:gap-4 gap-2">
               <div>
                 <h4>VWAP</h4>
                 <div class="flex flex-row space-x-1">
@@ -63,7 +59,7 @@
         </div>
       </div>
 
-      <div class="tabs">
+      <div class="tabs pt-2">
         <a
           class="tab md:tab-lg tab-lifted"
           :class="active_tab === 'info' ? 'tab-active' : ''"
