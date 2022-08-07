@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-full border-opacity-50 p-4">
+  <div class="flex flex-col w-full border-opacity-50 md:p-4 pt-1">
     <div
       class="grid px-16 card bg-base-300 rounded-box place-items-center space-y-2"
     >
