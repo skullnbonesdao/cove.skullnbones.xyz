@@ -55,9 +55,7 @@ const chartOptions = {
   dataLabels: {
     enabled: false,
   },
-  stroke: {
-    width: [4, 4],
-  },
+
   title: {
     text: "Last 100 trades",
   },

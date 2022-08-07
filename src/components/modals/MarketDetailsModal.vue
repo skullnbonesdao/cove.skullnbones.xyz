@@ -12,7 +12,7 @@
     </button>
 
     <div id="content relative">
-      <div v-if="asset" class="md:m-20">
+      <div v-if="asset" class="m-5">
         <div class="card bg-base-100 shadow-xl image-full space-y-1">
           <figure>
             <img :src="asset.image" alt="asset_image" />
@@ -23,6 +23,7 @@
             <p class="rounded-box">
               {{ asset.description }}
             </p>
+
             <div class="card-actions">
               <div class="grid md:grid-cols-3 grid-cols-2 md:gap-4 gap-2">
                 <div>
@@ -157,25 +158,20 @@
           </div>
         </div>
         <div v-if="active_tab === 'market'">
-          <market-tab :mint_address="asset_address"></market-tab>
+          <market-tab :mint_address="mint_address"></market-tab>
         </div>
         <div v-if="active_tab === 'score'">
-          <score-tab :mint_address="asset_address"></score-tab>
+          <score-tab :mint_address="mint_address"></score-tab>
         </div>
         <div v-if="active_tab === 'stats'">
           <h1>- Under Construction -</h1>
         </div>
         <div v-if="active_tab === 'explorer'">
-          <explorer-tab :mint_address="asset_address"></explorer-tab>
+          <explorer-tab :mint_address="mint_address"></explorer-tab>
         </div>
         <div v-if="active_tab === 'images'">
-          <images-tab :mint_address="asset_address"></images-tab>
+          <images-tab :mint_address="mint_address"></images-tab>
         </div>
-      </div>
-      <div class="flex-shrink-0 flex justify-center items-center pt-4">
-        <button class="btn btn-primary" @click="$emit('close', close)">
-          close
-        </button>
       </div>
     </div>
   </vue-final-modal>
@@ -198,11 +194,12 @@ import MarketTab from "@/components/tabs/MarketTab.vue";
 import ExplorerTab from "@/components/tabs/ExplorerTab.vue";
 import UsdcIcon from "@/components/icons/USDCIcon.vue";
 import ScoreTab from "@/components/tabs/ScoreTab.vue";
+import LineChart from "@/components/charts/LineChart.vue";
 
 const active_tab = ref("info");
 
 const props = defineProps({
-  asset_address: {
+  mint_address: {
     type: String,
     default: "none",
   },

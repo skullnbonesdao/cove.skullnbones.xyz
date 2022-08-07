@@ -4,7 +4,7 @@
       v-model="show_modal"
       @close="show_modal = false"
       @click-outside="show_modal = false"
-      :asset_address="asset_address"
+      :mint_address="asset_address"
       :asset="asset_selected"
     >
     </market-details-modal>
