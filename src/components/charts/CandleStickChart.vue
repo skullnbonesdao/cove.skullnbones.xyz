@@ -2,14 +2,14 @@
   <div class="flex space-x-2 justify-end">
     <select
       v-model="selected_pair"
-      class="select select-bordered select-sm w-full max-w-xs"
+      class="select select-bordered select-sm max-w-xs"
     >
       <option>ATLAS</option>
       <option>USDC</option>
     </select>
     <select
       v-model="selected_timeframe"
-      class="select select-bordered select-sm w-full max-w-xs"
+      class="select select-bordered select-sm max-w-xs"
     >
       <option>5min</option>
       <option>1h</option>
