@@ -2,8 +2,8 @@
   <div
     class="flex flex-row bg-base-200 hover:bg-base-100 shadow-md rounded-lg space-x-2 p-2"
   >
-    <div class="item inline-flex items-baseline">
-      <usdc-icon class="self-center w-5 h-5 rounded-full mx-1"> </usdc-icon>
+    <div class="item inline-flex items-baseline space-x-1">
+      <usdc-icon class="self-center w-5 h-5 rounded-full"> </usdc-icon>
       <span>
         <strong> {{ vwap.toFixed(2) }}</strong></span
       >

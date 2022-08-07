@@ -3,7 +3,6 @@
     <grid-loader :color="'#ffa500'"></grid-loader>
   </div>
   <div v-else>
-    <div class="m-2 badge badge-secondary">testing</div>
     <apexchart
       type="line"
       height="250"

@@ -3,8 +3,10 @@
     <h1 class="p-2">Market</h1>
 
     <div class="flex flex-col space-y-3">
-      <div class="bg-base-200 shadow-inner rounded-xl p-4">
-        <line-chart :mint_address="mint_address"></line-chart>
+      <div class="collapse collapse-arrow border border-base-300 bg-base-100">
+        <div>
+          <line-chart :mint_address="mint_address"></line-chart>
+        </div>
       </div>
 
       <div class="bg-base-200 shadow-inner rounded-xl p-4">

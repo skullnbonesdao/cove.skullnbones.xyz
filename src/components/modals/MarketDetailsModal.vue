@@ -3,7 +3,7 @@
     v-slot="{ close }"
     v-bind="$attrs"
     classes="flex justify-center items-center md:px-20 md:py-10"
-    content-class="overflow-auto relative flex flex-col max-h-full p-4 border dark:border-base-300 rounded bg-base-300"
+    content-class="overflow-auto relative flex flex-col max-h-full md:p-4 p-2 border dark:border-base-300 rounded bg-base-300"
   >
     <div class="flex-shrink-0 flex justify-end pb-1">
       <button class="btn btn-primary btn-circle" @click="$emit('close', close)">
@@ -22,15 +22,16 @@
           <p class="rounded-box">
             {{ asset.description }}
           </p>
-          <div class="card-actions justify-end">
+          <div class="card-actions">
             <div class="grid md:grid-cols-3 grid-cols-2 md:gap-4 gap-2">
               <div>
                 <h4>VWAP</h4>
-                <div class="flex flex-row space-x-1">
-                  <usdc-icon class="w-6"></usdc-icon>
-                  <div>
+                <div class="item inline-flex items-baseline space-x-2">
+                  <usdc-icon class="self-center w-5 h-5 rounded-full">
+                  </usdc-icon>
+                  <span>
                     {{ asset.tradeSettings.vwap.toFixed(2) }}
-                  </div>
+                  </span>
                 </div>
               </div>
               <div>
@@ -43,7 +44,7 @@
                   }}
                 </div>
               </div>
-              <div>
+              <div class="col-span-2">
                 <a
                   class="btn"
                   :href="

@@ -20,7 +20,6 @@
     <grid-loader :color="'#ffa500'"></grid-loader>
   </div>
   <div v-else>
-    <div class="m-2 badge badge-secondary">testing</div>
     <apexchart
       type="candlestick"
       height="250"
@@ -69,7 +68,7 @@ const chartOptions = {
     height: 350,
   },
   title: {
-    text: "CandleStick Chart",
+    text: selected_pair.value + " " + selected_timeframe.value,
     align: "left",
   },
   xaxis: {
