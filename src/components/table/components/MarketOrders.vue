@@ -1,5 +1,5 @@
 <template>
-  <table class="table table-compact w-full">
+  <table class="table table-compact table-zebra w-full">
     <thead>
       <tr>
         <th>Price</th>

@@ -12,7 +12,7 @@
       <div class="bg-base-200 shadow-inner rounded-xl p-4">
         <div class="collapse collapse-arrow border border-base-300 bg-base-100">
           <input type="checkbox" class="peer" />
-          <div class="collapse-title text-primary-content">
+          <div class="collapse-title text-xl font-medium">
             <h2 class="">CandleStickChart</h2>
           </div>
           <div class="collapse-content">
@@ -26,12 +26,12 @@
       <div class="bg-base-200 shadow-inner rounded-xl p-4 space-y-2">
         <div class="collapse collapse-arrow border border-base-300 bg-base-100">
           <input type="checkbox" class="peer" />
-          <div class="collapse-title text-primary-content">
+          <div class="collapse-title text-xl font-medium">
             <h2 class="">BUY Orders</h2>
           </div>
           <div class="collapse-content">
             <div
-              class="bg-base-200 p-3 grid sm:grid-cols-2 grid-cols-1 gap-2 place-content-center"
+              class="p-3 grid sm:grid-cols-2 grid-cols-1 gap-2 place-content-center"
             >
               <div>
                 <div class="flex flex-row h-6 space-x-2">
@@ -69,12 +69,12 @@
 
         <div class="collapse collapse-arrow border border-base-300 bg-base-100">
           <input type="checkbox" class="peer" />
-          <div class="collapse-title text-primary-content">
+          <div class="collapse-title text-xl font-medium">
             <h2 class="">SELL Orders</h2>
           </div>
           <div class="collapse-content">
             <div
-              class="bg-base-200 p-3 grid sm:grid-cols-2 grid-cols-1 gap-2 place-content-center"
+              class="p-3 grid sm:grid-cols-2 grid-cols-1 gap-2 place-content-center"
             >
               <div class="basis-1/2">
                 <div class="flex flex-row h-6 space-x-2">
