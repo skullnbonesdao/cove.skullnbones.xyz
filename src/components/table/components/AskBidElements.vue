@@ -6,47 +6,38 @@
       <div v-if="price_usdc === 0">
         <beat-loader :color="'#ffa500'"></beat-loader>
       </div>
-      <div v-else class="flex text-right space-x-2">
-        <div class="item w-10">
-          <usdc-icon class=""></usdc-icon>
-        </div>
-        <div v-if="price_usdc === -1" class="item w-full">no-market</div>
-        <div v-else class="item w-full">
+      <div v-else class="item inline-flex items-baseline space-x-2 w-full">
+        <usdc-icon class="self-center w-5 h-5"> </usdc-icon>
+        <span v-if="price_usdc === -1" class="item w-full text-right">-</span>
+        <span v-else class="item w-full text-right">
           {{ format_number(price_usdc) }}
-        </div>
-        <div v-if="vwap" class="divider divider-horizontal"></div>
-        <div v-if="vwap" class="item">
           <percentage-element
-            class="w-16"
+            class=""
             :price_vwap="vwap"
             :is_price="price_usdc !== -1 ? price_usdc : 0"
           ></percentage-element>
-        </div>
+        </span>
       </div>
     </div>
+    <div class="divider"></div>
     <div class="item w-auto">
       <div v-if="price_atlas === 0">
         <beat-loader :color="'#ffa500'"></beat-loader>
       </div>
-      <div v-else class="flex text-right space-x-2">
-        <div class="item w-10">
-          <atlas-icon class=""></atlas-icon>
-        </div>
-        <div v-if="price_atlas === -1" class="item w-full">no-market</div>
-        <div v-else class="item w-full">
+      <div v-else class="item inline-flex items-baseline space-x-2 w-full">
+        <atlas-icon class="self-center w-5 h-5"></atlas-icon>
+        <div v-if="price_atlas === -1" class="item w-full text-right">-</div>
+        <span v-else class="item w-full text-right">
           {{ format_number(price_atlas) }}
-        </div>
-        <div v-if="vwap" class="divider divider-horizontal"></div>
-        <div v-if="vwap" class="item w-16">
           <percentage-element
-            class="w-16"
+            class=""
             :price_vwap="vwap"
             :no_market="vwap === 0"
             :is_price="
               price_atlas !== -1 ? price_atlas * parseFloat(tokenWS.m_atlas) : 0
             "
           ></percentage-element>
-        </div>
+        </span>
       </div>
     </div>
   </div>

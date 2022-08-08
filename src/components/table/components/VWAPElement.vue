@@ -3,7 +3,7 @@
     class="flex flex-row w-full bg-base-200 hover:bg-base-100 shadow-md rounded-lg space-x-2 p-2"
   >
     <div class="item inline-flex items-baseline space-x-2 w-full">
-      <usdc-icon class="self-center w-5 h-5 rounded-full"> </usdc-icon>
+      <usdc-icon class="self-center w-5 h-5"> </usdc-icon>
       <span class="font-bold">
         {{ format_number(vwap) }}
       </span>
