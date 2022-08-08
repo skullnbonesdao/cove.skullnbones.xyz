@@ -5,7 +5,7 @@
     <div class="item inline-flex items-baseline space-x-1">
       <usdc-icon class="self-center w-5 h-5 rounded-full"> </usdc-icon>
       <span>
-        <strong> {{ vwap.toFixed(2) }}</strong></span
+        <strong> {{ format_number(vwap) }}</strong></span
       >
     </div>
     <div v-if="show_vwap_text" class="item divider divider-horizontal"></div>
@@ -33,6 +33,12 @@ defineProps({
     default: true,
   },
 });
+function format_number(number: number): string {
+  if (number >= 1000) {
+    const num_parts = number.toFixed(2).split(".");
+    return (num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+  } else return number.toFixed(2);
+}
 </script>
 
 <style scoped></style>

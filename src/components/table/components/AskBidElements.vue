@@ -12,7 +12,7 @@
         </div>
         <div v-if="price_usdc === -1" class="item w-full">no-market</div>
         <div v-else class="item w-full">
-          {{ price_usdc.toFixed(2) }}
+          {{ format_number(price_usdc) }}
         </div>
         <div v-if="vwap" class="divider divider-horizontal"></div>
         <div v-if="vwap" class="item">
@@ -34,7 +34,7 @@
         </div>
         <div v-if="price_atlas === -1" class="item w-full">no-market</div>
         <div v-else class="item w-full">
-          {{ price_atlas.toFixed(2) }}
+          {{ format_number(price_atlas) }}
         </div>
         <div v-if="vwap" class="divider divider-horizontal"></div>
         <div v-if="vwap" class="item w-16">
@@ -73,6 +73,13 @@ const props = defineProps({
   price_atlas: { type: Number, default: 0 },
   price_usdc: { type: Number, default: 0 },
 });
+
+function format_number(number: number): string {
+  if (number >= 1000) {
+    const num_parts = number.toFixed(2).split(".");
+    return (num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+  } else return number.toFixed(2);
+}
 </script>
 
 <style scoped></style>
