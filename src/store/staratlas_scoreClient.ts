@@ -26,6 +26,7 @@ export const staratlas_scoreClientStore = defineStore({
         new PublicKey(mint)
       );
     },
+
     async getAprForShipAtlas(
       ship_address: string,
       ship_cost_atlas: number,
@@ -57,7 +58,6 @@ export const staratlas_scoreClientStore = defineStore({
 
       const atlas_rewards_day = rewards_day - maintained_cost_in_atlas;
 
-      console.log(ship_cost_atlas);
       //APR
       return (atlas_rewards_day / ship_cost_atlas) * 365 * 100;
     },

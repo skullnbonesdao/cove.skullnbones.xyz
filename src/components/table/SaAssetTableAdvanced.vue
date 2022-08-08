@@ -273,9 +273,6 @@ async function load_data() {
   if (staratlas_gmClient.orders.length === 0) {
     await staratlas_gmClient.fetchOrders();
   }
-  table_data.value.forEach((element) =>
-    staratlas_gmClient.filter_orders(element.mint)
-  );
 
   //Append Market order to DATA
   table_data.value.forEach((element, index) => {
@@ -341,8 +338,6 @@ async function load_data() {
   staratlas_gmClient.filter_orders(TOKEN_TOOL.toString());
   resource_prices.tool_price =
     staratlas_gmClient.top_market_orders.at(-1)?.price_atlas_sell ?? 0;
-
-  console.log(resource_prices);
 
   // Get APRs
   if (props.sa_asset_type === "ship") {
