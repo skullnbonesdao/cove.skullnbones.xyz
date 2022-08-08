@@ -5,13 +5,13 @@
   >
     <beat-loader :color="'#ffa500'"></beat-loader>
   </div>
-  <div v-else class="flex flex-row rounded-lg space-x-1">
-    <div class="item w-4">
-      <atlas-icon v-if="currency === 'atlas'" class="item"></atlas-icon>
-      <usdc-icon v-else class="item"> </usdc-icon>
-    </div>
-    <div class="item divider divider-horizontal"></div>
-    <div class="item">
+  <div v-else class="flex flex-row inline-flex items-baseline space-x-2">
+    <atlas-icon
+      v-if="currency === 'atlas'"
+      class="self-center w-5 h-5 rounded-full"
+    ></atlas-icon>
+    <usdc-icon v-else class="self-center w-5 h-5 rounded-full"> </usdc-icon>
+    <span>
       <percentage-element
         class="item"
         v-if="show_percentage && currency === 'atlas'"
@@ -29,7 +29,7 @@
       <strong v-else class="item">
         {{ price === -1 ? "-" : format_number(price) }}
       </strong>
-    </div>
+    </span>
     <div v-if="text.length" class="item text-right">{{ text }}</div>
   </div>
 </template>
@@ -47,6 +47,7 @@ import AtlasIcon from "@/components/icons/ATLASIcon.vue";
 import PercentageElement from "@/components/special/PercentageElement.vue";
 import BeatLoader from "vue-spinner/src/BeatLoader.vue";
 import { tokenPricesWebsocket } from "@/store/token_price_websocket";
+import { format_number } from "@/typescipt/helper/format_number";
 
 const tokenWS = tokenPricesWebsocket();
 
@@ -72,13 +73,6 @@ defineProps({
     default: false,
   },
 });
-
-function format_number(number: number): string {
-  if (number >= 1000) {
-    const num_parts = number.toFixed(2).split(".");
-    return (num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-  } else return number.toFixed(2);
-}
 </script>
 
 <style scoped></style>
