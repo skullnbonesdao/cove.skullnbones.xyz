@@ -12,6 +12,7 @@
         <span v-else class="item w-full text-right">
           {{ format_number(price_usdc) }}
           <percentage-element
+            v-if="vwap"
             class=""
             :price_vwap="vwap"
             :is_price="price_usdc !== -1 ? price_usdc : 0"
@@ -30,6 +31,7 @@
         <span v-else class="item w-full text-right">
           {{ format_number(price_atlas) }}
           <percentage-element
+            v-if="vwap"
             class=""
             :price_vwap="vwap"
             :no_market="vwap === 0"

@@ -4,13 +4,13 @@
   >
     <div class="item inline-flex items-baseline space-x-2 w-full">
       <usdc-icon class="self-center w-5 h-5"> </usdc-icon>
-      <span class="font-bold">
+      <span class="w-full text-right font-bold">
         {{ format_number(vwap) }}
       </span>
     </div>
 
     <div v-if="show_vwap_text" class="item divider divider-horizontal"></div>
-    <div v-if="show_vwap_text" class="item w-fulltext-right pr-1">VWAP</div>
+    <div v-if="show_vwap_text" class="item pr-1">VWAP</div>
   </div>
 </template>
 
