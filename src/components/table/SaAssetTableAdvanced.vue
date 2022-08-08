@@ -343,7 +343,6 @@ async function load_data() {
   if (props.sa_asset_type === "ship") {
     for (const element of table_data.value) {
       const index = table_data.value.indexOf(element);
-      console.log(table_data.value[index].name);
 
       table_data.value[index].apr_atlas =
         await staratlas_scoreClient.getAprForShipAtlas(

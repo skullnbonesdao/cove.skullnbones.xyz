@@ -14,7 +14,7 @@
           <tbody>
             <tr>
               <td>Solscan.io</td>
-              <td>
+              <td class="w-16">
                 <a class="link" :href="solscanURL" target="_blank">{{
                   solscanURL
                 }}</a>
