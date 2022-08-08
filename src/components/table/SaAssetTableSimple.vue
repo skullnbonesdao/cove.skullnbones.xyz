@@ -47,7 +47,7 @@
         >
           <th>
             <ship-table-image-component
-              class="justify-center"
+              class="justify-center pl-1"
               :symbol="row.symbol"
               :img_url="'sa_images/webp/' + row._id + '.webp'"
             ></ship-table-image-component>
