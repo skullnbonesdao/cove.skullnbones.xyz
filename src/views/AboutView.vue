@@ -4,7 +4,7 @@
       <div
         class="grid px-16 card bg-base-300 rounded-box place-items-center space-y-2"
       >
-        <h1>About</h1>
+        <h1 class="m-3">About</h1>
       </div>
     </div>
 

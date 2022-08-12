@@ -28,6 +28,12 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/BurnerView.vue"),
   },
+  {
+    path: "/features",
+    name: "features",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/FeaturesView.vue"),
+  },
 ];
 
 const router = createRouter({

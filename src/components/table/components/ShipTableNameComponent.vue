@@ -1,7 +1,10 @@
 <template>
   <div class="flex flex-col">
     <h3>{{ ship.name }}</h3>
-    <div v-if="!disable_badges" class="flex flex-row space-x-2">
+    <div
+      v-if="!disable_badges"
+      class="flex md:flex-row flex-col md:space-x-2 md:space-y-0 space-y-1"
+    >
       <tier-badge :text="ship?.attributes.tier || 0"></tier-badge>
       <rarity-badge :text="ship?.attributes.rarity"></rarity-badge>
       <class-badge :text="ship?.attributes.class"></class-badge>

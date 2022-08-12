@@ -5,7 +5,9 @@
     classes="flex justify-center items-center md:px-20 md:py-10"
     content-class="overflow-auto relative flex flex-col max-h-full md:p-4 p-2 border dark:border-base-300 rounded bg-base-300"
   >
-    <button class="sticky top-3 right-3 z-50 flex-shrink-0 flex justify-end">
+    <button
+      class="md:visible invisible sticky top-1 right-1 z-50 flex-shrink-0 flex justify-end"
+    >
       <button
         class="absolute btn btn-primary btn-circle"
         @click="$emit('close', close)"
@@ -177,6 +179,17 @@
         </div>
       </div>
     </div>
+
+    <button
+      class="visible md:invisible sticky bottom-12 right-1 z-50 flex-shrink-0 flex justify-end"
+    >
+      <button
+        class="absolute btn btn-primary btn-circle"
+        @click="$emit('close', close)"
+      >
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </button>
   </vue-final-modal>
 </template>
 
