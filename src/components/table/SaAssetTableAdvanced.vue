@@ -94,8 +94,9 @@
               :img_url="'sa_images/webp/' + row._id + '.webp'"
             ></ship-table-image-component>
           </th>
-          <td class="w-full">
+          <td class="w-full space-x-1">
             <strong>{{ row.name }}</strong>
+            <i class="bi bi-info-circle"></i>
           </td>
           <td v-if="rows[0]?.vwap ?? 0">
             <vwap-element

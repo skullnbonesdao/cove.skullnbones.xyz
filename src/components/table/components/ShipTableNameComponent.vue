@@ -8,9 +8,10 @@
       <tier-badge :text="ship?.attributes.tier || 0"></tier-badge>
       <rarity-badge :text="ship?.attributes.rarity"></rarity-badge>
       <class-badge :text="ship?.attributes.class"></class-badge>
-      <span v-if="ship?.attributes.spec" class="badge">{{
-        ship?.attributes.spec
-      }}</span>
+      <span v-if="ship?.attributes.spec" class="badge"
+        >{{ ship?.attributes.spec }}
+      </span>
+      <span class="bi bi-info-circle"></span>
     </div>
   </div>
 </template>
