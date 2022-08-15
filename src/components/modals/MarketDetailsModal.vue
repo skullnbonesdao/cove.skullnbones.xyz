@@ -31,7 +31,7 @@
 
             <div class="card-actions">
               <div class="grid md:grid-cols-3 grid-cols-2 md:gap-4 gap-2">
-                <div>
+                <div v-if="asset.tradeSettings.vwap > 0">
                   <h4>VWAP</h4>
                   <div class="item inline-flex items-baseline space-x-2">
                     <usdc-icon class="self-center w-5 h-5 rounded-full">
@@ -41,7 +41,7 @@
                     </span>
                   </div>
                 </div>
-                <div>
+                <div v-if="asset.primarySales.length > 0">
                   <h4>Supply</h4>
                   <div>
                     {{
@@ -81,6 +81,7 @@
               >Market</a
             >
             <a
+              v-if="asset.tradeSettings.vwap > 0"
               class="tab md:tab-lg tab-lifted"
               :class="active_tab === 'score' ? 'tab-active' : ''"
               @click="active_tab = 'score'"
