@@ -1,6 +1,9 @@
 <template>
   <div class="flex flex-col">
-    <h3>{{ ship.name }}</h3>
+    <div class="flex space-x-1">
+      <h3>{{ ship?.name }}</h3>
+      <span class="bi bi-info-circle"></span>
+    </div>
     <div
       v-if="!disable_badges"
       class="flex md:flex-row flex-col md:space-x-2 md:space-y-0 space-y-1"
@@ -11,7 +14,6 @@
       <span v-if="ship?.attributes.spec" class="badge"
         >{{ ship?.attributes.spec }}
       </span>
-      <span class="bi bi-info-circle"></span>
     </div>
   </div>
 </template>
