@@ -31,13 +31,7 @@
                   </div>
                 </router-link>
               </li>
-              <li>
-                <router-link class="router-link" to="/features">
-                  <div class="flex flex-row space-x-1">
-                    <div>Features</div>
-                  </div>
-                </router-link>
-              </li>
+
               <li>
                 <router-link class="router-link" to="/market">
                   <div class="flex flex-row space-x-1">
@@ -82,17 +76,7 @@
                 </div>
               </router-link>
             </li>
-            <li>
-              <router-link
-                class="router-link"
-                v-bind:class="$route.name === 'features' ? ' active' : ''"
-                to="/features"
-              >
-                <div class="flex flex-col-reverse items-center">
-                  <div>Features</div>
-                </div>
-              </router-link>
-            </li>
+
             <li>
               <router-link
                 class="router-link"
