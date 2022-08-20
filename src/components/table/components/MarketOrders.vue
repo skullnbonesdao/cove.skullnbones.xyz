@@ -10,11 +10,11 @@
     <tbody>
       <tr v-for="orders in market_orders" :key="orders">
         <td v-if="market_token === 'USDC'" class="flex flex-row">
-          <div>{{ orders.price }}</div>
+          <div>{{ orders.uiPrice }}</div>
         </td>
         <td v-if="market_token === 'ATLAS'" class="flex flex-row">
           <div>
-            {{ orders.price }}
+            {{ orders.uiPrice }}
           </div>
         </td>
         <td>{{ orders.orderQtyRemaining }}</td>
@@ -36,8 +36,6 @@ export default {
 <script setup lang="ts">
 import { defineProps, PropType } from "vue";
 import { Order } from "@staratlas/factory";
-import UsdcIcon from "@/components/icons/USDCIcon.vue";
-import AtlasIcon from "@/components/icons/ATLASIcon.vue";
 
 defineProps({
   market_orders: {

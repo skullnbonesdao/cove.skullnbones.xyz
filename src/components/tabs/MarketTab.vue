@@ -140,7 +140,7 @@ import CandleStickChart from "@/components/charts/CandleStickChart.vue";
 const props = defineProps({
   mint_address: {
     type: String,
-    default: null,
+    default: "",
   },
 });
 const staratlas_gmClient = staratlas_gmClientStore();
@@ -162,11 +162,11 @@ async function load_order_data() {
 
   market_orders_buy_usdc.value = market_orders_buy
     .filter((orders) => orders.currencyMint == TOKEN_USDC.toString())
-    .sort((a, b) => b.price - a.price);
+    .sort((a, b) => b.uiPrice - a.uiPrice);
 
   market_orders_buy_atlas.value = market_orders_buy
     .filter((orders) => orders.currencyMint == TOKEN_ATLAS.toString())
-    .sort((a, b) => b.price - a.price);
+    .sort((a, b) => b.uiPrice - a.uiPrice);
 
   const market_orders_sell = market_orders.filter((orders) =>
     JSON.stringify(orders.orderType).includes("sell")
@@ -174,11 +174,11 @@ async function load_order_data() {
 
   market_orders_sell_usdc.value = market_orders_sell
     .filter((orders) => orders.currencyMint == TOKEN_USDC.toString())
-    .sort((a, b) => a.price - b.price);
+    .sort((a, b) => a.uiPrice - b.uiPrice);
 
   market_orders_sell_atlas.value = market_orders_sell
     .filter((orders) => orders.currencyMint === TOKEN_ATLAS.toString())
-    .sort((a, b) => a.price - b.price);
+    .sort((a, b) => a.uiPrice - b.uiPrice);
 }
 
 onMounted(async () => {

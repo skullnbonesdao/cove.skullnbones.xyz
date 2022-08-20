@@ -1,15 +1,7 @@
 import { defineStore } from "pinia";
-import {
-  getMarketplaceProgram,
-  GmEventService,
-  GmClientService,
-  GmOrderbookService,
-  Order,
-  getOpenOrdersForAsset,
-  OrderAccountItem,
-} from "@staratlas/factory";
-import { Connection, PublicKey } from "@solana/web3.js";
-import { GENESYSGO, SOLANRPC } from "@/typescipt/const/solana";
+import { GmClientService, Order } from "@staratlas/factory";
+import { Connection } from "@solana/web3.js";
+import { GENESYSGO } from "@/typescipt/const/solana";
 import { TRADE_PROGRAM } from "@/typescipt/const/staratlas";
 import { TOKEN_ATLAS, TOKEN_USDC } from "@/typescipt/const/tokens";
 
@@ -48,12 +40,12 @@ export const staratlas_gmClientStore = defineStore({
 
       const buy_orders_atlas = buy_orders
         .filter((order) => order.currencyMint === TOKEN_ATLAS.toString())
-        .map((order) => order.price)
+        .map((order) => order.uiPrice)
         .sort((a, b) => a - b);
 
       const buy_orders_usdc = buy_orders
         .filter((order) => order.currencyMint === TOKEN_USDC.toString())
-        .map((order) => order.price)
+        .map((order) => order.uiPrice)
         .sort((a, b) => a - b);
 
       this.top_market_orders.push({
@@ -63,13 +55,13 @@ export const staratlas_gmClientStore = defineStore({
         price_atlas_sell:
           sell_orders
             .filter((order) => order.currencyMint === TOKEN_ATLAS.toString())
-            .map((order) => order.price)
+            .map((order) => order.uiPrice)
             .sort((a, b) => a - b)[0] ?? -1,
 
         price_usdc_sell:
           sell_orders
             .filter((order) => order.currencyMint === TOKEN_USDC.toString())
-            .map((order) => order.price)
+            .map((order) => order.uiPrice)
             .sort((a, b) => a - b)[0] ?? -1,
       });
 
