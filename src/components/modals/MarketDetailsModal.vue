@@ -69,6 +69,7 @@
                   </div>
                 </div>
                 <RecentOrdersElement
+                  class="md:col-span-1 col-span-2"
                   :mint_address="mint_address"
                 ></RecentOrdersElement>
                 <div class="col-span-2">

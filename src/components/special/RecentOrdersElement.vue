@@ -5,13 +5,13 @@
     <div class="flex flex-col">
       <div class="item inline-flex items-baseline space-x-2">
         <usdc-icon class="self-center w-5 h-5 rounded-full"></usdc-icon>
-        <span class="w-full text-right">
+        <span v-if="recent_trade_usdc" class="w-full text-right">
           {{ recent_trade_usdc === 0 ? "-" : recent_trade_usdc?.toFixed(2) }}
         </span>
       </div>
       <div class="item inline-flex items-baseline space-x-2">
         <atlas-icon class="self-center w-5 h-5 rounded-full"></atlas-icon>
-        <span class="w-full text-right">
+        <span v-if="recent_trade_atlas" class="w-full text-right">
           {{ recent_trade_atlas === 0 ? "-" : recent_trade_atlas.toFixed(2) }}
         </span>
       </div>
