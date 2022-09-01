@@ -125,8 +125,6 @@ async function load_table_data() {
       y: price?.toFixed(3),
     };
   });
-  console.log(trading_data_atlas.value);
-  console.log(trading_data_usdc.value);
 }
 
 onMounted(async () => {

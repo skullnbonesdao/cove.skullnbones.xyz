@@ -6,13 +6,13 @@
       <div class="item inline-flex items-baseline space-x-2">
         <usdc-icon class="self-center w-5 h-5 rounded-full"></usdc-icon>
         <span class="w-full text-right">
-          {{ recent_trade_usdc?.toFixed(2) }}
+          {{ recent_trade_usdc === 0 ? "-" : recent_trade_usdc?.toFixed(2) }}
         </span>
       </div>
       <div class="item inline-flex items-baseline space-x-2">
         <atlas-icon class="self-center w-5 h-5 rounded-full"></atlas-icon>
         <span class="w-full text-right">
-          {{ recent_trade_atlas?.toFixed(2) }}
+          {{ recent_trade_atlas === 0 ? "-" : recent_trade_atlas.toFixed(2) }}
         </span>
       </div>
     </div>
@@ -61,8 +61,16 @@ async function load_recent_trades() {
     .then(
       (data) =>
         (recent_trade_usdc.value =
-          (data[0].buyer_amount * Math.pow(10, -data[0].buyer_decimals)) /
-          (data[0].seller_amount * Math.pow(10, -data[0].seller_decimals)))
+          data[0]?.seller_token ===
+          "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+            ? (data[0]?.seller_amount *
+                Math.pow(10, -data[0]?.seller_decimals)) /
+              data[0]?.buyer_amount
+            : data[0]?.buyer_token ===
+              "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+            ? (data[0]?.buyer_amount * Math.pow(10, -data[0]?.buyer_decimals)) /
+              data[0]?.seller_amount
+            : 0)
     );
 
   await fetch(
@@ -74,8 +82,16 @@ async function load_recent_trades() {
     .then(
       (data) =>
         (recent_trade_atlas.value =
-          (data[0].buyer_amount * Math.pow(10, -data[0].buyer_decimals)) /
-          (data[0].seller_amount * Math.pow(10, -data[0].seller_decimals)))
+          data[0]?.seller_token ===
+          "ATLASXmbPQxBUYbxPsV97usA3fPQYEqzQBUHgiFCUsXx"
+            ? (data[0]?.seller_amount *
+                Math.pow(10, -data[0]?.seller_decimals)) /
+              data[0]?.buyer_amount
+            : data[0]?.buyer_token ===
+              "ATLASXmbPQxBUYbxPsV97usA3fPQYEqzQBUHgiFCUsXx"
+            ? (data[0]?.buyer_amount * Math.pow(10, -data[0]?.buyer_decimals)) /
+              data[0]?.seller_amount
+            : 0)
     );
 }
 </script>
