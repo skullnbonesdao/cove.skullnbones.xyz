@@ -31,29 +31,49 @@
 
             <div class="card-actions">
               <div class="grid md:grid-cols-3 grid-cols-2 md:gap-4 gap-2">
-                <div v-if="asset.tradeSettings.vwap > 0">
-                  <h4>VWAP</h4>
-                  <div class="item inline-flex items-baseline space-x-2">
-                    <usdc-icon class="self-center w-5 h-5 rounded-full">
-                    </usdc-icon>
-                    <span>
-                      {{ asset.tradeSettings.vwap.toFixed(2) }}
-                    </span>
+                <div
+                  v-if="asset.tradeSettings.vwap > 0"
+                  class="bg-base-200 hover:bg-base-100 shadow-md rounded-lg p-2"
+                >
+                  <h4 class="text-center pt-2">VWAP</h4>
+                  <div class="divider h-0"></div>
+                  <div class="flex flex-col">
+                    <div class="item inline-flex items-baseline space-x-2">
+                      <usdc-icon class="self-center w-5 h-5 rounded-full">
+                      </usdc-icon>
+                      <span class="w-full text-right">
+                        {{ asset.tradeSettings.vwap.toFixed(2) }}
+                      </span>
+                    </div>
                   </div>
                 </div>
-                <div v-if="asset.primarySales.length > 0">
-                  <h4>Supply</h4>
-                  <div>
-                    {{
-                      asset.primarySales.reduce((sum, current) => {
-                        return sum + current.supply;
-                      }, 0)
-                    }}
+                <div
+                  v-if="asset.primarySales.length > 0"
+                  class="bg-base-200 hover:bg-base-100 shadow-md rounded-lg p-2"
+                >
+                  <h4 class="text-center pt-2">Supply</h4>
+                  <div class="divider h-0"></div>
+                  <div class="flex flex-col">
+                    <div class="item inline-flex items-baseline space-x-2">
+                      <i
+                        class="bi bi-hash self-center w-5 h-5 rounded-full"
+                      ></i>
+                      <span class="w-full text-right">
+                        {{
+                          asset.primarySales.reduce((sum, current) => {
+                            return sum + current.supply;
+                          }, 0)
+                        }}
+                      </span>
+                    </div>
                   </div>
                 </div>
+                <RecentOrdersElement
+                  :mint_address="mint_address"
+                ></RecentOrdersElement>
                 <div class="col-span-2">
                   <a
-                    class="btn"
+                    class="btn btn-secondary"
                     :href="
                       'https://play.staratlas.com/market/' +
                       asset.name.replace(/\s+/g, '-').toLowerCase()
@@ -212,6 +232,7 @@ import ExplorerTab from "@/components/tabs/ExplorerTab.vue";
 import UsdcIcon from "@/components/icons/USDCIcon.vue";
 import ScoreTab from "@/components/tabs/ScoreTab.vue";
 import LineChart from "@/components/charts/LineChart.vue";
+import RecentOrdersElement from "@/components/special/RecentOrdersElement.vue";
 
 const active_tab = ref("info");
 

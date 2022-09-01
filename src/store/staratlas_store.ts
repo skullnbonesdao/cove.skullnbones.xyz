@@ -7,6 +7,12 @@ export const use_staratlasStore = defineStore({
   state: () => ({
     status: "",
     nfts: [] as Array<StarAtlasNFT>,
+    ship_detailsCategories: [
+      "attributes",
+      "crew slots",
+      "component slots",
+      "module slots",
+    ] as Array<string>,
   }),
 
   actions: {
