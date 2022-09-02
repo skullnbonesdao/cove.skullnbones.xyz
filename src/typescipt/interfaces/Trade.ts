@@ -1,5 +1,6 @@
 export interface Trade {
   block: number;
+  timestamp: number;
   seller_token: string;
   seller_amount: number;
   seller_decimals: number;

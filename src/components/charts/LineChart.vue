@@ -86,7 +86,7 @@ async function load_table_data() {
   )
     .then((res) => res.json())
     .then((data) => (trading_history.value = data));
-  trading_history.value.sort((a: Trade, b: Trade) => a.block - b.block);
+  trading_history.value.sort((a: Trade, b: Trade) => a.timestamp - b.timestamp);
   trading_data_atlas.value = trading_history.value.map((element: Trade) => {
     const price =
       element.seller_token === "ATLASXmbPQxBUYbxPsV97usA3fPQYEqzQBUHgiFCUsXx"
@@ -97,7 +97,7 @@ async function load_table_data() {
           element.seller_amount
         : null;
     return {
-      x: new Date(element.block * 1000),
+      x: new Date(element.timestamp * 1000),
       y: price?.toFixed(9),
     };
   });
@@ -109,7 +109,7 @@ async function load_table_data() {
   )
     .then((res) => res.json())
     .then((data) => (trading_history.value = data));
-  trading_history.value.sort((a: Trade, b: Trade) => a.block - b.block);
+  trading_history.value.sort((a: Trade, b: Trade) => a.timestamp - b.timestamp);
   trading_data_usdc.value = trading_history.value.map((element: Trade) => {
     const price =
       element.seller_token === "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
@@ -121,7 +121,7 @@ async function load_table_data() {
         : null;
 
     return {
-      x: new Date(element.block * 1000),
+      x: new Date(element.timestamp * 1000),
       y: price?.toFixed(3),
     };
   });
