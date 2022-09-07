@@ -19,9 +19,10 @@
         </td>
         <td>{{ orders.orderQtyRemaining }}</td>
         <td>
-          {{ orders.owner.substring(0, 4) }}...{{
+          {{ orders.owner }}
+          <!--          {{ orders.owner.substring(0, 4) }}...{{
             orders.owner.substring(orders.owner.length - 4)
-          }}
+          }}-->
         </td>
       </tr>
     </tbody>
