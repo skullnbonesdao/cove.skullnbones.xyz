@@ -116,6 +116,9 @@
               :vwap="row.vwap"
               currency="atlas"
               :price="row.price_ask_atlas"
+              :price_as_usdc="
+                (row.price_ask_atlas * token_ws.m_atlas).toFixed(2)
+              "
             ></price-element>
           </td>
           <td v-if="rows[0]?.vwap ?? 0" class="marketAsk">
@@ -145,6 +148,9 @@
               :vwap="row.vwap"
               currency="atlas"
               :price="row.price_bid_atlas"
+              :price_as_usdc="
+                (row.price_bid_atlas * token_ws.m_atlas).toFixed(2)
+              "
             ></price-element>
           </td>
           <td v-if="rows[0]?.vwap ?? 0" class="marketBid">

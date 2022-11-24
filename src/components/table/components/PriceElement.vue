@@ -26,9 +26,12 @@
         :is_price="price"
         :price_vwap="vwap"
       ></percentage-element>
-      <strong v-else class="item">
-        {{ price === -1 ? "-" : format_number(price) }}
-      </strong>
+      <div v-else class="flex flex-col">
+        <strong class="item">
+          {{ price === -1 ? "-" : format_number(price) }}
+        </strong>
+        <p v-if="price_as_usdc > 0" class="text-xs">{{ price_as_usdc }}$</p>
+      </div>
     </span>
     <div v-if="text.length" class="item text-right">{{ text }}</div>
   </div>
@@ -53,6 +56,10 @@ const tokenWS = tokenPricesWebsocket();
 
 defineProps({
   price: {
+    type: Number,
+    default: 0,
+  },
+  price_as_usdc: {
     type: Number,
     default: 0,
   },
