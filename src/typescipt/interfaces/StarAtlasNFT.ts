@@ -15,10 +15,11 @@ export interface StarAtlasNFT {
   airdrops: Airdrop[];
   primarySales: PrimarySale[];
   updatedAt: Date;
-  collection: Collection;
+  collection?: Collection;
   slots?: Slots;
   id: string;
   createdAt?: Date;
+  __v?: number;
 }
 
 export interface Airdrop {
@@ -28,10 +29,10 @@ export interface Airdrop {
 }
 
 export interface Attributes {
-  itemType: Category;
+  itemType: ItemType;
   tier?: number;
   class: string;
-  category: Category;
+  category?: string;
   score?: number;
   rarity: Rarity;
   musician?: string;
@@ -41,17 +42,17 @@ export interface Attributes {
   unitLength?: number;
   unitWidth?: number;
   unitHeight?: number;
+  seriesName?: string;
+  episode?: number;
+  edition?: string;
 }
 
-export enum Category {
+export enum ItemType {
   Access = "access",
   Collectible = "collectible",
-  Cosmetic = "cosmetic",
-  Crew = "crew",
-  Equipment = "equipment",
-  Rebirth = "rebirth",
   Resource = "resource",
   Ship = "ship",
+  Story = "story",
   Structure = "structure",
 }
 
@@ -82,10 +83,12 @@ export interface Market {
 
 export enum QuotePair {
   Atlas = "ATLAS",
+  Sol = "SOL",
   Usdc = "USDC",
 }
 
 export enum SerumProgramID {
+  Srmv4UTCPF81HWDaPyEN2MLZ8XbvzuEM6LsAxR8NpjU = "srmv4uTCPF81hWDaPyEN2mLZ8XbvzuEM6LsAxR8NpjU",
   The9XQeWvG816BUx9EPjHMAT23YvVM2ZWbrrpZb9PusVFin = "9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin",
 }
 
@@ -137,6 +140,7 @@ export enum Size {
   Medium = "medium",
   SizeLarge = "Large",
   Small = "small",
+  Titan = "titan",
   XSmall = "x-small",
   XXSmall = "XX-Small",
   XxSmall = "xx-small",
@@ -144,10 +148,12 @@ export enum Size {
 }
 
 export interface TradeSettings {
-  expireTime?: number;
-  saleTime?: number;
+  expireTime?: number | string;
+  saleTime?: number | string;
   vwap: number;
   msrp?: Msrp;
+  saleType?: string;
+  limited?: string;
 }
 
 export interface Msrp {

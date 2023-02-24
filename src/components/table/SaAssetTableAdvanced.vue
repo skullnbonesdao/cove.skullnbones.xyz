@@ -31,10 +31,26 @@
       <template #head="{ rows }">
         <tr>
           <th></th>
-          <th :colspan="rows[0]?.vwap !== 0 ? 2 : 1" class="">Asset</th>
-          <th :colspan="rows[0]?.vwap !== 0 ? 4 : 2" class="marketAsk">ASK</th>
-          <th :colspan="rows[0]?.vwap !== 0 ? 4 : 2" class="marketBid">BID</th>
-          <th v-if="rows[0]?.vwap ?? 0" colspan="2" class="marketAPR">
+          <th :colspan="rows.find((r) => r.vwap !== 0) ? 2 : 1" class="">
+            Asset
+          </th>
+          <th
+            :colspan="rows.find((r) => r.vwap !== 0) ? 4 : 2"
+            class="marketAsk"
+          >
+            ASK
+          </th>
+          <th
+            :colspan="rows.find((r) => r.vwap !== 0) ? 4 : 2"
+            class="marketBid"
+          >
+            BID
+          </th>
+          <th
+            v-if="rows.find((r) => r.vwap !== 0) ?? 0"
+            colspan="2"
+            class="marketAPR"
+          >
             APR (ask)
           </th>
           <th colspan="1" class=""></th>
@@ -42,17 +58,17 @@
         <tr>
           <VTh sort-key="symbol">#</VTh>
           <VTh sort-key="name">Name</VTh>
-          <VTh v-if="rows[0]?.vwap ?? 0" sort-key="vwap">VWAP</VTh>
+          <VTh v-if="rows.find((r) => r.vwap !== 0)" sort-key="vwap">VWAP</VTh>
           <VTh class="marketAsk" sort-key="price_ask_usdc">USDC</VTh>
           <VTh class="marketAsk" sort-key="price_ask_usdc">ATLAS</VTh>
           <VTh
-            v-if="rows[0]?.vwap ?? 0"
+            v-if="rows.find((r) => r.vwap !== 0)"
             class="marketAsk"
             sort-key="price_ask_usdc_discount"
             >USDC%
           </VTh>
           <VTh
-            v-if="rows[0]?.vwap ?? 0"
+            v-if="rows.find((r) => r.vwap !== 0)"
             class="marketAsk"
             sort-key="price_ask_atlas_discount"
             >ATLAS%
@@ -60,21 +76,27 @@
           <VTh class="marketBid" sort-key="price_bid_usdc">USDC</VTh>
           <VTh class="marketBid" sort-key="price_bid_atlas">ATLAS</VTh>
           <VTh
-            v-if="rows[0]?.vwap ?? 0"
+            v-if="rows.find((r) => r.vwap !== 0)"
             class="marketBid"
             sort-key="price_bid_usdc_discount"
             >USDC%
           </VTh>
           <VTh
-            v-if="rows[0]?.vwap ?? 0"
+            v-if="rows.find((r) => r.vwap !== 0)"
             class="marketBid"
             sort-key="price_bid_atlas_discount"
             >ATLAS%
           </VTh>
-          <VTh v-if="rows[0]?.vwap ?? 0" class="marketAPR" sort-key="apr_usdc"
+          <VTh
+            v-if="rows.find((r) => r.vwap !== 0)"
+            class="marketAPR"
+            sort-key="apr_usdc"
             >USDC
           </VTh>
-          <VTh v-if="rows[0]?.vwap ?? 0" class="marketAPR" sort-key="apr_atlas"
+          <VTh
+            v-if="rows.find((r) => r.vwap !== 0)"
+            class="marketAPR"
+            sort-key="apr_atlas"
             >ATLAS
           </VTh>
           <th></th>
@@ -98,7 +120,7 @@
             <strong>{{ row.name }}</strong>
             <i class="bi bi-info-circle"></i>
           </td>
-          <td v-if="rows[0]?.vwap ?? 0">
+          <td v-if="rows.find((r) => r.vwap !== 0)">
             <vwap-element
               :vwap="row.vwap"
               :show_vwap_text="false"
@@ -123,7 +145,7 @@
               "
             ></price-element>
           </td>
-          <td v-if="rows[0]?.vwap ?? 0" class="marketAsk">
+          <td v-if="rows.find((r) => r.vwap !== 0)" class="marketAsk">
             <price-element
               :show_percentage="true"
               :vwap="row.vwap"
@@ -131,7 +153,7 @@
               :price="row.price_ask_usdc"
             ></price-element>
           </td>
-          <td v-if="rows[0]?.vwap ?? 0" class="marketAsk">
+          <td v-if="rows.find((r) => r.vwap !== 0)" class="marketAsk">
             <price-element
               :show_percentage="true"
               :vwap="row.vwap"
@@ -157,7 +179,7 @@
               "
             ></price-element>
           </td>
-          <td v-if="rows[0]?.vwap ?? 0" class="marketBid">
+          <td v-if="rows.find((r) => r.vwap !== 0)" class="marketBid">
             <price-element
               :show_percentage="true"
               :vwap="row.vwap"
@@ -165,7 +187,7 @@
               :price="row.price_bid_usdc"
             ></price-element>
           </td>
-          <td v-if="rows[0]?.vwap ?? 0" class="marketBid">
+          <td v-if="rows.find((r) => r.vwap !== 0)" class="marketBid">
             <price-element
               :show_percentage="true"
               :vwap="row.vwap"
@@ -173,10 +195,10 @@
               :price="row.price_bid_atlas"
             ></price-element>
           </td>
-          <td v-if="rows[0]?.vwap ?? 0" class="marketAPR">
+          <td v-if="rows.find((r) => r.vwap !== 0)" class="marketAPR">
             <apr-element :apr_value="row.apr_usdc"></apr-element>
           </td>
-          <td v-if="rows[0]?.vwap ?? 0" class="marketAPR">
+          <td v-if="rows.find((r) => r.vwap !== 0)" class="marketAPR">
             <apr-element :apr_value="row.apr_atlas"></apr-element>
           </td>
           <td>

@@ -4,18 +4,13 @@ import {
   resolveToWalletAddress,
 } from "@nfteyez/sol-rayz";
 import { SolRayzType } from "@/typescipt/interfaces/SolRayzType";
-import {
-  clusterApiUrl,
-  Connection,
-  PublicKey,
-  Transaction,
-} from "@solana/web3.js";
+import { Connection, PublicKey, Transaction } from "@solana/web3.js";
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
   Token,
   TOKEN_PROGRAM_ID,
 } from "@solana/spl-token";
-import { SOLANANETWORK, ANKRRPC, EXTRNODE } from "@/typescipt/const/solana";
+import { EXTRNODE, SOLANANETWORK } from "@/typescipt/const/solana";
 import { useWallet } from "solana-wallets-vue";
 import {
   status_message_enum,
@@ -36,11 +31,12 @@ export const solana_burnerStore = defineStore({
       this.message.message = "...fetching nft data";
       console.info("{fetch_baseInfoNFTs} called!");
 
-      const publicAddress = await resolveToWalletAddress({
-        text: wallet_address,
-      });
+      const connection = new Connection(EXTRNODE);
 
-      this.nftArray = await getParsedNftAccountsByOwner({ publicAddress });
+      this.nftArray = await getParsedNftAccountsByOwner({
+        publicAddress: wallet_address,
+        connection: connection,
+      });
     },
 
     async fetch_additionData() {
@@ -94,7 +90,7 @@ export const solana_burnerStore = defineStore({
             closeInstruction
           );
 
-          const connection = new Connection(EXTRNODE);
+          const connection = new Connection(SOLANANETWORK);
 
           const BurnandCloseSignature = await useWallet().sendTransaction(
             BurnandCloseTransaction,

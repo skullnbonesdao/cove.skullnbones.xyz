@@ -10,7 +10,7 @@
   "dependencies": {
     "@nfteyez/sol-rayz": "^0.10.2",
     "@solana/wallet-adapter-wallets": "^0.15.5",
-    "@solana/web3.js": "^1.50.0",
+    "@solana/web3.js": "^1.73.3",
     "@staratlas/factory": "^0.4.4",
     "apexcharts": "^3.35.4",
     "bootstrap-icons": "^1.9.1",
