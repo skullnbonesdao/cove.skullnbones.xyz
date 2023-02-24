@@ -15,7 +15,7 @@ import {
   Token,
   TOKEN_PROGRAM_ID,
 } from "@solana/spl-token";
-import { SOLANANETWORK } from "@/typescipt/const/solana";
+import { SOLANANETWORK, ANKRRPC, EXTRNODE } from "@/typescipt/const/solana";
 import { useWallet } from "solana-wallets-vue";
 import {
   status_message_enum,
@@ -94,13 +94,12 @@ export const solana_burnerStore = defineStore({
             closeInstruction
           );
 
-          const connection = new Connection(clusterApiUrl(SOLANANETWORK));
+          const connection = new Connection(EXTRNODE);
 
           const BurnandCloseSignature = await useWallet().sendTransaction(
             BurnandCloseTransaction,
             connection
           );
-
           const confirmed = await connection.confirmTransaction(
             BurnandCloseSignature,
             "processed"

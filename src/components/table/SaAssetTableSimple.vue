@@ -25,14 +25,16 @@
       class="table w-full"
       :data="table_data"
       :filters="filters"
-      sortHeaderClass="flex items-center justify-between w-full"
+      sort-header-class="flex items-center justify-between w-full"
     >
       <!-- head -->
       <template #head="{ rows }">
         <tr>
           <th></th>
-          <VTh sortKey="name">Name</VTh>
-          <VTh v-if="rows[0]?.vwap ?? 0" sortKey="tradeSettings.vwap">VWAP</VTh>
+          <VTh sort-key="name">Name</VTh>
+          <VTh v-if="rows[0]?.vwap ?? 0" sort-key="tradeSettings.vwap"
+            >VWAP</VTh
+          >
           <th class="marketAsk">ASK</th>
           <th class="marketBid">BID</th>
           <th></th>
@@ -117,18 +119,13 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { defineProps, onMounted, PropType, ref, watch } from "vue";
-import { StarAtlasNFT } from "@/typescipt/interfaces/StarAtlasNFT";
+import { defineProps, onMounted, ref, watch } from "vue";
 import ShipTableImageComponent from "@/components/table/components/ShipTableImageComponent.vue";
 import ShipTableNameComponent from "@/components/table/components/ShipTableNameComponent.vue";
 import MarketDetailsModal from "@/components/modals/MarketDetailsModal.vue";
-import UsdcIcon from "@/components/icons/USDCIcon.vue";
 import AskBidElements from "@/components/table/components/AskBidElements.vue";
 import { staratlas_gmClientStore } from "@/store/staratlas_gmClient";
-
-import { TOKEN_ATLAS, TOKEN_USDC } from "@/typescipt/const/tokens";
 import VwapElement from "@/components/table/components/VWAPElement.vue";
-import SortableElement from "@/components/table/components/SortableElement.vue";
 import { MarketTableElements } from "@/typescipt/interfaces/MarkeTableElements";
 import { use_staratlasStore } from "@/store/staratlas_store";
 import { calculatesPercentageVWAPvsMarket } from "@/typescipt/helper/calculate_market";

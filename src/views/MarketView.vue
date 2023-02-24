@@ -7,19 +7,19 @@
       <div class="grid sm:grid-cols-2 md:grid-cols-4 sm:gap-10 gap-4 pb-4">
         <price-ticker
           asset_name="BTC/USDC"
-          :asset_price="tokenWS.m_btc"
+          :asset_price="tokenWS.token_price.bitcoin.toFixed(2)"
         ></price-ticker>
         <price-ticker
-          asset_name="SOL/USDC"
-          :asset_price="tokenWS.m_sol"
+          asset_name="SOL/USDA"
+          :asset_price="tokenWS.token_price.solana.toFixed(2)"
         ></price-ticker>
         <price-ticker
           asset_name="POLIS/USDC"
-          :asset_price="tokenWS.m_polis"
+          :asset_price="tokenWS.token_price.polis.toFixed(4)"
         ></price-ticker>
         <price-ticker
           asset_name="ATLAS/USDC"
-          :asset_price="tokenWS.m_atlas"
+          :asset_price="tokenWS.token_price.atlas.toFixed(4)"
         ></price-ticker>
       </div>
     </div>
@@ -89,8 +89,7 @@ import SaAssetTableAdvanced from "@/components/table/SaAssetTableAdvanced.vue";
 
 const staratlas_store = use_staratlasStore();
 const tokenWS = tokenPricesWebsocket();
-
-tokenWS.initMarkets();
+tokenWS.init();
 
 const tab_entries = ref();
 

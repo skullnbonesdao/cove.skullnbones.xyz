@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { GmClientService, Order } from "@staratlas/factory";
 import { Connection } from "@solana/web3.js";
-import { PORTALRPC, ANKRRPC } from "@/typescipt/const/solana";
+import { PORTALRPC, ANKRRPC, EXTRNODE } from "@/typescipt/const/solana";
 import { TRADE_PROGRAM } from "@/typescipt/const/staratlas";
 import { TOKEN_ATLAS, TOKEN_USDC } from "@/typescipt/const/tokens";
 
@@ -19,7 +19,7 @@ export const staratlas_gmClientStore = defineStore({
       console.info("{getOrders} called!");
       const client = new GmClientService();
       await client
-        .getAllOpenOrders(new Connection(ANKRRPC), TRADE_PROGRAM)
+        .getAllOpenOrders(new Connection(EXTRNODE), TRADE_PROGRAM)
         .then((response) => {
           this.orders = response;
         })

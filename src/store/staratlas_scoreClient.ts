@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { getScoreVarsShipInfo, ScoreVarsShipInfo } from "@staratlas/factory";
 import { Connection, PublicKey } from "@solana/web3.js";
-import { PORTALRPC, ANKRRPC } from "@/typescipt/const/solana";
+import { PORTALRPC, ANKRRPC, EXTRNODE } from "@/typescipt/const/solana";
 import { SCORE_PROGRAM } from "@/typescipt/const/staratlas";
 
 export interface ResourcePrices {
@@ -21,7 +21,7 @@ export const staratlas_scoreClientStore = defineStore({
   actions: {
     async getScoreVarsShipInfo(mint: string): Promise<ScoreVarsShipInfo> {
       return await getScoreVarsShipInfo(
-        new Connection(ANKRRPC),
+        new Connection(EXTRNODE),
         SCORE_PROGRAM,
         new PublicKey(mint)
       );

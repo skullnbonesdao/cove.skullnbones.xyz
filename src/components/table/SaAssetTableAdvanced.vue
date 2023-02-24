@@ -26,7 +26,7 @@
       class="table w-full relative"
       :data="table_data"
       :filters="filters"
-      sortHeaderClass="flex items-center justify-between w-full"
+      sort-header-class="flex items-center justify-between w-full"
     >
       <template #head="{ rows }">
         <tr>
@@ -40,43 +40,43 @@
           <th colspan="1" class=""></th>
         </tr>
         <tr>
-          <VTh sortKey="symbol">#</VTh>
-          <VTh sortKey="name">Name</VTh>
-          <VTh v-if="rows[0]?.vwap ?? 0" sortKey="vwap">VWAP</VTh>
-          <VTh class="marketAsk" sortKey="price_ask_usdc">USDC</VTh>
-          <VTh class="marketAsk" sortKey="price_ask_usdc">ATLAS</VTh>
+          <VTh sort-key="symbol">#</VTh>
+          <VTh sort-key="name">Name</VTh>
+          <VTh v-if="rows[0]?.vwap ?? 0" sort-key="vwap">VWAP</VTh>
+          <VTh class="marketAsk" sort-key="price_ask_usdc">USDC</VTh>
+          <VTh class="marketAsk" sort-key="price_ask_usdc">ATLAS</VTh>
           <VTh
             v-if="rows[0]?.vwap ?? 0"
             class="marketAsk"
-            sortKey="price_ask_usdc_discount"
-            >USDC%</VTh
-          >
+            sort-key="price_ask_usdc_discount"
+            >USDC%
+          </VTh>
           <VTh
             v-if="rows[0]?.vwap ?? 0"
             class="marketAsk"
-            sortKey="price_ask_atlas_discount"
-            >ATLAS%</VTh
-          >
-          <VTh class="marketBid" sortKey="price_bid_usdc">USDC</VTh>
-          <VTh class="marketBid" sortKey="price_bid_atlas">ATLAS</VTh>
+            sort-key="price_ask_atlas_discount"
+            >ATLAS%
+          </VTh>
+          <VTh class="marketBid" sort-key="price_bid_usdc">USDC</VTh>
+          <VTh class="marketBid" sort-key="price_bid_atlas">ATLAS</VTh>
           <VTh
             v-if="rows[0]?.vwap ?? 0"
             class="marketBid"
-            sortKey="price_bid_usdc_discount"
-            >USDC%</VTh
-          >
+            sort-key="price_bid_usdc_discount"
+            >USDC%
+          </VTh>
           <VTh
             v-if="rows[0]?.vwap ?? 0"
             class="marketBid"
-            sortKey="price_bid_atlas_discount"
-            >ATLAS%</VTh
-          >
-          <VTh v-if="rows[0]?.vwap ?? 0" class="marketAPR" sortKey="apr_usdc"
-            >USDC</VTh
-          >
-          <VTh v-if="rows[0]?.vwap ?? 0" class="marketAPR" sortKey="apr_atlas"
-            >ATLAS</VTh
-          >
+            sort-key="price_bid_atlas_discount"
+            >ATLAS%
+          </VTh>
+          <VTh v-if="rows[0]?.vwap ?? 0" class="marketAPR" sort-key="apr_usdc"
+            >USDC
+          </VTh>
+          <VTh v-if="rows[0]?.vwap ?? 0" class="marketAPR" sort-key="apr_atlas"
+            >ATLAS
+          </VTh>
           <th></th>
         </tr>
       </template>
@@ -117,7 +117,9 @@
               currency="atlas"
               :price="row.price_ask_atlas"
               :price_as_usdc="
-                (row.price_ask_atlas * token_ws.m_atlas).toFixed(2)
+                parseFloat(
+                  (row.price_ask_atlas * token_ws.token_price.atlas).toFixed(2)
+                )
               "
             ></price-element>
           </td>
@@ -149,7 +151,9 @@
               currency="atlas"
               :price="row.price_bid_atlas"
               :price_as_usdc="
-                (row.price_bid_atlas * token_ws.m_atlas).toFixed(2)
+                parseFloat(
+                  (row.price_bid_atlas * token_ws.token_price.atlas).toFixed(2)
+                )
               "
             ></price-element>
           </td>
@@ -207,11 +211,9 @@ import { MarketTableElements } from "@/typescipt/interfaces/MarkeTableElements";
 import { staratlas_gmClientStore } from "@/store/staratlas_gmClient";
 import ShipTableImageComponent from "@/components/table/components/ShipTableImageComponent.vue";
 import PriceElement from "@/components/table/components/PriceElement.vue";
-import ShipTableNameComponent from "@/components/table/components/ShipTableNameComponent.vue";
 import MarketDetailsModal from "@/components/modals/MarketDetailsModal.vue";
 import { calculatesPercentageVWAPvsMarket } from "@/typescipt/helper/calculate_market";
 import { staratlas_scoreClientStore } from "@/store/staratlas_scoreClient";
-import BeatLoader from "vue-spinner/src/BeatLoader.vue";
 import VwapElement from "@/components/table/components/VWAPElement.vue";
 import { ResourcePrices } from "@/store/staratlas_scoreClient";
 import {
@@ -305,7 +307,7 @@ async function load_data() {
       );
     table_data.value[index].price_ask_atlas_discount =
       calculatesPercentageVWAPvsMarket(
-        table_data.value[index].vwap / parseFloat(token_ws.m_atlas),
+        table_data.value[index].vwap / token_ws.token_price.atlas,
         table_data.value[index].price_ask_atlas,
         table_data.value[index].price_ask_atlas == -1
       );
@@ -317,7 +319,7 @@ async function load_data() {
       );
     table_data.value[index].price_bid_atlas_discount =
       calculatesPercentageVWAPvsMarket(
-        table_data.value[index].vwap / parseFloat(token_ws.m_atlas),
+        table_data.value[index].vwap / token_ws.token_price.atlas,
         table_data.value[index].price_bid_atlas,
         table_data.value[index].price_ask_atlas == -1
       );
@@ -361,7 +363,7 @@ async function load_data() {
       table_data.value[index].apr_usdc =
         await staratlas_scoreClient.getAprForShipAtlas(
           element.mint,
-          element.price_ask_usdc / parseFloat(token_ws.m_atlas),
+          element.price_ask_usdc / token_ws.token_price.atlas,
           resource_prices
         );
     }
