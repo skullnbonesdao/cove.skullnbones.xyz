@@ -32,9 +32,11 @@
         <tr>
           <th></th>
           <VTh sort-key="name">Name</VTh>
-          <VTh v-if="rows[0]?.vwap ?? 0" sort-key="tradeSettings.vwap"
-            >VWAP</VTh
-          >
+          <VTh
+            v-if="rows.find((r) => r.vwap !== 0)"
+            sort-key="tradeSettings.vwap"
+            >VWAP
+          </VTh>
           <th class="marketAsk">ASK</th>
           <th class="marketBid">BID</th>
           <th></th>
@@ -59,7 +61,7 @@
               :mint_address="row.mint"
             ></ship-table-name-component>
           </td>
-          <td v-if="rows[0]?.vwap ?? 0">
+          <td v-if="rows.find((r) => r.vwap !== 0)">
             <vwap-element :vwap="row.vwap ?? 0"></vwap-element>
           </td>
 
